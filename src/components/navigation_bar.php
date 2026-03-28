@@ -12,16 +12,16 @@ function renderNavItem($name, $iconPath, $linkUrl, $pageId) {
     $activeClass = ($current_page == $pageId) ? 'active' : '';
 
     echo "
-    <li class='nav-item' {$activeClass}>
-        <a href='{$linkUrl}' class='nav-link'>
-            <img class='nav-item-icon' src='{$baseUrl}{$iconPath}' aria-hidden='true'>
-            <div class='nav-label'>{$name}</div>
+    <li class='nav-item {$activeClass}'>
+        <a href='{$linkUrl}'>
+            <div class='nav-link'>
+                <img class='nav-item-icon' src='{$baseUrl}{$iconPath}' aria-hidden='true'>
+                {$name}
+             </div>
         </a>
     </li>
     ";
 }
-
-$current_page = 'home'
 ?>
 
 <!DOCTYPE html>
