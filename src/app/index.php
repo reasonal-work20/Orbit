@@ -1,3 +1,5 @@
+<!-- Home Page For Anonymous Users -->
+<!-- Lets people login -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
