@@ -1,8 +1,9 @@
 <?php
 $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit-Captone-Projet';
-include_once ($doc_root_folder . '/src/config/config.php');
+include_once($doc_root_folder . '/src/config/config.php');
 
-function renderNavItem($name, $iconPath, $linkUrl, $pageId) {
+function renderNavItem($name, $iconPath, $linkUrl, $pageId)
+{
     $baseUrl = '/Orbit-Captone-Projet';
 
     global $current_page;
@@ -12,7 +13,7 @@ function renderNavItem($name, $iconPath, $linkUrl, $pageId) {
     $activeClass = ($current_page == $pageId) ? 'active' : '';
 
     echo "
-    <li class='nav-item {$activeClass}'>
+    <li class='nav-item {$activeClass}' id='{$pageId}'>
         <a href='{$linkUrl}'>
             <div class='nav-link'>
                 <img class='nav-item-icon' src='{$baseUrl}{$iconPath}' aria-hidden='true'>
@@ -25,28 +26,33 @@ function renderNavItem($name, $iconPath, $linkUrl, $pageId) {
 ?>
 
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/src/styles/navigation_bar.css?version=<?php echo time(); ?>">
     <title>Navigation Bar</title>
 </head>
+
 <body>
     <div class="nav-bar">
-        <div class="logo-wrapper">
-            <img class='logo'src="<?php echo BASE_URL . 'src/resources/icons/orbit-logo.svg'?>">
-        </div>
-        <div class="nav-button-container">
-            <ul class="nav-list" style="list-style: none;">
-                <?php
+        <div class="nav-container">
+            <div class="logo-wrapper">
+                <img class='logo' src="<?php echo BASE_URL . 'src/resources/icons/orbit-logo.svg' ?>">
+            </div>
+            <div class="nav-button-container">
+                <ul class="nav-list" style="list-style: none;">
+                    <?php
                     renderNavItem('Home', '/src/resources/icons/home-icon.svg', '#', 'home');
                     renderNavItem('Transport', '/src/resources/icons/car-icon.svg', '#', 'transport');
                     renderNavItem('Directory', '/src/resources/icons/map-icon.svg', '#', 'directory');
                     renderNavItem('Profile', '/src/resources/icons/profile-icon.svg', '#', 'profile');
                     renderNavItem('More', '/src/resources/icons/more-icon-vertical.svg', '#', 'more');
-                ?>
-            </ul>
+                    ?>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
+
 </html>
