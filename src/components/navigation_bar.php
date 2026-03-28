@@ -1,10 +1,9 @@
 <?php
-$doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit-Captone-Projet';
+$doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
 include_once($doc_root_folder . '/src/config/config.php');
 
 function renderNavItem($name, $iconPath, $linkUrl, $pageId)
 {
-    $baseUrl = '/Orbit-Captone-Projet';
 
     global $current_page;
 
@@ -16,7 +15,7 @@ function renderNavItem($name, $iconPath, $linkUrl, $pageId)
     <li class='nav-item {$activeClass}' id='{$pageId}'>
         <a href='{$linkUrl}'>
             <div class='nav-link'>
-                <img class='nav-item-icon' src='{$baseUrl}{$iconPath}' aria-hidden='true'>
+                <img class='nav-item-icon' src='". BASE_URL . "{$iconPath}' aria-hidden='true'>
                 {$name}
              </div>
         </a>

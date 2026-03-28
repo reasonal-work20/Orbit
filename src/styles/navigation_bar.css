@@ -48,6 +48,7 @@
 
 .nav-button-container {
   align-self: stretch;
+  padding: 0 10px;
 }
 
 .nav-list {
@@ -108,7 +109,7 @@
 
 @media (max-width: 860px) {
   .nav-container {
-    padding: 0 24px;
+    padding: 0px 24px;
   }
 
   .nav-button-container {
@@ -135,6 +136,11 @@
   }
 
   .nav-item {
+    flex: 1;
     padding: 4px 8px;
+  }
+
+  .nav-item a {
+    width: 100%;
   }
 }
