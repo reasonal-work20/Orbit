@@ -131,9 +131,9 @@
     padding: 10px 0;
   }
 
-  .nav-list #more {
+  /* .nav-list #more {
     display: none;
-  }
+  } */
 
   .nav-item {
     flex: 1;
