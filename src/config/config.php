@@ -1,4 +1,4 @@
-<!-- STORES CONSTANTS FOR THE NAVIGATION-->
+
 <?php
 // Use this for PHP includes (Server Path)
 define('SRC_PATH', $_SERVER['DOCUMENT_ROOT'] . '/Orbit/src');

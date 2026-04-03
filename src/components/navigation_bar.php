@@ -6,9 +6,9 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
 {
     global $current_page;
     $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
-    
+
     $svgPath = $doc_root_folder . '/src/resources/icons/' . $iconFilename;
-    
+
     $activeClass = (isset($current_page) && $current_page == $pageId) ? 'active' : '';
 
     echo "
@@ -17,12 +17,9 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
             <div class='nav-link'>
                 <div class='icon'>
     ";
-    
+
     if (file_exists($svgPath)) {
-        // NOTE: Use 'include' instead of 'include_once'. 
-        // If you use include_once and try to use the same icon twice on the page, 
-        // it will only render the first time!
-        include $svgPath; 
+        include $svgPath;
     } else {
         echo "";
     }
@@ -55,17 +52,15 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
             <div class="logo-wrapper">
                 <img class='logo' src="<?php echo BASE_URL . '/src/resources/icons/orbit-logo.svg' ?>">
             </div>
-            <div class="nav-button-container">
-                <ul class="nav-list" style="list-style: none;">
-                    <?php
-                    renderNavItem('Home', 'home-icon.svg', '#', 'home');
-                    renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
-                    renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
-                    renderNavItem('Profile', 'profile-icon.svg', '#', 'profile');
-                    renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
-                    ?>
-                </ul>
-            </div>
+            <ul class="nav-list" style="list-style: none;">
+                <?php
+                renderNavItem('Home', 'home-icon.svg', '#', 'home');
+                renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
+                renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
+                renderNavItem('Profile', 'profile-icon.svg', '#', 'profile');
+                renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
+                ?>
+            </ul>
         </div>
     </div>
 </body>
