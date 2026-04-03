@@ -9,13 +9,14 @@
 
 .nav-container {
   display: flex;
-  height: 74px;
+  height: 64px;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 96px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  justify-items: center;
 }
 
 .logo-wrapper {
@@ -43,13 +44,12 @@
   width: 500px;
   justify-content: space-between;
   gap: 4px;
-  padding: 10px 0;
 }
 
 .nav-item {
   display: flex;
   flex: 1;
-  padding: 4px 12px;
+  padding: 2px 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -57,6 +57,11 @@
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.2s ease;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard syntax */
 }
 
 .nav-item:hover {
@@ -73,6 +78,11 @@
 
 .nav-item.active a {
   color: #007aff;
+}
+
+.nav-item.active svg path {
+  stroke: #007aff;
+  fill: #007aff;
 }
 
 .nav-item a {
@@ -107,7 +117,7 @@
 
   .nav-list {
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 10px 10px;
     position: fixed;
     bottom: 0;
     left: 0;

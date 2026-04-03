@@ -4,12 +4,12 @@ include_once($doc_root_folder . '/src/config/config.php');
 
 function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
 {
-    global $current_page;
+    
     $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
-
     $svgPath = $doc_root_folder . '/src/resources/icons/' . $iconFilename;
+    $linkUrl = BASE_URL . '/src/app/student/' . $linkUrl;
 
-    $activeClass = (isset($current_page) && $current_page == $pageId) ? 'active' : '';
+    $activeClass = (isset($_SESSION['current_page']) && $_SESSION['current_page'] == $pageId) ? 'active' : '';
 
     echo "
     <li class='nav-item {$activeClass}' id='{$pageId}'>
@@ -24,7 +24,6 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
         echo "";
     }
 
-    // 4. Echo the second half of your HTML
     echo "
                 </div>
                 {$name}
@@ -54,7 +53,7 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
             </div>
             <ul class="nav-list" style="list-style: none;">
                 <?php
-                renderNavItem('Home', 'home-icon.svg', '#', 'home');
+                renderNavItem('Home', 'home-icon.svg', 'dashboard.php', 'home');
                 renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
                 renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
                 renderNavItem('Profile', 'profile-icon.svg', '#', 'profile');
