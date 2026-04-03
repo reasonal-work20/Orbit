@@ -1,6 +1,19 @@
 <?php
+
+session_start();
+
 $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
 include_once($doc_root_folder . '/src/config/config.php');
+
+// require $doc_root_folder . '/vendor/autoload.php';
+
+// use Symfony\Component\Uid\Ulid;
+
+// $ulid = new Ulid();
+
+// $custom_id = $ulid->toBase32();
+
+// echo "Generated ULID: " . $custom_id;
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +23,7 @@ include_once($doc_root_folder . '/src/config/config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Logo -->
-    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>src/resources/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
+    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/src/resources/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/global.css?version=<?php echo time(); ?>">
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/login.css?version=<?php echo time(); ?>">
@@ -18,6 +31,12 @@ include_once($doc_root_folder . '/src/config/config.php');
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['login_error'])) {
+        echo '<div class="error-message">' . htmlspecialchars($_SESSION['login_error']) . '</div>';
+        unset($_SESSION['login_error']);
+    }
+    ?>
     <div class="loading-overlay" style="display: none;">
         <span class="loader"></span>
     </div>
@@ -31,7 +50,7 @@ include_once($doc_root_folder . '/src/config/config.php');
         <form class="login-form" method="POST" action="<?php echo BASE_URL; ?>/src/backend/processes/login_handler.php">
             <div class="input-group">
                 <label for="username-or-email" class="input-label">Username / Email</label>
-                <input type="text" id="username-or-email" name="username_or_email" class="input-field" required>
+                <input type="text" id="username-or-email" name="username-or-email" class="input-field" required>
             </div>
             <div class="input-group">
                 <label for="password" class="input-label">Password</label>
@@ -48,6 +67,7 @@ include_once($doc_root_folder . '/src/config/config.php');
                 </div>
             </div>
             <button type="submit" class="login-button">Log In</button>
+            <?php echo password_hash("password", PASSWORD_DEFAULT); ?>
         </form>
     </div>
 </body>

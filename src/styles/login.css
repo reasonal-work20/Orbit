@@ -224,6 +224,45 @@ body::before {
   z-index: 9999;
 }
 
+.error-message {
+  z-index: 9999; /* Position over everything */
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  top: 10px;
+  align-self: center;
+
+  border-radius: 8px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  background: #ffc2bf;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+  animation: fadeInDownAndDisappear 3.5s ease forwards;
+}
+
+@keyframes fadeInDownAndDisappear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+    visibility: hidden;
+  }
+}
+
 .loader {
   animation: rotate 1s infinite;
   height: 50px;
