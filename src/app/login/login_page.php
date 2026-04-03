@@ -38,21 +38,16 @@ include_once($doc_root_folder . '/src/config/config.php');
                 <div class="password-wrapper">
                     <input type="password" id="password" name="password" class="input-field" required>
                     <div id="togglePassword" class="toggle-password-btn">
-
                         <div class="icon-show">
                             <?php include $_SERVER['DOCUMENT_ROOT'] . '/Orbit/src/resources/icons/eye-open.svg'; ?>
                         </div>
-
                         <div class="icon-hide" style="display: none;">
                             <?php include $_SERVER['DOCUMENT_ROOT'] . '/Orbit/src/resources/icons/eye-closed.svg'; ?>
                         </div>
-
                     </div>
                 </div>
             </div>
             <button type="submit" class="login-button">Log In</button>
-        </form>
-
         </form>
     </div>
 </body>
@@ -62,7 +57,7 @@ include_once($doc_root_folder . '/src/config/config.php');
     const loginForm = document.querySelector('.login-form');
     const loadingOverlay = document.querySelector('.loading-overlay');
 
-    loginForm.addEventListener('submit', function () {
+    loginForm.addEventListener('submit', function() {
         loadingOverlay.style.display = 'flex';
     });
 </script>
@@ -73,13 +68,13 @@ include_once($doc_root_folder . '/src/config/config.php');
     const iconShow = togglePasswordBtn.querySelector('.icon-show');
     const iconHide = togglePasswordBtn.querySelector('.icon-hide');
 
-    togglePasswordBtn.addEventListener('click', function () {
+    togglePasswordBtn.addEventListener('click', function() {
         // 1. Check current state
         const isPassword = passwordInput.getAttribute('type') === 'password';
-        
+
         // 2. Toggle the input type
         passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-        
+
         // 3. Swap the icons instantly
         if (isPassword) {
             // Password is now visible, show the "hide" icon
