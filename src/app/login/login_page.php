@@ -67,7 +67,6 @@ include_once($doc_root_folder . '/src/config/config.php');
                 </div>
             </div>
             <button type="submit" class="login-button">Log In</button>
-            <?php echo password_hash("password", PASSWORD_DEFAULT); ?>
         </form>
     </div>
 </body>

@@ -12,8 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $identifier = trim($_POST['username-or-email']);
     $password = trim($_POST['password']);
 
-    
-
     // Check if fields are empty
     if (empty($identifier) || empty($password)) {
         $_SESSION['login_error'] = "Please fill in all fields.";
@@ -23,20 +21,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare the SQL statement
     $sql = "SELECT * FROM users WHERE name = ? OR email = ?";
-
-    $stmt = $conn->prepare($sql);
+    $stmt = $pdo->prepare($sql);
+    
     if ($stmt === false) {
-        die("Database error during prepare " . $conn->error);
+        die("Database error during prepare.");
     }
 
-    $stmt->bind_param("ss", $identifier, $identifier);
-    $stmt->execute();
+    // PDO WAY: Pass the variables directly into execute() as an array
+    $stmt->execute([$identifier, $identifier]);
 
-    // Fetch result
-    $result = $stmt->get_result();
+    // PDO WAY: Fetch the first matching row directly
+    // (Assuming you set PDO::FETCH_ASSOC in your conn.php as discussed previously)
+    $user = $stmt->fetch(); 
 
-    if($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
+    // If $user is true, it means a row was found
+    if ($user) {
 
         // Verify password
         if (password_verify($password, $user['password'])) {
@@ -56,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: " . BASE_URL . "/src/app/tutor/dashboard.php");
                     break;
                 case 'admin1':
-                    header("Location: " .BASE_URL . "/src/app/admin/#");
+                    header("Location: " . BASE_URL . "/src/app/admin/#");
                     break;
                 default:
                     // Fallback if role missing / unrecognized
