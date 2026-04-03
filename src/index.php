@@ -11,7 +11,7 @@ include_once($doc_root_folder . '/src/config/config.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/global.css?version=<?php echo time(); ?>">
     <link rel="stylesheet" href="<?php echo BASE_URL; ?>/src/styles/anon.css?version<?php echo time() ?>">
-    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>src/resources/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
+    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/src/resources/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
     <title>Orbit</title>
 </head>
 
@@ -29,11 +29,10 @@ include_once($doc_root_folder . '/src/config/config.php');
             </a>
         </div>
     </div>
-    <div class="footer">
+    <footer>
         <p class="footer-text">an extension of</p>
         <img id="apspace-logo" src="<?php echo BASE_URL; ?>/src/resources/icons/apspace-logo.svg" alt="apspace logo" aria-hidden="true">
         <p class="footer-text"> ORBIT &copy; 2026</p>
-    </div>
+    </footer>
 </body>
-
 </html>

@@ -49,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check role
             switch ($user['role']) {
                 case 'student':
-                    header("Location: " . BASE_URL . "/src/app/student/dashboard.php");
+                    header("Location: " . BASE_URL . "/src/app/student/#");
                     break;
                 case 'lecturer':
-                    header("Location: " . BASE_URL . "/src/app/tutor/dashboard.php");
+                    header("Location: " . BASE_URL . "/src/app/tutor/#");
                     break;
                 case 'admin1':
                     header("Location: " . BASE_URL . "/src/app/admin/#");

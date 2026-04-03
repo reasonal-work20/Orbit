@@ -69,6 +69,9 @@ include_once($doc_root_folder . '/src/config/config.php');
             <button type="submit" class="login-button">Log In</button>
         </form>
     </div>
+    <footer>
+        <p class="footer-text"> ORBIT &copy; 2026</p>
+    </footer>
 </body>
 
 <script>
