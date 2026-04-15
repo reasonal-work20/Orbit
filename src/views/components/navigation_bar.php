@@ -1,14 +1,12 @@
 <?php
 $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
-include_once($doc_root_folder . '/src/config/config.php');
+include_once($doc_root_folder . '/config/config.php');
 
 function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
 {
     
     $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
-    $svgPath = $doc_root_folder . '/src/resources/icons/' . $iconFilename;
-    $linkUrl = BASE_URL . '/src/app/student/' . $linkUrl;
-
+    $svgPath = $_SERVER['DOCUMENT_ROOT'] . ASSETS_PATH . '/icons/' . $iconFilename;
     $activeClass = (isset($_SESSION['current_page']) && $_SESSION['current_page'] == $pageId) ? 'active' : '';
 
     echo "
@@ -40,8 +38,8 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/global.css?version=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/navigation_bar.css?version=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATH; ?>/styles/global.css?version=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATH; ?>/styles/navigation_bar.css?version=<?php echo time(); ?>">
     <title>Navigation Bar</title>
 </head>
 
@@ -49,7 +47,7 @@ function renderNavItem($name, $iconFilename, $linkUrl, $pageId)
     <div class="nav-bar">
         <div class="nav-container">
             <div class="logo-wrapper">
-                <img class='logo' src="<?php echo BASE_URL . '/src/resources/icons/orbit-logo.svg' ?>">
+                <img class='logo' src="<?php echo ASSETS_PATH . '   /icons/orbit-logo.svg' ?>">
             </div>
             <ul class="nav-list" style="list-style: none;">
                 <?php

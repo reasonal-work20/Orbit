@@ -1,6 +1,6 @@
 <?php
 $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
-include_once($doc_root_folder . '/src/config/config.php');
+include_once($doc_root_folder . '/config/config.php');
 ?>
 
 <!DOCTYPE html>

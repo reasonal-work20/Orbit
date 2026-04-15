@@ -1,4 +1,3 @@
-
 <?php
 define('BASE_URL', '/Orbit');
 define('ASSETS_PATH', '/Orbit/assets');

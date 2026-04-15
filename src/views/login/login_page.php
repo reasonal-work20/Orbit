@@ -13,7 +13,7 @@ include_once($doc_root_folder . '/config/config.php');
     <link rel="icon" type="image/png" href="<?php echo ASSETS_PATH; ?>/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATH; ?>/styles/global.css?version=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATHL; ?>/styles/login.css?version=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATH; ?>/styles/login.css?version=<?php echo time(); ?>">
     <title>Login Page</title>
 </head>
 
