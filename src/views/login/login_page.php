@@ -1,19 +1,6 @@
 <?php
-
-session_start();
-
 $doc_root_folder = $_SERVER['DOCUMENT_ROOT'] . '/Orbit';
-include_once($doc_root_folder . '/src/config/config.php');
-
-// require $doc_root_folder . '/vendor/autoload.php';
-
-// use Symfony\Component\Uid\Ulid;
-
-// $ulid = new Ulid();
-
-// $custom_id = $ulid->toBase32();
-
-// echo "Generated ULID: " . $custom_id;
+include_once($doc_root_folder . '/config/config.php');
 ?>
 
 <!DOCTYPE html>
@@ -23,10 +10,10 @@ include_once($doc_root_folder . '/src/config/config.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Logo -->
-    <link rel="icon" type="image/png" href="<?php echo BASE_URL; ?>/src/resources/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
+    <link rel="icon" type="image/png" href="<?php echo ASSETS_PATH; ?>/icons/orbit-logo-square.svg?version=<?php echo time(); ?>">
     <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/global.css?version=<?php echo time(); ?>">
-    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>/src/styles/login.css?version=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATH; ?>/styles/global.css?version=<?php echo time(); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo ASSETS_PATHL; ?>/styles/login.css?version=<?php echo time(); ?>">
     <title>Login Page</title>
 </head>
 
@@ -47,7 +34,7 @@ include_once($doc_root_folder . '/src/config/config.php');
                 <p class="subtitle">If you dont have an account, <a class="register-link" href="#">register here</a></p>
             </div>
         </div>
-        <form class="login-form" method="POST" action="<?php echo BASE_URL; ?>/src/backend/processes/login_handler.php">
+        <form class="login-form" method="POST" action="#">
             <div class="input-group">
                 <label for="username-or-email" class="input-label">Username / Email</label>
                 <input type="text" id="username-or-email" name="username-or-email" class="input-field" required>
@@ -58,10 +45,10 @@ include_once($doc_root_folder . '/src/config/config.php');
                     <input type="password" id="password" name="password" class="input-field" required>
                     <div id="togglePassword" class="toggle-password-btn">
                         <div class="icon-show">
-                            <?php include $_SERVER['DOCUMENT_ROOT'] . '/Orbit/src/resources/icons/eye-open.svg'; ?>
+                            <?php include $_SERVER['DOCUMENT_ROOT'] . ASSETS_PATH . '/icons/eye-open.svg'; ?>
                         </div>
                         <div class="icon-hide" style="display: none;">
-                            <?php include $_SERVER['DOCUMENT_ROOT'] . '/Orbit/src/resources/icons/eye-closed.svg'; ?>
+                            <?php include $_SERVER['DOCUMENT_ROOT'] . ASSETS_PATH . '/icons/eye-closed.svg'; ?>
                         </div>
                     </div>
                 </div>
