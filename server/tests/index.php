@@ -1,0 +1,15 @@
+<?php
+/**
+ * Entry point for testing.
+*/
+?>
+
+<html>
+<head>
+    <title>Tests</title>
+</head>
+
+<body>
+    <h1>Tests</h1>
+</body>
+</html>
