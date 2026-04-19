@@ -1,5 +1,13 @@
 # Orbit Captone Project
 
+## Casing
+| Casing | Condition |
+|--|--|
+| camelCase | Variables, functions |
+| PascalCase | Classes |
+| snake_case | Database table and columns |
+| kebab-case | File names, urls, css classes |
+
 ## Folder Structure
 ```
 Orbit
