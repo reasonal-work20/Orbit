@@ -24,7 +24,7 @@ Orbit
 ├── server/                 # Backend
 |   ├── config/             # Database configurations, Environment setups
 |   ├── controllers/        # 
-|   ├── models/             # Database schemas
+|   ├── models/             # Database schemas, CRUD operations
 |   ├── routes/             # 
 |   ├── tests/              # Unit and integration tests.
 |

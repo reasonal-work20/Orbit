@@ -2,6 +2,8 @@
 /**
  * Entry point for testing.
 */
+require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+include ROOT.CONFIG;
 ?>
 
 <html>
