@@ -15,17 +15,17 @@ Orbit
 |   ├── src/
 |   |   ├── app/            # Global setup
 |   |   ├── assets/         # Static assets (images, icons, fonts)
-|   |   ├── features/       # Smart components
-|   |   ├── pages/          # Route level pages
-|   |   ├── shared/         # 
-|   |   ├── styles/         # 
+|   |   ├── features/       # Organized by features in the system
+|   |   ├── pages/          # Route level pages - login, dashboard
+|   |   ├── shared/         # Shared components
+|   |   ├── styles/         # CSS
 |   ├── index.php
 |
 ├── server/                 # Backend
 |   ├── config/             # Database configurations, Environment setups
-|   ├── controllers/        # 
+|   ├── controllers/        # Contains the logic.
 |   ├── models/             # Database schemas, CRUD operations
-|   ├── routes/             # 
+|   ├── routes/             # Connects with client side - input and output
 |   ├── tests/              # Unit and integration tests.
 |
 ├── shared/                 # Shared by frontend and backend
