@@ -11,7 +11,7 @@ require_once ROOT.MODELS.'/lecturer.php';
 *
 * Functions in the class
 * create    -> Creates new user, either student or lecturer. Takes in an associated array input and role input. Return any string of error.
-*           -> [name, password, email, phone, picture, qualification] *Qualification only applicable for lecturer role.
+*           -> [name, password, email, phone, picture, role, qualification] *Qualification only applicable for lecturer role.
 *
 * getList   -> Takes in a string input to filter through the data. Input is optional. Returns a list of user data.
 *           -> [userID, name, password, email, phone, picture, role]
@@ -37,16 +37,16 @@ class ManageUser {
         $this->lecturerEditor = new Lecturer($connect);
     }
 
-    public function create(array $input, $role):string {
+    public function create(array $input):string {
         $error = True;
         
-        $user = $this->userEditor->createUser($input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"], $role);
+        $user = $this->userEditor->createUser($input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"], $input["role"]);
         $error = $user["error"];
         if ($error) {
             return "Error has occurred when creating the user.";
         }
 
-        switch ($role) {
+        switch ($input["role"]) {
             case "Student":
                 $student = $this->studentEditor->createStudent($user["id"]);
                 $error = $student["error"];
@@ -142,7 +142,7 @@ class ManageUser {
         return $result;
     }
 
-    public function update(array $input, $role):string {
+    public function update(array $input):string {
         $error = True;
 
         $user = $this->userEditor->updateUser($input["userID"], $input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"]);
@@ -151,7 +151,7 @@ class ManageUser {
             return "Error has occurred when updating the user.";
         }
 
-        switch ($role) {
+        switch ($input["role"]) {
             case "Student":
                 $student = $this->studentEditor->updateStudent($input["studentID"], $input["status"]);
                 $error = $student["error"];
