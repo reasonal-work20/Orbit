@@ -3,6 +3,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT.CONFIG;
 require_once ROOT.CONTROLLERS.'/manage-user.php';
 
+/**
+* Functions in File
+* getAllUser, getUser, createUser, updateUser, deleteUser
+*/
+
 $manageUser = new ManageUser();
 
 function getAllUser($search) {
@@ -28,6 +33,7 @@ function createUser($inputData, $inputFile) {
         $data["qualification"] = $inputData["qualification"];
     }
 
+    /** Creates a duplicate image file saved in the uploads folder. */
     if (isset($inputFile["picture"]) && $inputFile["picture"]["error"] === 0) {
         $extension = pathinfo($inputFile["picture"]["name"], PATHINFO_EXTENSION);
         $file = substr($data["name"], 0, 2) . "-" . time() . "." . $extension;
@@ -58,6 +64,7 @@ function updateUser($inputData, $inputFile) {
         $data["qualification"] = $inputData["qualification"];
     }
 
+    /** Removes the old version of the image file and replaces it with a new file. */
     $user = $manageUser->get($data["userID"]);
     $data["picture"] = $user["picture"];
     if (isset($inputFile["picture"]) && $inputFile["picture"]["error"] === 0) {
