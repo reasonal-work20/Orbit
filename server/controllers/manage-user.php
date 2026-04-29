@@ -10,15 +10,22 @@ require_once ROOT.MODELS.'/lecturer.php';
 * User management.
 */
 
-public class ManageUser() {
-    private $userEditor = new User();
-    private $studentEditor = new User();
-    private $lecturerEditor = new User();
+class ManageUser {
+    private $userEditor;
+    private $studentEditor;
+    private $lecturerEditor;
+
+    public function __construct() {
+        global $connect;
+        $this->userEditor = new User($connect);
+        $this->studentEditor = new Student($connect);
+        $this->lecturerEditor = new Lecturer($connect);
+    }
 
     public function create(array $input, $role) {
         $error = True;
         
-        $user = $userEditor.createUser($input["name"], $input["password"], $input["email"], $input["phone"], $input["profile"], $role);
+        $user = $this->userEditor->createUser($input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"], $role);
         $error = $user["error"];
         if ($error) {
             return "Error has occurred when creating the user.";
@@ -26,12 +33,12 @@ public class ManageUser() {
 
         switch ($role) {
             case "Student":
-                $student = $studentEditor.createStudent($user["id"], $input["intakeGroupID"]);
+                $student = $this->studentEditor->createStudent($user["id"]);
                 $error = $student["error"];
                 break;
             case "Lecturer":
-                $lecturer = $lecturerEditor.createLecturer($user["id"], $input["qualification"]);
-                $error = $lecturer["error"];
+                $lecturer = $this->lecturerEditor->createLecturer($user["id"], $input["qualification"]);
+                $error = $this->lecturer["error"];
                 break;
         }
         
@@ -49,10 +56,10 @@ public class ManageUser() {
             "name" => "",
             "email" => "",
             "phone" => "",
-            "profile" => ""
+            "picture" => ""
         ];
 
-        $user = $userEditor.getUser($id);
+        $user = $this->userEditor->getUser($id);
         $result["error"] = $user["error"];
         if ($result["error"]) {
             return $result;
@@ -61,12 +68,12 @@ public class ManageUser() {
             $result["name"] = $user["name"];
             $result["email"] = $user["email"];
             $result["phone"] = $user["phone"];
-            $result["profile"] = $user["profile"];
+            $result["picture"] = $user["picture"];
         }
 
         switch ($role) {
             case "Student":
-                $student = $studentEditor.getStudent($id);
+                $student = $this->studentEditor->getStudent($id);
                 $result["error"] = $student["error"];
                 if (!$result["error"]) {
                     $result["studentID"] = $student["studentID"];
@@ -75,7 +82,7 @@ public class ManageUser() {
                 }
                 break;
             case "Lecturer":
-                $lecturer = $lecturerEditor.getLecturer($id);
+                $lecturer = $this->lecturerEditor->getLecturer($id);
                 $result["error"] = $lecturer["error"];
                 if (!$result["error"]) {
                     $result["lecturerID"] = $lecturer["lecturerID"];
@@ -91,7 +98,7 @@ public class ManageUser() {
     public function update(array $input, $role) {
         $error = True;
 
-        $user = $userEditor.updateUser($input["userID"], $input["name"], $input["password"], $input["email"], $input["phone"], $input["profile"]);
+        $user = $this->userEditor->updateUser($input["userID"], $input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"]);
         $error = $user["error"];
         if ($error) {
             return "Error has occurred when updating the user.";
@@ -99,11 +106,11 @@ public class ManageUser() {
 
         switch ($role) {
             case "Student":
-                $student = $studentEditor.updateStudent($input["studentID"], $input["intakeGroupID"], $input["status"]);
+                $student = $this->studentEditor->updateStudent($input["studentID"], $input["status"]);
                 $error = $student["error"];
                 break;
             case "Lecturer":
-                $lecturer = $lecturerEditor.updateLecturer($input["lecturerID"], $input["qualification"], $input["status"]);
+                $lecturer = $this->lecturerEditor->updateLecturer($input["lecturerID"], $input["qualification"], $input["status"]);
                 $error = $lecturer["error"];
                 break;
         }
@@ -117,7 +124,7 @@ public class ManageUser() {
 
     public function delete(array $input) {
         $error = True;
-        $user = $userEditor.deleteUser($input["userID"]);
+        $user = $this->userEditor->deleteUser($input["userID"]);
         $error = $user["error"];
         if ($error) {
             return "Error has occurred when deleting the user.";

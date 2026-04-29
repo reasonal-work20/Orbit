@@ -1,27 +1,43 @@
 <?php
 /**
 * Class model of user.
+* 
+* User class constructor takes in the parameter database to
+* establish connection to the database.
+*
+* Functions
+* createUser    -> :param -> name, password, email, phone, picture picture file name, role
+*               -> Returns an associated array containing the error status and id of the created user.
+*
+* getUser       -> :param -> userID of the selected user.
+*               -> Returns an associated array containing the error status and details of the selected user. 
+*
+* updateUser    -> :param -> userID of the user to be updated, name, password, email, phone, picture picture file name
+*               -> Returns an associated array containing the error status.
+*
+* deleteUser    -> :param -> userID of the user to be deleted.
+*               -> Returns an associated array containing the error status.
 */
 
-public class User() {
+class User {
     private $connection;
 
     public function __construct($database) {
-        $this->$connection = $database;
+        $this->connection = $database;
     }
 
-    public function createUser($name, $password, $email, $phone, $profile, $role):array {
+    public function createUser($name, $password, $email, $phone, $picture, $role):array {
         $result = [
             "error" => True,
             "id" => 0
         ];
 
-        $hashPassword = password_hash($password);
-        $sql = "INSERT INTO user (name, password, email, phone, profile, role)
-                VALUES ('$name', '$hashPassword', '$email', '$phone', '$profile', '$role');";
-        if (mysqli_query($connection, $sql)) {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO user (name, password, email, phone, picture, role)
+                VALUES ('$name', '$hashPassword', '$email', '$phone', '$picture', '$role');";
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
-            $result["id"] = mysqli_insert_id($connection);
+            $result["id"] = mysqli_insert_id($this->connection);
         }
 
         return $result;
@@ -34,31 +50,31 @@ public class User() {
             "name" => "",
             "email" => "",
             "phone" => "",
-            "profile" => ""
+            "picture" => ""
         ];
 
         $sql = "SELECT * FROM user WHERE user_id = $userID;";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $user = mysqli_fetch_array($statement);
         if ($user) {
             $result["error"] = True;
             $result["name"] = $user["name"];
             $result["email"] = $user["email"];
             $result["phone"] = $user["phone"];
-            $result["profile"] = $user["profile"];
+            $result["picture"] = $user["picture"];
         }
 
         return $result;
     }
 
-    public function updateUser($userID, $name, $password, $email, $phone, $profile):array {
+    public function updateUser($userID, $name, $password, $email, $phone, $picture):array {
         $result = ["error" => True];
 
-        $hashPassword = password_verify($password);
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "UPDATE user
-                SET name = '$name', password = '$hashPassword', email = '$email', phone = '$phone', profile = '$profile'
+                SET name = '$name', password = '$hashPassword', email = '$email', phone = '$phone', picture = '$picture'
                 WHERE user_id = $userID;";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
 
@@ -69,7 +85,7 @@ public class User() {
         $result = ["error" => True];
 
         $sql = "DELETE FROM user WHERE user_id = $userID;";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
 

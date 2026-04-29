@@ -19,6 +19,7 @@ Orbit
 |   |   ├── pages/          # Route level pages - login, dashboard
 |   |   ├── shared/         # Shared components
 |   |   ├── styles/         # CSS
+|   |   ├── upload/         # Folder storing all the user profile picture.
 |   ├── index.php
 |
 ├── server/                 # Backend

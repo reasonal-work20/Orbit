@@ -3,11 +3,11 @@
 * Class model for lecturers.
 */
 
-public class Lecturer() {
+class Lecturer {
     private $connection;
 
     public function __construct($database) {
-        $this->$connection = $database;
+        $this->connection = $database;
     }
 
     public function createLecturer($userID, $qualification):array {
@@ -18,8 +18,8 @@ public class Lecturer() {
 
         $sql = "INSERT INTO lecturer (user_id, qualification, status)
                 VALUES ($userID, '$qualification', 'Active');";
-        if (mysqli_query($connection, $sql)) {
-            $result["id"] = mysqli_insert_id($connection);
+        if (mysqli_query($this->connection, $sql)) {
+            $result["id"] = mysqli_insert_id($this->connection);
             $result["error"] = False;
         }
 
@@ -36,7 +36,7 @@ public class Lecturer() {
         ];
 
         $sql = "SELECT * FROM lecturer WHERE lecturer_id = '$id' OR user_id = $id;";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $lecturer = mysqli_fetch_array($statement);
         if ($lecturer) {
             $result["lecturerID"] = $lecturer["lecturer_id"];
@@ -55,7 +55,7 @@ public class Lecturer() {
         $sql = "UPDATE lecturer
                 SET qualification = '$qualification', status = '$status'
                 WHERE lecturer_id = '$lecturerID';";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
 

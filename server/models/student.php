@@ -3,24 +3,24 @@
 * Class model for students.
 */
 
-public class Student() {
+class Student {
     private $connection;
 
     public function __construct($database) {
-        $this->$connection = $database;
+        $this->connection = $database;
     }
 
-    public function createStudent($userID, $intakeGroupID):array {
+    public function createStudent($userID):array {
         $result = [
             "error" => True,
             "id" => ""
         ];
 
-        $sql = "INSERT INTO student (user_id, intake_group_id, status) 
-                VALUES ($userID, '$intakeGroupID', 'Active')";
-        if (mysqli_query($connection, $sql)) {
+        $sql = "INSERT INTO student (user_id, status) 
+                VALUES ($userID, 'Active')";
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
-            $result["id"] = mysqli_insert_id($connection);
+            $result["id"] = mysqli_insert_id($this->connection);
         }
 
         return $result;
@@ -31,31 +31,29 @@ public class Student() {
             "error" => True,
             "studentID" => "",
             "userID" => 0,
-            "intakeGroupID" => "",
             "status" => ""
         ];
 
         $sql = "SELECT * FROM student WHERE student_id = '$id' OR user_id = $id;";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $student = mysqli_fetch_array($statement);
         if ($student) {
             $result["error"] = False;
             $result["studentID"] = $student["student_id"];
             $result["userID"] = $student["user_id"];
-            $result["intakeGroupID"] = $student["intake_group_id"];
             $result["status"] = $student["status"];
         }
 
         return $result;
     }
 
-    public function updateStudent($studentID, $intakeGroupID, $status):array {
+    public function updateStudent($studentID, $status):array {
         $result = ["error" => True];
         
         $sql = "UPDATE student
-                SET intake_group_id = '$intakeGroupID', status = '$status'
+                SET status = '$status'
                 WHERE student_id = '$studentID';";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
 
