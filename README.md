@@ -32,3 +32,8 @@ Orbit
 ├── shared/                 # Shared by frontend and backend
 |   ├── constant.php
 ```
+
+## Important Note
+User Admin -> admin@example.com, user@dm1n
+Course Admin -> academic@example.com, course@dm1n
+Schedule Admin -> schedule@example.com, schedule@dm1n

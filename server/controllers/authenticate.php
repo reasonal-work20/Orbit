@@ -13,7 +13,8 @@ require_once ROOT.CONFIG;
 * | keys: error -> bool, role -> string
 */
 
-public function authenticate($email, $password):array {
+function authenticate($email, $password):array {
+    global $connect;
     // Default return result.
     $result = [
         "error" => True,
@@ -27,10 +28,10 @@ public function authenticate($email, $password):array {
     $user = mysqli_fetch_array($statement);
     if (!$user) {
         $result["message"] = "Incorrect email / password. Please try again.";
-    } elseif (!password_verify($pass, $user['password'])) {
+    } elseif (!password_verify($password, $user['password'])) {
         $result["message"] = "Incorrect email / password. Please try again.";
     } else {
-        $result["error"] = False
+        $result["error"] = False;
         $result["id"] = $user["user_id"];
         $result["role"] = $user["role"];
     }

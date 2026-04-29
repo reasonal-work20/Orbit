@@ -49,6 +49,7 @@ if (isset($_SESSION['login_error'])) {
     <button type="submit" class="login-button">Log In</button>
 </form>
 
+<script src="<?php echo SERVICES ?>/login-service.js"></script>
 <script>
     const togglePasswordBtn = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');

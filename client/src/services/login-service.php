@@ -1,10 +1,14 @@
 <?php
-$route = curl_init(ROOT.ROUTES.'/login.php');
-curl_setopt($route, CURLOPT_POST, true);
-curl_setopt($route, CURLOPT_POSTFIELDS, $_POST);
-curl_setopt($route, CURLOPT_RETURNTRANSFER, true);
-$response = curl_exec($route);
-curl_close($route);
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+require_once ROOT.ROUTES.'/login.php';
 
-$result = json_decode($response, true);
+$data = $_POST;
+$result = login($data);
+if ($result["error"]) {
+    echo "Authentication fail<br/>";
+    echo $result["message"];
+} else {
+    echo "Authentication pass<br/>";
+    echo $result["role"];
+}
 ?>
