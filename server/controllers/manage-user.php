@@ -7,7 +7,22 @@ require_once ROOT.MODELS.'/student.php';
 require_once ROOT.MODELS.'/lecturer.php';
 
 /** 
-* User management.
+* User Management Controller
+*
+* Functions in the class
+* create    -> Creates new user, either student or lecturer. Takes in an associated array input and role input. Return any string of error.
+*           -> [name, password, email, phone, picture, qualification] *Qualification only applicable for lecturer role.
+*
+* getList   -> Takes in a string input to filter through the data. Input is optional. Returns a list of user data.
+*           -> [userID, name, password, email, phone, picture, role]
+*
+* get       -> Takes in id input of the selected user. Returns data of the selected user.
+*           -> [userID, name, password, email, phone, picture, role, lecturerID, qualification, studentID, status]
+*
+* update    -> Updates the current user. Takes in an associated array input and role input. Return any string of error.
+*           -> [userID, name, password, email, phone, picture, role, qualification, status]
+*
+* delete    -> Takes in id input of the selected user and deletes said user. Returns any string of error.
 */
 
 class ManageUser {
@@ -22,7 +37,7 @@ class ManageUser {
         $this->lecturerEditor = new Lecturer($connect);
     }
 
-    public function create(array $input, $role) {
+    public function create(array $input, $role):string {
         $error = True;
         
         $user = $this->userEditor->createUser($input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"], $role);
@@ -38,7 +53,7 @@ class ManageUser {
                 break;
             case "Lecturer":
                 $lecturer = $this->lecturerEditor->createLecturer($user["id"], $input["qualification"]);
-                $error = $this->lecturer["error"];
+                $error = $lecturer["error"];
                 break;
         }
         
@@ -49,14 +64,44 @@ class ManageUser {
         }
     }
 
-    public function get($id, $role):array {
+    public function getList($search):array {
+        global $connect;
+        $result = [];
+        
+        if ($search) {
+            $sql = "SELECT * FROM user
+                    WHERE name LIKE '%$search%'
+                    AND role != 'User Admin' AND role != 'Course Admin' AND role != 'Schedule Admin';";
+        } else {
+            $sql = "SELECT * FROM user WHERE role != 'User Admin' AND role != 'Course Admin' AND role != 'Schedule Admin';";
+        }
+        $statement = mysqli_query($connect, $sql);
+        while ($user = mysqli_fetch_array($statement)) {
+            $data = [
+                "userID" => $user["user_id"],
+                "name" => $user["name"],
+                "password" => $user["password"],
+                "email" => $user["email"],
+                "phone" => $user["phone"],
+                "picture" => $user["picture"],
+                "role" => $user["role"]
+            ];
+            $result[] = $data;
+        }
+
+        return $result;
+    }
+
+    public function get($id):array {
         $result = [
             "error" => True,
             "userID" => 0,
             "name" => "",
+            "password" => "",
             "email" => "",
             "phone" => "",
-            "picture" => ""
+            "picture" => "",
+            "role" => ""
         ];
 
         $user = $this->userEditor->getUser($id);
@@ -66,9 +111,12 @@ class ManageUser {
         } else {
             $result["userID"] = $user["id"];
             $result["name"] = $user["name"];
+            $result["password"] = $user["password"];
             $result["email"] = $user["email"];
             $result["phone"] = $user["phone"];
             $result["picture"] = $user["picture"];
+            $result["role"] = $user["role"];
+            $role = $user["role"];
         }
 
         switch ($role) {
@@ -77,7 +125,6 @@ class ManageUser {
                 $result["error"] = $student["error"];
                 if (!$result["error"]) {
                     $result["studentID"] = $student["studentID"];
-                    $result["intakeGroupID"] = $student["intakeGroupID"];
                     $result["status"] = $student["status"];
                 }
                 break;
@@ -95,7 +142,7 @@ class ManageUser {
         return $result;
     }
 
-    public function update(array $input, $role) {
+    public function update(array $input, $role):string {
         $error = True;
 
         $user = $this->userEditor->updateUser($input["userID"], $input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"]);
@@ -122,7 +169,7 @@ class ManageUser {
         }
     }
 
-    public function delete(array $input) {
+    public function delete(array $input):string {
         $error = True;
         $user = $this->userEditor->deleteUser($input["userID"]);
         $error = $user["error"];

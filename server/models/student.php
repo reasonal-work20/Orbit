@@ -1,6 +1,21 @@
 <?php
 /** 
 * Class model for students.
+*
+* Student class constructor takes in the parameter database to establish connection to the database.
+*
+* Functions
+* createStudent -> :param -> userID of the student's user account.
+*               -> Returns an associated array containing the error status and id of the created student. 
+*               -> Key -> [error, id]
+* 
+* getStudent    -> :param -> id referring to either studentID or userID.
+*               -> Returns an associated array containing the error status and details of the selected student. 
+*               -> Key -> [error, studentID, userID, status]
+*
+* updateStudent -> :param -> studentID, status of the student (either Active or Inactive).
+*               -> Returns an associated array containing the error status. 
+*               -> Key -> [error]
 */
 
 class Student {
@@ -59,16 +74,5 @@ class Student {
 
         return $result;
     }
-
-    // public function deleteStudent($studentID):array {
-    //     $result = ["error" => True];
-
-    //     $sql = "DELETE FROM student WHERE student_id = '$studentID';";
-    //     if (mysqli_query($connection, $sql)) {
-    //         $result["error"] = False;
-    //     }
-
-    //     return $result;
-    // }
 }
 ?>
