@@ -10,6 +10,7 @@ define('APP', '/Orbit/client/src/app');
 define('COMPONENTS', '/Orbit/client/src/app/components');
 define('FEATURES', '/Orbit/client/src/app/features');
 define('SERVICES', '/Orbit/client/src/services');
+define('UPLOADS', '/Orbit/client/src/uploads');
 
 /** Constants used in the backend (server side). */
 define('CONFIG', '/Orbit/server/config/config.php');
