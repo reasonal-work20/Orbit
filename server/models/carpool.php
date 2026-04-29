@@ -1,23 +1,42 @@
 <?php
 /**
-* Class model for Carpool.
+* Class model for carpool.
+*
+* Carpool class constructor takes in the parameter database to establish connection to the database.
+* 
+* Functions
+* createCarpool -> :param -> userID, type, start, destination, time, car colour, car plate, car model, capacity, note
+*               -> Returns an associated array containing the error status and id of the created carpool.
+*               -> Key -> [error, id]
+*
+* getCarpool    -> :param -> id, referring to either carpoolID or userID
+*               -> Returns an associated array containing the error status and the details of the selected carpool.
+*               -> Key -> [error, type, start, destination, time, car colour, car plate, car model, capacity, note, status]
+*
+* updateCarpool -> :param -> carpoolID, status
+*               -> Returns an associated array containing the error status. The function only updates the status of the carpool.
+*               -> Key -> [error]
+*
+* deleteCarpool -> :param -> carpoolID
+*               -> Returns an associated array containing the error status. 
+*               -> Key -> [error]
 */
 
-public class Carpool() {
+class Carpool {
     private $connection;
 
-    public function __construct($connection) {
-        $this->connection = $connection;
+    public function __construct($database) {
+        $this->connection = $database;
     }
 
-    public function createCarpool($userID, $type, $start, $destination, $time, $carColour, $carPlate, $carModel, $capacity, $note) {
+    public function createCarpool($userID, $type, $start, $destination, $time, $carColour, $carPlate, $carModel, $capacity, $note):array {
         $result = [
             "error" => True,
             "id" => 0
         ];
 
-        $sql = "INSERT INTO carpool (user_id, type, start, destination, time, car_colour, car_plate, car_model, capacity, note, status)
-                VALUES ($userID, '$type', '$start', '$destination', '$time', '$carColour', '$carPlate', '$carModel', $capacity, '$note', 'Open');";
+        $sql = "INSERT INTO carpool (user_id, type, start, destination, time, car_colour, car_plate, car_model, capacity, note, status) 
+                VALUES ($userID, '$type', '$start', '$destination', '$time', '$carColour', '$carPlate', '$carModel', $capacity, '$note', 'Waiting');";
         if (mysqli_query($this->connection, $sql)) {
             $result["id"] = mysqli_insert_id($this->connection);
             $result["error"] = False;
@@ -26,38 +45,11 @@ public class Carpool() {
         return $result;
     }
 
-    public function createRequest($carpoolID, $userID) {
+    public function getCarpool($id):array {
         $result = [
+            "carpoolID" => 0,
+            "userID" => 0,
             "error" => True,
-            "id" => 0
-        ];
-
-        $sql = "SELECT capacity FROM carpool WHERE carpool_id = $carpoolID;";
-        $statement = mysqli_query($this->connection, $sql);
-        $carpool = mysqli_fetch_array($statement);
-        if (!$carpool) {
-            return $result;
-        }
-        $sql = "SELECT COUNT(request_id) AS total FROM carpool_request WHERE carpool_id = $carpoolID;";
-        $statement = mysqli_query($this->connection, $sql);
-        $capacity = mysqli_fetch_array($statement);
-        if (!$capacity || $capacity["total"] >= $carpool["capacity"]) {
-            return $result;
-        } 
-
-        $sql = "INSERT INTO carpool_request (user_id, carpool_id, approval) VALUES ($userID, $carpoolID, 'Pending');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = mysqli_insert_id($this->connection);
-            $result["error"] = False;
-        }
-
-        return $result;
-    }
-
-    public function getCarpool($carpoolID) {
-        $result = [
-            "error" => True,
-            "id" => 0,
             "type" => "",
             "start" => "",
             "destination" => "",
@@ -65,16 +57,17 @@ public class Carpool() {
             "carColour" => "",
             "carPlate" => "",
             "carModel" => "",
-            "capacity" => 0,
+            "capacity" => 0, 
             "note" => "",
             "status" => ""
         ];
 
-        $sql = "SELECT * FROM carpool WHERE carpool_id = $carpoolID;";
+        $sql = "SELECT * FROM carpool WHERE carpool_id = $id OR user_id = $id;";
         $statement = mysqli_query($this->connection, $sql);
         $carpool = mysqli_fetch_array($statement);
         if ($carpool) {
-            $result["id"] = $carpool["carpool_id"];
+            $result["carpoolID"] = $carpool["carpool_id"];
+            $result["userID"] = $carpool["user_id"];
             $result["type"] = $carpool["type"];
             $result["start"] = $carpool["start"];
             $result["destination"] = $carpool["destination"];
@@ -87,48 +80,22 @@ public class Carpool() {
             $result["status"] = $carpool["status"];
             $result["error"] = False;
         }
+
         return $result;
     }
 
-    public function getRequest($carpoolID) {
+    public function updateCarpool($carpoolID, $status):array {
         $result = ["error" => True];
-        $sql = "SELECT * FROM carpool_request WHERE carpool_id = $carpoolID;";
-    }
-
-    public function updateCarpool($carpoolID, $type, $start, $destination, $time, $carColour, $carPlate, $carModel, $capacity, $note, $status) {
-        $result = ["error" => True];
-        $sql = "UPDATE carpool
-                SET type = '$type', start = '$start', destination = '$destination',
-                car_colour = '$carColour', car_plate = '$carPlate', car_model = '$carModel', 
-                capacity = $capacity, note = '$note', status = '$status'
-                WHERE carpool_id = $carpoolID";
+        $sql = "UPDATE carpool SET status = '$status' WHERE carpool_id = $carpoolID;";
         if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;
     }
 
-    public function updateRequest($requestID, $approval) {
-        $result = ["error" => True];
-        $sql = "UPDATE carpool_request SET approval = '$approval' WHERE request_id = $requestID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
-        }
-        return $result;
-    }
-
-    public function deleteCarpool($carpoolID) {
-        $result = ["error" => True];
+    public function deleteCarpool($carpoolID):array {
+        $result = ["error" => True ];
         $sql = "DELETE FROM carpool WHERE carpool_id = $carpoolID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
-        }
-        return $result;
-    }
-
-    public function deleteRequest($requestID) {
-        $result = ["error" => True];
-        $sql = "DELETE FROM carpool_request WHERE request_id = $requestID;";
         if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
