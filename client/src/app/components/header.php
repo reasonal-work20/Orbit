@@ -12,7 +12,7 @@ function createHead($title, $cssFiles) {
     <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <link rel='icon' type='image/png' href='" . ASSETS . "/orbit-logo-square.svg?version=" . time() . "'>
+    <link rel='icon' type='image/png' href='" . ASSETS . "/orbit-logo-square.svg'>
     <title>" . $title . "</title>";
     foreach ($cssFiles as $file) {
         echo '<link rel="stylesheet" type="text/css" href="' . STYLES . '/' . $file . '?version=' . time() . '">';

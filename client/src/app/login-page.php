@@ -14,9 +14,9 @@ createHead('Login | Orbit', $cssFiles);
 ?>
 
 <?php
-if (isset($_SESSION['login_error'])) {
-    echo '<div class="error-message">' . htmlspecialchars($_SESSION['login_error']) . '</div>';
-    unset($_SESSION['login_error']);
+if (isset($_SESSION['loginError'])) {
+    echo '<div class="error-message">' . htmlspecialchars($_SESSION['loginError']) . '</div>';
+    unset($_SESSION['loginError']);
 }
 ?>
 <div class="loading-overlay" style="display: none;">
@@ -49,7 +49,16 @@ if (isset($_SESSION['login_error'])) {
     <button type="submit" class="login-button">Log In</button>
 </form>
 
-<script src="<?php echo SERVICES ?>/login-service.js"></script>
+<script>
+    // Show loading overlay on form submit
+    const loginForm = document.querySelector('.login-form');
+    const loadingOverlay = document.querySelector('.loading-overlay');
+
+    loginForm.addEventListener('submit', function() {
+        loadingOverlay.style.display = 'flex';
+    });
+</script>
+
 <script>
     const togglePasswordBtn = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');

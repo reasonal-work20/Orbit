@@ -4,8 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 ?>
 
-
-    </main>
+</main>
     <footer>
         <p class="footer-text">an extension of</p>
         <img id="apspace-logo" src="<?php echo ASSETS; ?>/icons/apspace-logo.svg" alt="apspace logo" aria-hidden="true">

@@ -12,8 +12,9 @@ include_once ROOT.COMPONENTS . "/header.php";
 include_once ROOT.COMPONENTS . "/footer.php";
 include_once ROOT.COMPONENTS . "/nav-bar.php";
 
-$currentPage = 'home';
+$currentPage = 'home'; // Change this to test different active states
 $_SESSION['currentPage'] = $currentPage; // Set the current page for active state testing
+
 $userRole = 'student'; // Change this to test different roles
 $_SESSION['user_role'] = $userRole; // Set the user role in session for testing
 
