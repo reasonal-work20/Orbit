@@ -10,5 +10,11 @@ if ($result["error"]) {
 } else {
     echo "Authentication pass<br/>";
     echo $result["role"];
+    /**
+     * Roles Output:
+     * User Admin
+     * Course Admin
+     * Schedule Admin
+     */
 }
 ?>
