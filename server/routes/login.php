@@ -9,10 +9,11 @@ function login($data) {
     $verify = authenticate($email, $password);
 
     if ($verify["error"]) {
-        return ["error" => True, "role" => "", "message" => $verify["message"]];
+        return ["error" => True, "message" => $verify["message"]];
     } else {
         $_SESSION["userID"] = $verify["id"];
-        return ["error" => False, "role" => $verify["role"], "message" => ""];
+        $_SESSION["role"] = $verify["role"];
+        return ["error" => False, "message" => ""];
     }
 } 
 ?>

@@ -7,7 +7,7 @@ public class Carpool() {
     private $connection;
 
     public function __construct($connection) {
-        $this->$connection = $connection;
+        $this->connection = $connection;
     }
 
     public function createCarpool($userID, $type, $start, $destination, $time, $carColour, $carPlate, $carModel, $capacity, $note) {
@@ -18,8 +18,8 @@ public class Carpool() {
 
         $sql = "INSERT INTO carpool (user_id, type, start, destination, time, car_colour, car_plate, car_model, capacity, note, status)
                 VALUES ($userID, '$type', '$start', '$destination', '$time', '$carColour', '$carPlate', '$carModel', $capacity, '$note', 'Open');";
-        if (mysqli_query($connection, $sql)) {
-            $result["id"] = mysqli_insert_id($connection);
+        if (mysqli_query($this->connection, $sql)) {
+            $result["id"] = mysqli_insert_id($this->connection);
             $result["error"] = False;
         }
 
@@ -33,21 +33,21 @@ public class Carpool() {
         ];
 
         $sql = "SELECT capacity FROM carpool WHERE carpool_id = $carpoolID;";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $carpool = mysqli_fetch_array($statement);
         if (!$carpool) {
             return $result;
         }
         $sql = "SELECT COUNT(request_id) AS total FROM carpool_request WHERE carpool_id = $carpoolID;";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $capacity = mysqli_fetch_array($statement);
         if (!$capacity || $capacity["total"] >= $carpool["capacity"]) {
             return $result;
         } 
 
         $sql = "INSERT INTO carpool_request (user_id, carpool_id, approval) VALUES ($userID, $carpoolID, 'Pending');";
-        if (mysqli_query($connection, $sql)) {
-            $result["id"] = mysqli_insert_id($connection);
+        if (mysqli_query($this->connection, $sql)) {
+            $result["id"] = mysqli_insert_id($this->connection);
             $result["error"] = False;
         }
 
@@ -71,7 +71,7 @@ public class Carpool() {
         ];
 
         $sql = "SELECT * FROM carpool WHERE carpool_id = $carpoolID;";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $carpool = mysqli_fetch_array($statement);
         if ($carpool) {
             $result["id"] = $carpool["carpool_id"];
@@ -102,7 +102,7 @@ public class Carpool() {
                 car_colour = '$carColour', car_plate = '$carPlate', car_model = '$carModel', 
                 capacity = $capacity, note = '$note', status = '$status'
                 WHERE carpool_id = $carpoolID";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;
@@ -111,7 +111,7 @@ public class Carpool() {
     public function updateRequest($requestID, $approval) {
         $result = ["error" => True];
         $sql = "UPDATE carpool_request SET approval = '$approval' WHERE request_id = $requestID;";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;
@@ -120,7 +120,7 @@ public class Carpool() {
     public function deleteCarpool($carpoolID) {
         $result = ["error" => True];
         $sql = "DELETE FROM carpool WHERE carpool_id = $carpoolID;";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;
@@ -129,7 +129,7 @@ public class Carpool() {
     public function deleteRequest($requestID) {
         $result = ["error" => True];
         $sql = "DELETE FROM carpool_request WHERE request_id = $requestID;";
-        if (mysqli_query($connection, $sql)) {
+        if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;

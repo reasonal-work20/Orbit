@@ -9,8 +9,10 @@ if ($result["error"]) {
     echo $result["message"];
 } else {
     echo "Authentication pass<br/>";
-    echo $result["role"];
     /**
+     * $_SESSION['userID'] already set.
+     * $_SESSION['role'] already set.
+     * 
      * Roles Output:
      * User Admin
      * Course Admin
