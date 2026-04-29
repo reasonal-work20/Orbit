@@ -1,6 +1,21 @@
 <?php
 /** 
 * Class model for lecturers.
+*
+* Lecturer class constructor takes in the parameter database to establish connection to the database.
+* 
+* Functions
+* createLecturer    -> :param -> userID of the lecturer's user account, qualification
+*                   -> Returns an associated array containing the error status and id of the created lecturer.
+*                   -> Key -> [error, id]
+*
+* getLecturer       -> :param -> id referring to either lecturerID or userID.
+*                   -> Returns an associated array containing the error status and details of the lecturer selected.
+*                   -> Key -> [error, lecturerID, userID, qualification, status]
+*
+* updateLecturer    -> :param -> lecturerID, qualification, status of the lecturer (Active or Inactive)
+*                   -> Returns an associated array containing the error status.
+*                   -> Key -> [error]
 */
 
 class Lecturer {
@@ -61,16 +76,5 @@ class Lecturer {
 
         return $result;
     }
-
-    // public function deleteLecturer($lecturerID) {
-    //     $result = ["error" => True];
-
-    //     $sql = "DELETE FROM lecturer WHERE lecturer_id = '$lecturerID';";
-    //     if (mysqli_query($connection, $sql)) {
-    //         $result["error"] = False;
-    //     }
-
-    //     return $result;
-    // }
 }
 ?>

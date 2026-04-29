@@ -4,6 +4,7 @@
 */
 require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 include ROOT.CONFIG;
+require_once ROOT.CONTROLLERS.'/manage-user.php';
 ?>
 
 <html>
@@ -13,5 +14,7 @@ include ROOT.CONFIG;
 
 <body>
     <h1>Tests</h1>
+    <p><?php
+    ?></p>
 </body>
 </html>
