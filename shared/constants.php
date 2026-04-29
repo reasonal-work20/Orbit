@@ -8,6 +8,7 @@ define('SHARED', '/Orbit/client/src/shared');
 define('ASSETS', '/Orbit/client/src/assets');
 define('APP', '/Orbit/client/src/app');
 define('COMPONENTS', '/Orbit/client/src/app/components');
+define('FEATURES', '/Orbit/client/src/app/features');
 
 /** Constants used in the backend (server side). */
 define('CONFIG', '/Orbit/server/config/config.php');
