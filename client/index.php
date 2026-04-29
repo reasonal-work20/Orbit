@@ -4,7 +4,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 // Include the header
 
-include_once ROOT.COMPONENTS . "/index-header.php";
+include_once ROOT.COMPONENTS . "/header.php";
+include_once ROOT.COMPONENTS . "/footer.php";
+
+$indexPage = true;
+$cssFiles = ['global.css', 'landing-page.css'];
+createHead('Orbit', $cssFiles)
 
 ?>
 
@@ -21,5 +26,5 @@ include_once ROOT.COMPONENTS . "/index-header.php";
         </div>
 
 <?php
-include_once ROOT.COMPONENTS . "/index-footer.php";
+createFooter($indexPage);
 ?>

@@ -1,0 +1,80 @@
+<?php
+
+session_start();
+
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+
+// Include header function and create head section with title and CSS files
+include_once ROOT . COMPONENTS . "/header.php";
+include_once ROOT . COMPONENTS . "/footer.php";
+
+$cssFiles = ['global.css', 'login-page.css'];
+createHead('Login | Orbit', $cssFiles);
+
+?>
+
+<?php
+if (isset($_SESSION['login_error'])) {
+    echo '<div class="error-message">' . htmlspecialchars($_SESSION['login_error']) . '</div>';
+    unset($_SESSION['login_error']);
+}
+?>
+<div class="loading-overlay" style="display: none;">
+    <span class="loader"></span>
+</div>
+<div class="login-container">
+    <div class="title-wrapper">
+        <p class="title">Log In</p>
+    </div>
+</div>
+<form class="login-form" method="POST" action="#">
+    <div class="input-group">
+        <label for="username-or-email" class="input-label">Username / Email</label>
+        <input type="text" id="username-or-email" name="username-or-email" class="input-field" required>
+    </div>
+    <div class="input-group">
+        <label for="password" class="input-label">Password</label>
+        <div class="password-wrapper">
+            <input type="password" id="password" name="password" class="input-field" required>
+            <div id="togglePassword" class="toggle-password-btn">
+                <div class="icon-show">
+                    <?php include_once ROOT . ASSETS . '/icons/eye-open.svg'; ?>
+                </div>
+                <div class="icon-hide" style="display: none;">
+                    <?php include_once ROOT . ASSETS . '/icons/eye-closed.svg'; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="login-button">Log In</button>
+</form>
+
+<script>
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const iconShow = togglePasswordBtn.querySelector('.icon-show');
+    const iconHide = togglePasswordBtn.querySelector('.icon-hide');
+
+    togglePasswordBtn.addEventListener('click', function() {
+        // 1. Check current state
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+
+        // 2. Toggle the input type
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+
+        // 3. Swap the icons instantly
+        if (isPassword) {
+            // Password is now visible, show the "hide" icon
+            iconShow.style.display = 'none';
+            iconHide.style.display = 'block';
+        } else {
+            // Password is now hidden, show the "show" icon
+            iconShow.style.display = 'block';
+            iconHide.style.display = 'none';
+        }
+    });
+</script>
+
+<?php
+createFooter(false);
+?>
