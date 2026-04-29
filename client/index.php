@@ -1,12 +1,10 @@
 <?php 
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT.ASSETS;
-require_once ROOT.COMPONENTS;
 
 // Include the header
 
-include_once COMPONENTS . "/index-header.php";
+include_once ROOT.COMPONENTS . "/index-header.php";
 
 ?>
 
@@ -15,7 +13,7 @@ include_once COMPONENTS . "/index-header.php";
             Your personal campus navigator and transport manager
         </p>
         <div class="login-button">
-            <a href="<?php echo BASE_URL; ?>/src/app/auth/login_page.php">Log In
+            <a href="<?php echo ASSETS; ?>/src/app/auth/login_page.php">Log In
                 <div class="icon">
                     <?php include_once ASSETS . "/icons/login-square-icon.svg" ?>
                 </div>
@@ -23,5 +21,5 @@ include_once COMPONENTS . "/index-header.php";
         </div>
 
 <?php
-include_once COMPONENTS . "/index-footer.php";
+include_once ROOT.COMPONENTS . "/index-footer.php";
 ?>
