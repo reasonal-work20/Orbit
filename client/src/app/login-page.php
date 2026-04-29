@@ -29,8 +29,8 @@ if (isset($_SESSION['login_error'])) {
 </div>
 <form class="login-form" method="POST" action="#">
     <div class="input-group">
-        <label for="username-or-email" class="input-label">Username / Email</label>
-        <input type="text" id="username-or-email" name="username-or-email" class="input-field" required>
+        <label for="email" class="input-label">Email</label>
+        <input type="text" id="email" name="email" class="input-field" required>
     </div>
     <div class="input-group">
         <label for="password" class="input-label">Password</label>
