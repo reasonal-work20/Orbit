@@ -27,7 +27,7 @@ if (isset($_SESSION['login_error'])) {
         <p class="title">Log In</p>
     </div>
 </div>
-<form class="login-form" method="POST" action="#">
+<form class="login-form" method="POST" action="<?php echo SERVICES ?>/login-service.php">
     <div class="input-group">
         <label for="email" class="input-label">Email</label>
         <input type="text" id="email" name="email" class="input-field" required>
