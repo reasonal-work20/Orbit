@@ -28,10 +28,10 @@ function createUser($inputData, $inputFile) {
         $data["qualification"] = $inputData["qualification"];
     }
 
-    if (isset($inputFile["file"]) && $inputFile["file"]["error"] === 0) {
-        $extension = pathinfo($inputFile["file"]["name"], PATHINFO_EXTENSION);
+    if (isset($inputFile["picture"]) && $inputFile["picture"]["error"] === 0) {
+        $extension = pathinfo($inputFile["picture"]["name"], PATHINFO_EXTENSION);
         $file = substr($data["name"], 0, 2) . "-" . time() . "." . $extension;
-        $temp = $inputFile["file"]["tmp_name"];
+        $temp = $inputFile["picture"]["tmp_name"];
         $path = ROOT.UPLOADS."/".$file;
         move_uploaded_file($temp, $path);
         $data["picture"] = $file;
@@ -60,11 +60,11 @@ function updateUser($inputData, $inputFile) {
 
     $user = $manageUser->get($data["userID"]);
     $data["picture"] = $user["picture"];
-    if (isset($inputFile["file"]) && $inputFile["file"]["error"] === 0) {
+    if (isset($inputFile["picture"]) && $inputFile["picture"]["error"] === 0) {
         unlink(ROOT.UPLOADS."/".$data["picture"]);
-        $extension = pathinfo($inputFile["file"]["name"], PATHINFO_EXTENSION);
+        $extension = pathinfo($inputFile["picture"]["name"], PATHINFO_EXTENSION);
         $file = substr($data["name"], 0, 2) . "-" . time() . "." . $extension;
-        $temp = $inputFile["file"]["tmp_name"];
+        $temp = $inputFile["picture"]["tmp_name"];
         $path = ROOT.UPLOADS."/".$file;
         move_uploaded_file($temp, $path);
         $data["picture"] = $file;
