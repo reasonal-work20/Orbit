@@ -1,7 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT.CONFIG;
-
 require_once ROOT.MODELS.'/user.php';
 require_once ROOT.MODELS.'/student.php';
 require_once ROOT.MODELS.'/lecturer.php';
