@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT.CONFIG;
-require_once ROOT.CONTROLLERS;
+require_once ROOT.CONTROLLERS.'/manage-user.php';
 
 $manageUser = new ManageUser();
 
@@ -16,21 +16,22 @@ function getUser($id) {
 }
 
 function createUser($inputData, $inputFile) {
+    global $manageUser;
     $data = [
-        "name" => $inputData[""],
-        "password" => $inputData[""],
-        "email" => $inputData[""],
-        "phone" => $inputData[""],
-        "role" => $inputData[""]
+        "name" => $inputData["name"],
+        "password" => $inputData["password"],
+        "email" => $inputData["email"],
+        "phone" => $inputData["phone"],
+        "role" => $inputData["role"]
     ];
     if ($data["role"] === "Lecturer") {
-        $data["qualification"] = $inputData[""];
+        $data["qualification"] = $inputData["qualification"];
     }
 
-    if (isset($inputFile[""]) && $inputFile[""]["error"] === 0) {
-        $extension = pathinfo($inputFile[""]["name"], PATHINFO_EXTENSION);
-        $file = $name . "-" . time() . $extension;
-        $temp = $inputFile[""]["tmp_name"];
+    if (isset($inputFile["file"]) && $inputFile["file"]["error"] === 0) {
+        $extension = pathinfo($inputFile["file"]["name"], PATHINFO_EXTENSION);
+        $file = substr($data["name"], 0, 2) . "-" . time() . "." . $extension;
+        $temp = $inputFile["file"]["tmp_name"];
         $path = ROOT.UPLOADS."/".$file;
         move_uploaded_file($temp, $path);
         $data["picture"] = $file;
@@ -43,29 +44,30 @@ function createUser($inputData, $inputFile) {
 }
 
 function updateUser($inputData, $inputFile) {
+    global $manageUser;
     $data = [
-        "userID" => $inputData[""],
-        "name" => $inputData[""],
-        "password" => $inputData[""],
-        "email" => $inputData[""],
-        "phone" => $inputData[""],
-        "role" => $inputData[""],
-        "status" => $inputData[""]
+        "userID" => (int)$inputData["userID"],
+        "name" => $inputData["name"],
+        "password" => $inputData["password"],
+        "email" => $inputData["email"],
+        "phone" => $inputData["phone"],
+        "role" => $inputData["role"],
+        "status" => $inputData["status"]
     ];
     if ($data["role"] === "Lecturer") {
-        $data["qualification"] = $inputData[""];
+        $data["qualification"] = $inputData["qualification"];
     }
 
-    if (isset($inputFile[""]) && $inputFile[""]["error"] === 0) {
-        $extension = pathinfo($inputFile[""]["name"], PATHINFO_EXTENSION);
-        $file = $name . "-" . time() . $extension;
-        $temp = $inputFile[""]["tmp_name"];
+    $user = $manageUser->get($data["userID"]);
+    $data["picture"] = $user["picture"];
+    if (isset($inputFile["file"]) && $inputFile["file"]["error"] === 0) {
+        unlink(ROOT.UPLOADS."/".$data["picture"]);
+        $extension = pathinfo($inputFile["file"]["name"], PATHINFO_EXTENSION);
+        $file = substr($data["name"], 0, 2) . "-" . time() . "." . $extension;
+        $temp = $inputFile["file"]["tmp_name"];
         $path = ROOT.UPLOADS."/".$file;
         move_uploaded_file($temp, $path);
         $data["picture"] = $file;
-    } else {
-        $user = $manageUser->get($data["userID"]);
-        $data["picture"] = $user["picture"];
     }
 
     $error = $manageUser->update($data);
@@ -73,7 +75,10 @@ function updateUser($inputData, $inputFile) {
 }
 
 function deleteUser($inputData) {
-    $data = ["userID" => $inputData[""]];
+    global $manageUser;
+    $userData = $manageUser->get($inputData["userID"]);
+    unlink(ROOT.UPLOADS."/".$userData["picture"]);
+    $data = ["userID" => (int)$inputData["userID"]];
     $error = $manageUser->delete($data);
     return $error;
 }

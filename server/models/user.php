@@ -51,6 +51,7 @@ class User {
             "error" => True,
             "id" => $userID,
             "name" => "",
+            "password" => "",
             "email" => "",
             "phone" => "",
             "picture" => "",
@@ -63,6 +64,7 @@ class User {
         if ($user) {
             $result["error"] = False;
             $result["name"] = $user["name"];
+            $result["password"] = $user["password"];
             $result["email"] = $user["email"];
             $result["phone"] = $user["phone"];
             $result["picture"] = $user["picture"];

@@ -153,11 +153,13 @@ class ManageUser {
 
         switch ($input["role"]) {
             case "Student":
-                $student = $this->studentEditor->updateStudent($input["studentID"], $input["status"]);
+                $studentData = $this->studentEditor->getStudent($input["userID"]);
+                $student = $this->studentEditor->updateStudent($studentData["studentID"], $input["status"]);
                 $error = $student["error"];
                 break;
             case "Lecturer":
-                $lecturer = $this->lecturerEditor->updateLecturer($input["lecturerID"], $input["qualification"], $input["status"]);
+                $lecturerData = $this->lecturerEditor->getLecturer($input["userID"]);
+                $lecturer = $this->lecturerEditor->updateLecturer($lecturerData["lecturerID"], $input["qualification"], $input["status"]);
                 $error = $lecturer["error"];
                 break;
         }
