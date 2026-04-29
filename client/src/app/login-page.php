@@ -49,41 +49,8 @@ if (isset($_SESSION['loginError'])) {
     <button type="submit" class="login-button">Log In</button>
 </form>
 
-<script>
-    // Show loading overlay on form submit
-    const loginForm = document.querySelector('.login-form');
-    const loadingOverlay = document.querySelector('.loading-overlay');
-
-    loginForm.addEventListener('submit', function() {
-        loadingOverlay.style.display = 'flex';
-    });
-</script>
-
-<script>
-    const togglePasswordBtn = document.getElementById('togglePassword');
-    const passwordInput = document.getElementById('password');
-    const iconShow = togglePasswordBtn.querySelector('.icon-show');
-    const iconHide = togglePasswordBtn.querySelector('.icon-hide');
-
-    togglePasswordBtn.addEventListener('click', function() {
-        // 1. Check current state
-        const isPassword = passwordInput.getAttribute('type') === 'password';
-
-        // 2. Toggle the input type
-        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
-
-        // 3. Swap the icons instantly
-        if (isPassword) {
-            // Password is now visible, show the "hide" icon
-            iconShow.style.display = 'none';
-            iconHide.style.display = 'block';
-        } else {
-            // Password is now hidden, show the "show" icon
-            iconShow.style.display = 'block';
-            iconHide.style.display = 'none';
-        }
-    });
-</script>
+<script src="<?php echo FEATURES?>/password-toggle.js"></script>
+<script src="<?php echo FEATURES?>/loading-overlay.js"></script>
 
 <?php
 createFooter(false);

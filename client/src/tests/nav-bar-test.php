@@ -18,7 +18,7 @@ $_SESSION['currentPage'] = $currentPage; // Set the current page for active stat
 $userRole = 'student'; // Change this to test different roles
 $_SESSION['user_role'] = $userRole; // Set the user role in session for testing
 
-createHead('Test Page', ['global.css', 'test-page.css', 'nav-bar.css']);
+createHead('Test Page', ['global.css', 'nav-bar.css']);
 renderNavBar();
 ?>
 
