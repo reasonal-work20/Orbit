@@ -13,9 +13,9 @@ include_once ROOT.COMPONENTS . "/index-header.php";
             Your personal campus navigator and transport manager
         </p>
         <div class="login-button">
-            <a href="<?php echo ASSETS; ?>/src/app/auth/login_page.php">Log In
+            <a href="<?php echo ROOT.ASSETS; ?>/src/app/auth/login_page.php">Log In
                 <div class="icon">
-                    <?php include_once ASSETS . "/icons/login-square-icon.svg" ?>
+                    <?php include_once ROOT.ASSETS . "/icons/login-square-icon.svg" ?>
                 </div>
             </a>
         </div>
