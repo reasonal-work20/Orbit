@@ -14,16 +14,4 @@ function alterSvg($svgPath, $idList, $colour) {
     }
     return $svg->saveXML();
 }
-
-/**
- * def highlight(self, id, color):
- *      self.imageCode = self.imageExport
- *      root = ET.fromstring(self.imageCode)
- *      for element in root.iter():
- *          if "id" in element.attrib:
- *              if element.attrib["id"] == id:
- *                  element.set("fill", color)
- *      root = self.format(root)
- *      self.imageCode = ET.tostring(root, encoding="unicode")
- */
 ?>
