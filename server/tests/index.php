@@ -4,7 +4,8 @@
 */
 require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 include ROOT.CONFIG;
-require_once ROOT.ROUTES.'/user-management-route.php';
+require_once ROOT.CONTROLLERS.'/dijkstra.php';
+// require_once ROOT.ROUTES.'/user-management-route.php';
 
 if (isset($_POST["file"])) {
     echo "Run<br/>";
@@ -20,8 +21,8 @@ if (isset($_POST["file"])) {
 
 <body>
     <h1>Tests</h1>
-    <form method="post" enctype="multipart/form-data">
-        <!-- <input type="file" name="file" required/> -->
+    <!-- <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required/>
         <input type="hidden" name="userID" value="13" /> 
         <input type="hidden" name="name" value="Jane" />
         <input type="hidden" name="password" value="janePassword" />
@@ -29,8 +30,8 @@ if (isset($_POST["file"])) {
         <input type="hidden" name="phone" value="+6012454632" />
         <input type="hidden" name="role" value="Student" />
         <input type="hidden" name="status" value="Active" />
-        <!-- <input type="hidden" name="qualification" value="Q" /> -->
+        <input type="hidden" name="qualification" value="Q" />
         <input type="submit" name="file"/>
-    </form>
+    </form> -->
 </body>
 </html>
