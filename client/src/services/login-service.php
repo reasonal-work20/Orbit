@@ -6,7 +6,7 @@ $data = $_POST;
 $result = login($data);
 if ($result["error"]) {
     $_SESSION['loginError'] = $result["message"]; // Displays message to login page
-    header("Location: " . APP . "/login-page.php");
+    header("Location: " . SHARED . "/login-page.php");
 } else {
     switch ($_SESSION['role']) {
         case 'User Admin':
