@@ -16,23 +16,64 @@ function dijkstra($start, $end, $graph) {
 
     /** Preset value of variables before the loop. */
     $previous = $start;
-    $node = "";
-    $distance = $temporary = $current = 0
-}
+    $next = "";
 
-/**
- * Start
- * Make final list table
- * Define all variable needed as preset
- * Loop
- *  > check if the previous is in the list
- *      > remove previous
- *      > check if there is still keys
- *          > find next key based on shortest distance
- *      *No next key, break loop
- *  > Get info on connected node
- *  > Check if better than already existing
- * Reverse find
- * Return path
- */
+    /** Loop through to update the table. */
+    while (true) {
+        if (array_key_exists($previous, $graph) && empty($graph[$previous][0])) {
+            unset($graph[$previous]);
+            if (empty(array_keys($graph))) {
+                break;
+            }
+            $allNodes = array_keys($graph);
+            $check = 99999;
+            foreach ($allNodes as $key) {
+                $index = array_search($key, $table[0]);
+                if ($table[1][$index] < $check) {
+                    $check = $table[1][$index];
+                    $next = $table[0][$index];
+                }
+            }
+            if ($previous === $next) {
+                break;
+            } elseif (!empty($next)) {
+                $previous = $next;
+            }
+            continue;
+        }
+
+        $node = $graph[$previous][0][0];
+        $distance = $graph[$previous][1][0];
+        $nodeIndex = array_search($node, $table[0]);
+        $temporary = $table[1][$nodeIndex];
+        $previousIndex = array_search($previous, $table[0]);
+        $current = $distance + $table[1][$previousIndex];
+        if ($current < $temporary) {
+            $table[1][$nodeIndex] = $current;
+            $table[2][$nodeIndex] = $previous;
+        }
+        unset($graph[$previous][0][0]);
+        $graph[$previous][0] = array_values($graph[$previous][0]);
+        unset($graph[$previous][1][0]);
+        $graph[$previous][1] = array_values($graph[$previous][1]);
+    }
+
+    $finalPath = [$end];
+    $distance = 0;
+    $currentNode = $end;
+    while (true) {
+        if ($currentNode === $start) {
+            break;
+        }
+        $index = array_search($currentNode, $table[0]);
+        if ($index === false) {
+            return [];
+        }
+        $currentNode = $table[2][$index];
+        $finalPath[] = $currentNode;
+    }
+    $finalPath = array_reverse($finalPath);
+    
+    return $finalPath;
+}
 ?>
