@@ -19,4 +19,5 @@ define('CONFIG', '/Orbit/server/config/config.php');
 define('CONTROLLERS', '/Orbit/server/controllers');
 define('MODELS', '/Orbit/server/models');
 define('ROUTES', '/Orbit/server/routes');
+define('LOGIC', '/Orbit/server/logic');
 ?>

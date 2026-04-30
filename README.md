@@ -25,7 +25,9 @@ Orbit
 |
 ├── server/                 # Backend
 |   ├── config/             # Database configurations, Environment setups
-|   ├── controllers/        # Contains the logic.
+|   ├── controllers/        # Contains the classes to run a feature.
+|   ├── data/               # Contains the map data and svg
+|   ├── logic/              # Reusable functions and algorithm
 |   ├── models/             # Database schemas, CRUD operations
 |   ├── routes/             # Connects with client side - input and output
 |   ├── tests/              # Unit and integration tests.
