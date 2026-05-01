@@ -2,6 +2,13 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . CONFIG;
 require_once ROOT . LOGIC . '/dijkstra.php';
+require_once ROOT . LOGIC . '/same-floor-navigate.php';
+require_once ROOT . MODELS . '/graph.php';
+
+/**
+ * Note to change the json file.
+ * - Remove the start and end points in the floor-floor. Only leave the possible direct routes. 
+ */
 
 class NavigateController {
     private $connection;
@@ -11,27 +18,52 @@ class NavigateController {
         $this->connection = $connect;
     }
 
-    public function navigate($start, $end):array {
+    public function navigate($start, $end, $type):array {
         if ($start["floor"] === $end["floor"]) {
-            $path = dijkstra($start, $end);
+            $result = sameFloorNavigate($start, $end, $type);
+            $path = $result["path"];
+            $floor = $result["floor"];
+        } else {
+            $directFloor = graph(["mode" => "floor to floor", "type" => $type]);
+            $connectorList = [[], []];
+            foreach ($directFloor[1] as $probableConnect) {
+                if (!in_array($start["floor"], $probableConnect) || !in_array($end["floor"], $probableConnect)) {
+                    continue;
+                }
+                $startIndex = array_search($start["floor"], $probableConnect);
+                $endIndex = array_search($end["floor"], $probableConnect);
+                if ($startIndex < $endIndex) {
+                    $rowIndex = array_search($probableConnect, $directFloor[1]);
+                    $connectorList[0][] = $directFloor[0][$rowIndex][$startIndex];
+                    $connectorList[1][] = $directFloor[0][$rowIndex][$endIndex];
+                }
+            }
+
+            $path = [];
+            $distance = 99999;
+            foreach ($connectorList[0] as $checkConnector) {
+                $index = array_search($checkConnector, $connectorList[0]);
+                $connector1 = ["point" => $checkConnector, "floor" => $start["floor"]];
+                $connector2 = ["point" => $connectorList[1][$index], "floor" => $end["floor"]];
+                $graph1 = graph(["mode" => "checkpoint to checkpoint", "floor" => $start["floor"], "type" => $type]);
+                $graph2 = graph(["mode" => "checkpoint to checkpoint", "floor" => $end["floor"], "type" => $type]);
+                $part1 = sameFloorNavigate($start, $connector1, "stair");
+                $part2 = sameFloorNavigate($connector2, $end, "stair");
+                $total = $part1["distance"] + $part2["distance"];
+                if ($total < $distance) {
+                    $path = array_merge($part1["path"], $part2["path"]);
+                    $distance = $total;
+                    $floor = array_merge($part1["floor"], $part2["floor"]);
+                }
+            }
         }
 
-        return [];
-    }
-
-    private function graph($mode) {
-        switch ($mode["mode"]) {
-            case "floor":
-                // Get data for a specific floor.
-                break;
-            case "connector":
-                // Get data to search through connector connection.
-                break;
-            case "all":
-                // Get data for all the connection.
+        if (empty($path)) {
+            $graph = graph(["mode" => "all", "type" => $type]);
+            $result = dijkstra($start["point"], $end["point"], $graph);
+            $path = $result["path"];
         }
-
-        return "";
+        return ["path" => $path, "floor" => $floor];
     }
 }
 ?>

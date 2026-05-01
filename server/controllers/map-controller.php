@@ -10,8 +10,8 @@ class MapController {
 
         if ($mode["mode"] === "default") {
             $sql = "SELECT * FROM location;";
-        } elseif ($mode["mode"] === "level") {
-            $level = $mode["level"];
+        } elseif ($mode["mode"] === "floor") {
+            $level = $mode["floor"];
             $sql = "SELECT * FROM location WHERE floor = '$level';";
         } elseif ($mode["mode"] === "search") {
             $search = $mode["search"];
@@ -36,7 +36,7 @@ class MapController {
         $svg->load(ROOT . DATA . "/map-l$level.svg");
 
         if ($mode["mode"] !== "default") {
-            $nodeList = $this->getNodeList(["mode" => "level", "level" => $level]);
+            $nodeList = $this->getNodeList(["mode" => "floor", "floor" => $level]);
             $nodeIdList = [];
             foreach ($nodeList as $row) {
                 $nodeIdList[] = $row["locationID"];
