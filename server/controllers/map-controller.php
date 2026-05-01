@@ -11,6 +11,8 @@ require_once ROOT . LOGIC . '/highlight-svg.php';
 *               -> input array [mode, floor, search]
 *               -> modes [default, floor, search]
 *
+* getNode       -> Takes in the id of a location and returns the data of selected location. 
+*
 * getMap        -> Takes in an associated array and level. Returns a string svg. 
 *               -> input array [mode, id], input level
 *               -> mode [default, highlight]
@@ -21,16 +23,20 @@ class MapController {
         global $connect;
         $result = [];
 
-        if ($mode["mode"] === "default") {
-            $sql = "SELECT * FROM location;";
-        } elseif ($mode["mode"] === "floor") {
-            $level = $mode["floor"];
-            $sql = "SELECT * FROM location WHERE floor = '$level';";
-        } elseif ($mode["mode"] === "search") {
-            $search = $mode["search"];
-            $sql = "SELECT * FROM location WHERE name LIKE '%$search%';";
+        switch ($mode["mode"]) {
+            case "floor":
+                $level = $mode["floor"];
+                $sql = "SELECT * FROM location WHERE floor = '$level';";
+                break;
+            case "search":
+                $search = $mode["search"];
+                $sql = "SELECT * FROM location WHERE name LIKE '%$search%';";
+                break;
+            default:
+                $sql = "SELECT * FROM location;";
+                break;
         }
-
+ 
         $statement = mysqli_query($connect, $sql);
         while ($location = mysqli_fetch_array($statement)) {
             $data = [
@@ -41,6 +47,19 @@ class MapController {
             $result[] = $data;
         }
 
+        return $result;
+    }
+
+    public function getNode($id) {
+        global $connect;
+        $result = ["name" => "", "floor" => ""];
+        $sql = "SELECT * FROM location WHERE location_id = '$id';";
+        $statement = mysqli_query($connect, $sql);
+        $location = mysqli_fetch_array($statement);
+        if ($location) {
+            $result["name"] = $location["name"];
+            $result["floor"] = $location["floor"];
+        }
         return $result;
     }
 
