@@ -1,0 +1,43 @@
+A0401,A-04-01,4
+A0402,A-04-02,4
+A0403,A-04-03,4
+A0404,A-04-04,4
+A0405,A-04-05,4
+B0401,B-04-01 Computer Lab,4
+B0402,B-04-02,4
+B0403,B-04-03 Library,4
+B0404,B-04-04 Senior Management Office,4
+B0405,B-04-05 Academic Office,4
+B0406,B-04-06 Admin Office,4
+B0407,B-04-07,4
+B0408,B-04-08,4
+B0409,B-04-09,4
+B0410,B-04-10,4
+AVBSO,Administrative Visa and Bursary Office,4
+GCE,Google Centre of Excellence,4
+TL402,Tech Lab 4-02,4
+TL403,Tech Lab 4-03,4
+TL404,Tech Lab 4-04,4
+TL405,Tech Lab 4-05,4
+TL406,Tech Lab 4-06,4
+TL407,Tech Lab 4-07,4
+S0402,S-04-02,4
+Library,Library,4
+S0401,S-04-01,4
+CRDIOT,Center for Research & Development of IoT,4
+MCL,Microprocessor / Communication Lab,4
+DL,Digital Lab,4
+MOL,Microwave Optic Lab,4
+AIL,Analogue Instrumentation Lab,4
+TS4,Technical Support,4
+ST41,First Staircase L4,4
+ST42,Block B Staircase L4,4
+ST43,Block D Staircase L4,4
+ST44,Block E Staircase L4,4
+ST45,Last Staircase L4,4
+ST46,Middle Staircase L4,4
+ST47,Block C Staircase L4,4
+EV41,First Elevator L4,4
+EV42,Block B Elevator L4,4
+EV43,Block E Elevator L4,4
+EV44,Block C Elevator L4,4

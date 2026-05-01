@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 29, 2026 at 03:26 AM
+-- Generation Time: May 01, 2026 at 01:01 AM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -31,16 +31,16 @@ DROP TABLE IF EXISTS `carpool`;
 CREATE TABLE IF NOT EXISTS `carpool` (
   `carpool_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `start` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `destination` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `start` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `destination` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `time` timestamp NOT NULL,
-  `car_colour` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `car_plate` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `car_model` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `car_colour` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `car_plate` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `car_model` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `capacity` int NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci,
-  `status` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`carpool_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `carpool_request` (
   `request_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `carpool_id` int NOT NULL,
-  `approval` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `approval` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`request_id`),
   KEY `user_id` (`user_id`),
   KEY `carpool_id` (`carpool_id`)
@@ -71,10 +71,10 @@ CREATE TABLE IF NOT EXISTS `carpool_request` (
 DROP TABLE IF EXISTS `classroom`;
 CREATE TABLE IF NOT EXISTS `classroom` (
   `classroom_id` int NOT NULL AUTO_INCREMENT,
-  `location_id` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `capacity` int NOT NULL,
-  `access` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`classroom_id`),
   KEY `location_id` (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `classroom` (
 
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
-  `course_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `course_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -112,8 +112,8 @@ INSERT INTO `course` (`course_id`, `type`) VALUES
 DROP TABLE IF EXISTS `course_module`;
 CREATE TABLE IF NOT EXISTS `course_module` (
   `course_module_id` int NOT NULL AUTO_INCREMENT,
-  `module_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lecturer_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lecturer_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`course_module_id`),
@@ -129,13 +129,13 @@ CREATE TABLE IF NOT EXISTS `course_module` (
 
 DROP TABLE IF EXISTS `intake`;
 CREATE TABLE IF NOT EXISTS `intake` (
-  `intake_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `course_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intake_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `course_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` date NOT NULL,
   `total_register` int NOT NULL,
   `total_active` int NOT NULL,
-  `status` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`intake_id`),
   KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -148,10 +148,10 @@ CREATE TABLE IF NOT EXISTS `intake` (
 
 DROP TABLE IF EXISTS `lecturer`;
 CREATE TABLE IF NOT EXISTS `lecturer` (
-  `lecturer_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lecturer_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int NOT NULL,
-  `qualification` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qualification` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`lecturer_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -180,11 +180,87 @@ DELIMITER ;
 
 DROP TABLE IF EXISTS `location`;
 CREATE TABLE IF NOT EXISTS `location` (
-  `location_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `floor` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `floor` varchar(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`location_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `location`
+--
+
+INSERT INTO `location` (`location_id`, `name`, `floor`) VALUES
+('A0401', 'A-04-01', '4'),
+('A0402', 'A-04-02', '4'),
+('A0403', 'A-04-03', '4'),
+('A0404', 'A-04-04', '4'),
+('A0405', 'A-04-05', '4'),
+('AIL', 'Analogue Instrumentation Lab', '4'),
+('Audi4', 'Auditorium 4', '3'),
+('Audi5', 'Auditorium 5', '3'),
+('Audi6', 'Auditorium 6', '3'),
+('Audi7', 'Auditorium 7', '3'),
+('AVBSO', 'Administrative Visa and Bursary Office', '4'),
+('B0401', 'B-04-01 Computer Lab', '4'),
+('B0402', 'B-04-02', '4'),
+('B0403', 'B-04-03 Library', '4'),
+('B0404', 'B-04-04 Senior Management Office', '4'),
+('B0405', 'B-04-05 Academic Office', '4'),
+('B0406', 'B-04-06 Admin Office', '4'),
+('B0407', 'B-04-07', '4'),
+('B0408', 'B-04-08', '4'),
+('B0409', 'B-04-09', '4'),
+('B0410', 'B-04-10', '4'),
+('CL308', 'CAD/CAM Lab 3-08', '3'),
+('CRDIOT', 'Center for Research & Development of IoT', '4'),
+('DL', 'Digital Lab', '4'),
+('DL302', 'Design Lab 3-02', '3'),
+('EPI', 'Engineering Project Incubator', '3'),
+('ETSC', 'Engineering Tech Support Center', '3'),
+('EV31', 'First Elevator L3', '3'),
+('EV32', 'Block B Elevator L3', '3'),
+('EV33', 'Block E Elevator L3', '3'),
+('EV34', 'Block C Elevator L3', '3'),
+('EV41', 'First Elevator L4', '4'),
+('EV42', 'Block B Elevator L4', '4'),
+('EV43', 'Block E Elevator L4', '4'),
+('EV44', 'Block C Elevator L4', '4'),
+('FL301', 'Fabrication Lab 3-01', '3'),
+('GCE', 'Google Centre of Excellence', '4'),
+('Library', 'Library', '4'),
+('MCL', 'Microprocessor / Communication Lab', '4'),
+('MOL', 'Microwave Optic Lab', '4'),
+('PC', 'Postgraduate Center', '3'),
+('PL1', 'Power Lab 1', '3'),
+('PL2', 'Power Lab 2', '3'),
+('PMR', 'Postgraduate Meeting Room', '3'),
+('PP306', 'PLC & Pneumatics Lab 3-06', '3'),
+('RE305', 'Robotic Engineering 3-05', '3'),
+('RL307', 'Robotics Lab 3-07', '3'),
+('S0401', 'S-04-01', '4'),
+('S0402', 'S-04-02', '4'),
+('ST31', 'First Staircase L3', '3'),
+('ST32', 'Block B Staircase L3', '3'),
+('ST33', 'Block D Staircase L3', '3'),
+('ST34', 'Block E Staircase L3', '3'),
+('ST35', 'Last Staircase L3', '3'),
+('ST36', 'Middle Staircase L3', '3'),
+('ST37', 'Block C Staircase L3', '3'),
+('ST41', 'First Staircase L4', '4'),
+('ST42', 'Block B Staircase L4', '4'),
+('ST43', 'Block D Staircase L4', '4'),
+('ST44', 'Block E Staircase L4', '4'),
+('ST45', 'Last Staircase L4', '4'),
+('ST46', 'Middle Staircase L4', '4'),
+('ST47', 'Block C Staircase L4', '4'),
+('TL402', 'Tech Lab 4-02', '4'),
+('TL403', 'Tech Lab 4-03', '4'),
+('TL404', 'Tech Lab 4-04', '4'),
+('TL405', 'Tech Lab 4-05', '4'),
+('TL406', 'Tech Lab 4-06', '4'),
+('TL407', 'Tech Lab 4-07', '4'),
+('TS4', 'Technical Support', '4');
 
 -- --------------------------------------------------------
 
@@ -194,8 +270,8 @@ CREATE TABLE IF NOT EXISTS `location` (
 
 DROP TABLE IF EXISTS `major`;
 CREATE TABLE IF NOT EXISTS `major` (
-  `major_id` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `major_id` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`major_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -227,9 +303,9 @@ INSERT INTO `major` (`major_id`, `name`) VALUES
 
 DROP TABLE IF EXISTS `module`;
 CREATE TABLE IF NOT EXISTS `module` (
-  `module_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `major_id` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `major_id` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`module_id`),
   KEY `major_id` (`major_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -242,10 +318,10 @@ CREATE TABLE IF NOT EXISTS `module` (
 
 DROP TABLE IF EXISTS `module_group`;
 CREATE TABLE IF NOT EXISTS `module_group` (
-  `module_group_id` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_group_id` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `course_module_id` int NOT NULL,
   `hours` decimal(2,1) NOT NULL,
-  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`module_group_id`),
   KEY `course_module_id` (`course_module_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -259,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `module_group` (
 DROP TABLE IF EXISTS `module_intake`;
 CREATE TABLE IF NOT EXISTS `module_intake` (
   `module_intake_id` int NOT NULL AUTO_INCREMENT,
-  `intake_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intake_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `course_module_id` int NOT NULL,
   PRIMARY KEY (`module_intake_id`),
   KEY `intake_id` (`intake_id`),
@@ -275,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `module_intake` (
 DROP TABLE IF EXISTS `schedule`;
 CREATE TABLE IF NOT EXISTS `schedule` (
   `schedule_id` int NOT NULL AUTO_INCREMENT,
-  `module_group_id` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `module_group_id` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `classroom_id` int NOT NULL,
   `start_time` timestamp NOT NULL,
   `end_time` timestamp NOT NULL,
@@ -292,9 +368,9 @@ CREATE TABLE IF NOT EXISTS `schedule` (
 
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE IF NOT EXISTS `student` (
-  `student_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `student_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int NOT NULL,
-  `status` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`student_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -324,8 +400,8 @@ DELIMITER ;
 DROP TABLE IF EXISTS `student_intake`;
 CREATE TABLE IF NOT EXISTS `student_intake` (
   `student_intake_id` int NOT NULL AUTO_INCREMENT,
-  `student_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `intake_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `student_id` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `intake_id` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`student_intake_id`),
   KEY `student_id` (`student_id`),
   KEY `intake_id` (`intake_id`)
@@ -340,12 +416,12 @@ CREATE TABLE IF NOT EXISTS `student_intake` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `user_id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `picture` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `role` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `picture` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
