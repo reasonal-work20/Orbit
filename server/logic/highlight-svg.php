@@ -1,7 +1,5 @@
 <?php
 function alterSvg($svg, $idList, $colour) {
-    // $svg = new DOMDocument();
-    // $svg->load($svgPath);
     $allElements = $svg->getElementsByTagName('*');
     foreach ($allElements as $element) {
         if (!$element->hasAttribute('id')) {
