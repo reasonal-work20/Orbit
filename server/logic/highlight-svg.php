@@ -12,6 +12,5 @@ function alterSvg($svg, $idList, $colour) {
             $element->setAttribute('fill', $colour);
         }
     }
-    return $svg->saveXML();
 }
 ?>
