@@ -58,6 +58,7 @@ function dijkstra($start, $end, $graph) {
         $graph[$previous][1] = array_values($graph[$previous][1]);
     }
 
+    /** Determines the final path. */
     $finalPath = [$end];
     $distance = 0;
     $currentNode = $end;

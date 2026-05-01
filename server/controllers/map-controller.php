@@ -3,6 +3,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . CONFIG;
 require_once ROOT . LOGIC . '/highlight-svg.php';
 
+/**
+* Map Controller
+*
+* Functions in the class
+* getNodeList   -> Takes in an associated array used as filter and returns a list of nodes.
+*               -> input array [mode, floor, search]
+*               -> modes [default, floor, search]
+*
+* getMap        -> Takes in an associated array and level. Returns a string svg. 
+*               -> input array [mode, id], input level
+*               -> mode [default, highlight]
+*/
+
 class MapController {
     public function getNodeList($mode):array {
         global $connect;

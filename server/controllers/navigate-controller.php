@@ -1,24 +1,32 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT . CONFIG;
 require_once ROOT . LOGIC . '/dijkstra.php';
 require_once ROOT . LOGIC . '/same-floor-navigate.php';
 require_once ROOT . MODELS . '/graph.php';
 
 /**
- * Note to change the json file.
- * - Remove the start and end points in the floor-floor. Only leave the possible direct routes. 
- */
+* Note to change the json file.
+* - Remove the start and end points in the floor-floor. Only leave the possible direct routes.
+* 
+* Navigate Controller
+*
+* Functions in class
+* navigate  -> :param > start:associated array, end:associated array, type:string
+*           -> array:start > keys > [point, floor]
+*           -> array:end > keys > [point, floor]
+*           -> string:type > options > [stair, elevator]
+*/
 
 class NavigateController {
     private $connection;
 
-    public function __construct() {
-        global $connect;
-        $this->connection = $connect;
-    }
-
     public function navigate($start, $end, $type):array {
+        /**
+         * If statement used to filter conditions.
+         * Condition 1 > Start and end point are on the same floor. Narrow down to identified floor.
+         * Condition 2 > Identify a direct route between floors. The staircase / elevator that can reach the floor in a straight line.
+         * If no path can be found, run dijkstra's algorithm on the entire mapping.
+         */
         if ($start["floor"] === $end["floor"]) {
             $result = sameFloorNavigate($start, $end, $type);
             $path = $result["path"];

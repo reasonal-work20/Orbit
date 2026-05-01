@@ -4,11 +4,18 @@ require_once ROOT . MODELS . '/graph.php';
 require_once ROOT . LOGIC . '/dijkstra.php';
 
 /**
-* start [floor, point]
-* end [floor, point]
+* :param > associated array:start, associated array:end, string:type
+* array:start > [point, floor], array:end > [point, floor]
+* string:type > option > [stair, elevator]
+*
+* Returns an associated array. [path, floor, distance]
 */
 
 function sameFloorNavigate($start, $end, $type) {
+    /** 
+     * Get the checkpoints that the start and end point are connected to.
+     * If no checkpoint was detected, assumption is made that the start or end point is a connector (elevator / staircase). 
+     */
     $startCheckpoint = graph(["mode" => "room to checkpoint", "floor" => $start["floor"], "point" => $start["point"], "type" => $type]);
     $endCheckpoint = graph(["mode" => "room to checkpoint", "floor" => $end["floor"], "point" => $end["point"], "type" => $type]);
     if (!$startCheckpoint) {
@@ -18,6 +25,9 @@ function sameFloorNavigate($start, $end, $type) {
         $endCheckpoint = [[$end["point"]], [0]];
     }
 
+    /**
+     * Go through all the possibilities to find the shortest route based on the combination of starting and ending checkpoints.
+     */
     $graph = graph(["mode" => "checkpoint to checkpoint", "floor" => $start["floor"], "type" => $type]);
     $path = [];
     $distance = 99999;
