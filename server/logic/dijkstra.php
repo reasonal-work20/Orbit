@@ -71,9 +71,10 @@ function dijkstra($start, $end, $graph) {
         }
         $currentNode = $table[2][$index];
         $finalPath[] = $currentNode;
+        $distance += $table[1][$index];
     }
     $finalPath = array_reverse($finalPath);
     
-    return $finalPath;
+    return ["path" => $finalPath, "distance" => $distance];
 }
 ?>
