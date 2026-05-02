@@ -20,7 +20,7 @@ $endData = [
     "floor" => $endNode["floor"]
 ];
 
-$result = $navigateController->navigate($startData, $endData, "stair");
+$result = $navigateController->navigate($startData, $endData, "elevator");
 if (empty($result["path"])) {
     $success = false;
 } else {
