@@ -37,6 +37,7 @@ class ManageUser {
     }
 
     public function create(array $input):string {
+        global $connect;
         $error = True;
         
         $user = $this->userEditor->createUser($input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"], $input["role"]);
@@ -51,7 +52,7 @@ class ManageUser {
                 $error = $student["error"];
                 break;
             case "Lecturer":
-                $lecturer = $this->lecturerEditor->createLecturer($user["id"], $input["qualification"]);
+                $lecturer = $this->lecturerEditor->createLecturer($user["id"], mysqli_real_escape_string($connect, $input["qualification"]));
                 $error = $lecturer["error"];
                 break;
         }
@@ -142,6 +143,7 @@ class ManageUser {
     }
 
     public function update(array $input):string {
+        global $connect;
         $error = True;
 
         $user = $this->userEditor->updateUser($input["userID"], $input["name"], $input["password"], $input["email"], $input["phone"], $input["picture"]);
@@ -158,7 +160,7 @@ class ManageUser {
                 break;
             case "Lecturer":
                 $lecturerData = $this->lecturerEditor->getLecturer($input["userID"]);
-                $lecturer = $this->lecturerEditor->updateLecturer($lecturerData["lecturerID"], $input["qualification"], $input["status"]);
+                $lecturer = $this->lecturerEditor->updateLecturer($lecturerData["lecturerID"], mysqli_real_escape_string($connect, $input["qualification"]), $input["status"]);
                 $error = $lecturer["error"];
                 break;
         }

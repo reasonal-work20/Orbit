@@ -11,6 +11,7 @@ require_once ROOT.CONTROLLERS.'/manage-user.php';
 $manageUser = new ManageUser();
 
 function getAllUser($search) {
+    global $manageUser;
     $data = $manageUser->getList($search);
     return $data;
 }
