@@ -1,43 +1,31 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT . ROUTES . '/campus-navigation.php';
+require_once ROOT . CONTROLLERS . '/map-controller.php';
+require_once ROOT . CONTROLLERS . '/navigate-controller.php';
 
-$file = fopen(ROOT . TESTS . '/temp.txt', 'r');
-if ($file) {
-    $line = fgets($file);
-    $cleanLine = trim($line);
-    $index = explode(",", $cleanLine);
-    $startIndex = (int)$index[0];
-    $endIndex = (int)$index[1];
+$mapController = new MapController();
+$navigateController = new NavigateController();
 
-    $mode = ["mode" => "default"];
-    $locationList = getLocation($mode);
-    $testData = [];
-    foreach ($locationList as $row) {
-        $testData[] = $row["locationID"];
-    }
+$start = $_GET["start"];
+$end = $_GET["end"];
+$startNode = $mapController->getNode($start);
+$endNode = $mapController->getNode($end);
 
-    if ($endIndex > count($testData)) {
-        $startIndex += 1;
-        $endIndex = $startIndex;
-    }
-    if ($startIndex > count($testData)) {
-        exit;   
-    }
+$startData = [
+    "point" => $start,
+    "floor" => $startNode["floor"]
+];
+$endData = [
+    "point" => $end,
+    "floor" => $endNode["floor"]
+];
 
-    $result = getMap([
-        "mode" => "route",
-        "start" => $testData[$startIndex], 
-        "end" => $testData[$endIndex], 
-        "type" => "stair"
-    ]);
-    $endIndex += 1;
-    $text = $startIndex . "," . $endIndex;
-    file_put_contents(ROOT . TESTS . '/temp.txt', $text);
-    header('Content-Type: application/json');
-    echo json_encode(["path" => [$testData[$startIndex], $testData[$endIndex-1]], "svg" => $result["svg"]]);
+$result = $navigateController->navigate($startData, $endData, "stair");
+if (empty($result["path"])) {
+    $success = false;
 } else {
-    header('Content-Type: application/json');
-    echo json_encode(["path" => "Can't open file.", "svg" => []]);
+    $success = true;
 }
+header('Content-Type: application/json');
+echo json_encode(["result" => $success]);
 ?>
