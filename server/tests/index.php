@@ -14,13 +14,6 @@ require_once ROOT . MODELS . '/bus.php';
 <body>
     <h1>Tests</h1>
     <?php
-    $x = new Bus();
-    $y = $x->getFew("M VERTICA >> APU", 5);
-    foreach ($y as $row) {
-        echo $row[0] . " >> " . $row[1] . "<br/>";
-        echo json_encode($row[2]);
-        echo "<br/>";
-    }
     ?>
 </body>
 </html>

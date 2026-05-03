@@ -1,13 +1,26 @@
 <?php
 /**
 * Class model of module.
+*
+* Functions
+* createModule  -> :param > majorID, name, short
+*               -> Returns associated array [error, id]
+*
+* getModule     -> :param > moduleID
+*               -> Returns associated array [error, moduleID, majorID, name]
+*
+* updateModule  -> :param > moduleID, majorID, name
+*               -> Returns associated array [error]
+*
+* deleteModule  -> :param > moduleID
+*               -> Returns associated array [error]
 */
 
 public class Module() {
     private $connection;
 
-    public function __construct($connection) {
-        $this->$connection = $connection;
+    public function __construct($database) {
+        $this->$connection = $database;
     }
 
     public function createModule($majorID, $name, $short) {
@@ -16,15 +29,11 @@ public class Module() {
             "id" => ""
         ];
 
-        $sql = "INSERT INTO module (major_id, name) VALUES ($majorID, '$name');";
-        if (mysqli_query($connection, $sql)) {
-            $tempID = mysqli_insert_id($connection);
-            $moduleID = "$tempID-$short";
-            $sql = "UPDATE module SET module_id = '$moduleID' WHERE module_id = '$tempID';";
-            if (mysqli_query($connection, $sql)) {
-                $result["id"]  $moduleID;
-                $result["error"] = False;
-            }
+        $moduleID = $majorID.$short;
+        $sql = "INSERT INTO module (module_id, major_id, name) VALUES ($moduleID, $majorID, '$name');";
+        if (mysqli_query($this->connection, $sql)) {
+            $result["id"]  $moduleID;
+            $result["error"] = False;
         }
 
         return $result;
@@ -39,7 +48,7 @@ public class Module() {
         ];
 
         $sql = "SELECT * FROM module WHERE module_id = '$moduleID';";
-        $statement = mysqli_query($connection, $sql);
+        $statement = mysqli_query($this->connection, $sql);
         $module = mysqli_fetch_array($statement);
         if ($module) {
             $result["moduleID"] = $module["module_id"];
@@ -51,10 +60,10 @@ public class Module() {
         return $result;
     }
 
-    public function updateModule($moduleID, $majorID, $name) {
+    public function updateModule($moduleID, $name) {
         $result = ["error" => True];
-        $sql = "UPDATE module SET major_id = $majorID, name = '$name' WHERE module_id = '$moduleID';";
-        if (!mysqli_query($connection, $sql)) {
+        $sql = "UPDATE module SET name = '$name' WHERE module_id = '$moduleID';";
+        if (!mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;
@@ -63,7 +72,7 @@ public class Module() {
     public function deleteModule($moduleID) {
         $result = ["error" => True];
         $sql = "DELETE FROM module WHERE module_id = '$moduleID';";
-        if (!mysqli_query($connection, $sql)) {
+        if (!mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
         return $result;

@@ -1,0 +1,141 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+require_once ROOT . MODELS . '/course-module.php';
+require_once ROOT . MODELS . '/module-intake.php';
+require_once ROOT . MODELS . '/module-group.php';
+require_once ROOT . MODELS . '/intake.php';
+require_once ROOT . CONFIG;
+
+class ManageCourse {
+    private $connection;
+    private $courseModuleEditor;
+    private $moduleIntakeEditor;
+    private $moduleGroupEditor;
+    private $intakeEditor;
+
+    public function __construct() {
+        global $connect;
+        $this->connection = $connect;
+        $this->courseModuleEditor = new CourseModule($connect);
+        $this->moduleIntakeEditor = new ModuleIntake($connect);
+        $this->moduleGroupEditor = new ModuleGroup($connect);
+        $this->intakeEditor = new Intake($connect);
+    }
+
+    public function getList($moduleID):array {
+        $result = [];
+        $sql = "SELECT * FROM course_module c 
+                LEFT JOIN lecturer l ON c.lecturer_id = l.lecturer_id
+                LEFT JOIN user u ON l.user_id = u.user_id WHERE c.module_id = '$moduleID';";
+        $statement = mysqli_query($this->connection, $sql);
+        while ($row = mysqli_fetch_array($statement)) {
+            $intakeList = $this->moduleIntakeEditor->getModuleIntake($row["course_module_id"]);
+            $result[] = [
+                $row["course_module_id"], 
+                $row["lecturer_id"],
+                $row["name"],
+                $intakeList,
+                $row["start_date"],
+                $row["end_date"]
+            ];
+        }
+        return $result;
+    }
+
+    public function getCourseModule($courseModuleID):array {
+        $result = [
+            "error" => True,
+            "lecturerID" => "",
+            "name" => "",
+            "intake" => [],
+            "startDate" => "",
+            "endDate" => ""
+        ];
+
+        $sql = "SELECT * FROM course_module c
+                LEFT JOIN lecturer l ON c.lecturer_id = l.lecturer_id
+                LEFT JOIN user u ON u.user_id = l.user_id WHERE c.course_module_id = $courseModuleID;";
+        $statement = mysqli_query($this->connection, $sql);
+        $courseModule = mysqli_fetch_array($statement);
+        if ($courseModule) {
+            $result["lecturerID"] = $courseModule["lecturer_id"];
+            $result["name"] = $courseModule["name"];
+            $result["intake"] = $this->moduleIntakeEditor->getModuleIntake($courseModuleID);
+            $result["startDate"] = $courseModule["start_date"];
+            $result["endDate"] = $courseModule["end_date"];
+            $result["error"] = False;
+        }
+        return $result;
+    }
+
+    public function getModuleGroup($courseModuleID) {
+        return $this->moduleGroupEditor->getModuleIntake($courseModuleID);
+    }
+
+    public function createCourseModule($input) {
+        $courseModule = $this->courseModuleEditor->createCourseModule($input["moduleID"], $input["lecturerID"], $input["startDate"], $input["endDate"]);
+        if ($courseModule["error"]) {
+            return "An error has occurred.";
+        }   
+        foreach ($input["intakeID"] as $intakeID) {
+            $error = $this->moduleIntakeEditor->createModuleIntake($intakeID, $courseModule["id"]);
+            if ($error["error"]) {
+                return "An error has occurred.";
+            }
+        }
+
+        return $result;
+    }
+
+    public function createGroupModule($input) {
+        if ($type === "Lecture") {
+            $error = $this->moduleGroupEditor->createModuleGroup($input["courseModuleID"], $input["hours"], $input["type"]);
+            if ($error["error"]) {
+                return "Error has occurred while creating the course module.";
+            } else {
+                return "";
+            }
+        }
+
+        $courseModule = $this->moduleIntakeEditor->getModuleIntake($input["courseModuleID"]);
+        if (empty($courseModule["intakeID"])) {
+            return "No intakes found.";
+        }
+
+        $number = 0;
+        foreach ($courseModule["intakeID"] as $intakeID) {
+            $intakeData = $this->intakeEditor->getIntake($intakeID);
+            $groupNumber = ceil($intakeData["total_register"] / 30);
+            if ($groupNumber > $number) {
+                $number = $groupNumber;
+            }
+        }
+        if ($number === 0) {
+            return "Not enough found.";
+        }
+
+        for ($index = 1, $index <= $number, $index++) {
+            $this->moduleGroupEditor->createModuleGroup($input["courseModuleID"], $input["hours"], $input["type"]);
+        }
+        return "";
+    }
+
+    public function updateCourseModule($input) {
+        $error = $this->courseModuleEditor->updateCourseModule($input["courseModuleID"], $input["lecturerID"], $input["startDate"], $input["endDate"]);
+        if ($error["error"]) {
+            return "An error has occurred.";
+        } else {
+            return "";
+        }
+    }
+
+    public function deleteCourseModule($courseModuleID) {
+        $error = $this->courseModuleEditor->deleteCourseModule($courseModuleID);
+        if ($error["error"]) {
+            return "An error has occurred.";
+        } else {
+            return "";
+        }
+    }
+}
+?>
