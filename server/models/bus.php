@@ -1,6 +1,17 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']. '/Orbit/shared/constants.php';
 
+/**
+* Bus class model
+*
+* Functions
+* getAll    -> Takes in a string input used to search through the bus route.
+*           -> Returns a list of data with all the scheduled bus time.
+*
+* getFew    -> Takes in a string input used to search through the bus route.
+*           -> Takes in an integer input used to limit the number of scheduled bus time to return.
+*/
+
 class Bus {
     private $busData;
 
