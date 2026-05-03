@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 01, 2026 at 01:01 AM
+-- Generation Time: May 03, 2026 at 11:51 AM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -134,7 +134,6 @@ CREATE TABLE IF NOT EXISTS `intake` (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `start_date` date NOT NULL,
   `total_register` int NOT NULL,
-  `total_active` int NOT NULL,
   `status` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`intake_id`),
   KEY `course_id` (`course_id`)
@@ -155,6 +154,13 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
   PRIMARY KEY (`lecturer_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lecturer`
+--
+
+INSERT INTO `lecturer` (`lecturer_id`, `user_id`, `qualification`, `status`) VALUES
+('L000001', 6, 'Bachelor of Science in Computer Science', 'Active');
 
 --
 -- Triggers `lecturer`
@@ -376,6 +382,14 @@ CREATE TABLE IF NOT EXISTS `student` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `user_id`, `status`) VALUES
+('TP000001', 4, 'Active'),
+('TP000002', 5, 'Active');
+
+--
 -- Triggers `student`
 --
 DROP TRIGGER IF EXISTS `before_student_insert`;
@@ -423,7 +437,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `picture` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -432,7 +446,10 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`user_id`, `name`, `password`, `email`, `phone`, `picture`, `role`) VALUES
 (1, 'User Admin', '$2y$10$8uN9/8QvoXrTXD8Q2QeAeODyrEr8GSJFQMRqioZi6qtPq7ayWByGm', 'admin@example.com', '+123456789', NULL, 'User Admin'),
 (2, 'Course Admin', '$2y$10$jrp4jUEmucYqfJrXGUOrr.Qu0Zd6CP2j/s56vd9e6Vozyhh2gUk3y', 'academic@example.com', '+234567891', NULL, 'Course Admin'),
-(3, 'Schedule Admin', '$2y$10$oMWHGlPK9yVXzWBrWhkWRewMxTlxlNYK8/81LgTt07DAS2TtAhPt2', 'schedule@example.com', '+345678912', NULL, 'Schedule Admin');
+(3, 'Schedule Admin', '$2y$10$oMWHGlPK9yVXzWBrWhkWRewMxTlxlNYK8/81LgTt07DAS2TtAhPt2', 'schedule@example.com', '+345678912', NULL, 'Schedule Admin'),
+(4, 'Wendy Tan', '$2y$10$YDrcQKE.r0zu5T5eD8JDk.NXBah1c/nn4I33gfeXEBmNn4O4lipmC', 'TP000001@mail.apu.edu.my', '+60123456789', '', 'Student'),
+(5, 'Terry Chong', '$2y$10$yC8tlie7oj.4o1Ugso4Nl.DX0Yz8/6cO5oTKSC5VntLY3GmuKKNgS', 'TP000002@mail.apu.edu.my', '+60124567891', '', 'Student'),
+(6, 'Ahmad bin Razak', '$2y$10$5OhvNjXfMjxUDmfnqn9gZOhkCac7Od1QoplsqY0Cd5l3PqsbYhssW', 'ahmad.razak@mail.apu.edu.my', '+60125678912', '', 'Lecturer');
 
 --
 -- Constraints for dumped tables
