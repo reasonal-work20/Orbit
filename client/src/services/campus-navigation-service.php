@@ -12,12 +12,13 @@ require_once ROOT . ROUTES . '/campus-navigation.php';
  * | mode options => default (returns all)                                  | input ["mode"=>"default"]
  * |              => floor (returns all location on a selected floor)       | input ["mode"=>"floor", "floor"=>"3"]
  * |              => search (returns all location based on search result)   | input ["mode"=>"search", "search"=>"A"]
+ * |              => type (returns all location based on type)              | input ["mode"=>"type", "type"=>"Classroom"]
  * 
  * getLocation($data) >> output
  *  This function will return a list of array that looks like this.
  *  [
- *      ["locationID" => "A0401", "name" => "A-04-01", "floor" => "4"],
- *      ["locationID" => "A0401", "name" => "A-04-01", "floor" => "4"],
+ *      ["locationID" => "A0401", "name" => "A-04-01", "floor" => "4", "type" => "Classroom"],
+ *      ["locationID" => "A0401", "name" => "A-04-01", "floor" => "4", "type" => "Classroom"]
  *  ]
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
  * Function >> getMap($condition)

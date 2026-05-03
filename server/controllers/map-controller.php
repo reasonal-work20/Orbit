@@ -8,8 +8,8 @@ require_once ROOT . LOGIC . '/highlight-svg.php';
 *
 * Functions in the class
 * getNodeList   -> Takes in an associated array used as filter and returns a list of nodes.
-*               -> input array [mode, floor, search]
-*               -> modes [default, floor, search]
+*               -> input array [mode, floor, search, type]
+*               -> modes [default, floor, search, type]
 *
 * getNode       -> Takes in the id of a location and returns the data of selected location. 
 *
@@ -32,6 +32,10 @@ class MapController {
                 $search = $mode["search"];
                 $sql = "SELECT * FROM location WHERE name LIKE '%$search%';";
                 break;
+            case "type":
+                $type = $mode["type"];
+                $sql = "SELECT * FROM location WHERE type = '$type';";
+                break;
             default:
                 $sql = "SELECT * FROM location;";
                 break;
@@ -42,7 +46,8 @@ class MapController {
             $data = [
                 "locationID" => $location["location_id"],
                 "name" => $location["name"],
-                "floor" => $location["floor"]
+                "floor" => $location["floor"],
+                "type" => $location["type"]
             ];
             $result[] = $data;
         }
@@ -52,13 +57,14 @@ class MapController {
 
     public function getNode($id) {
         global $connect;
-        $result = ["name" => "", "floor" => ""];
+        $result = ["name" => "", "floor" => "", "type" => ""];
         $sql = "SELECT * FROM location WHERE location_id = '$id';";
         $statement = mysqli_query($connect, $sql);
         $location = mysqli_fetch_array($statement);
         if ($location) {
             $result["name"] = $location["name"];
             $result["floor"] = $location["floor"];
+            $result["type"] = $location["type"];
         }
         return $result;
     }
