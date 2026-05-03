@@ -31,12 +31,12 @@ class ManageCourse {
         while ($row = mysqli_fetch_array($statement)) {
             $intakeList = $this->moduleIntakeEditor->getModuleIntake($row["course_module_id"]);
             $result[] = [
-                $row["course_module_id"], 
-                $row["lecturer_id"],
-                $row["name"],
-                $intakeList,
-                $row["start_date"],
-                $row["end_date"]
+                "courseModuleID" => $row["course_module_id"], 
+                "lecturerID" => $row["lecturer_id"],
+                "name" => $row["name"],
+                "intake" => $intakeList,
+                "startDate" => $row["start_date"],
+                "endDate" => $row["end_date"]
             ];
         }
         return $result;

@@ -40,7 +40,7 @@ class ManageCourse {
         $sql = "SELECT * FROM major;";
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
-            $result[] = [$row["major_id"], $row["name"]];
+            $result[] = ["majorID" => $row["major_id"], "name" => $row["name"]];
         }
         return $result;
     }
@@ -50,13 +50,22 @@ class ManageCourse {
         $sql = "SELECT * FROM module WHERE major_id = '$majorID';";
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
-            $result[] = [$row["module_id"], $row["name"]];
+            $result[] = ["moduleID" => $row["module_id"], "name" => $row["name"]];
         }
         return $result;
     }
 
     public function getModule($moduleID):array {
-        return $this->moduleEditor->getModule($moduleID);
+        $result = $this->moduleEditor->getModule($moduleID);
+        if ($result["error"]) {
+            return [];
+        } else {
+            return [
+                "moduleID" => $result["moduleID"],
+                "majorID" => $result["majorID"],
+                "name" => $result["name"]
+            ];
+        }
     }
 
     public function createModule($input):array {

@@ -62,7 +62,13 @@ class ManageIntake {
         if ($error["error"]) {
             return [];
         } else {
-            return [$result["intakeID"], $result["courseID"], $result["name"], $result["startDate"], $result["totalRegister"], $result["status"]];
+            return [
+                "intakeID" => $result["intakeID"], 
+                "courseID" => $result["courseID"],
+                "name" => $result["name"],
+                "startDate" => $result["startDate"],
+                "totalRegister" => $result["totalRegister"],
+                "status" => $result["status"]];
         }
     }
 
@@ -71,7 +77,11 @@ class ManageIntake {
         $sql = "SELECT * FROM student_intake WHERE intake_id = '$intakeID';";
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
-            $result[] = [$row["student_intake_id"], $row["student_id"], $row["intake_id"]];
+            $result[] = [
+                "studentIntakeID" => $row["student_intake_id"],
+                "studentID" => $row["student_id"],
+                "intakeID" => $row["intake_id"]
+            ];
         }
         return $result;
     }
@@ -84,7 +94,11 @@ class ManageIntake {
                 WHERE u.name LIKE '%$search%';";
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
-            $result[] = [$row["student_intake_id"], $row["student_id"], $row["intake_id"], $row["name"]];
+            $result[] = [
+                "studentIntakeID" => $row["student_intake_id"],
+                "studentID" => $row["student_id"],
+                "intakeID" => $row["intake_id"],
+                "name" => $row["name"]];
         }
         return $result;
     }
