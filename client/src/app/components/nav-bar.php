@@ -4,7 +4,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 function renderNavItem($name, $iconFilename, $link, $pageId)
 {
-    $svgPath = ROOT.ASSETS . '/icons/' . $iconFilename;
+    $svgPath = ROOT . ICONS . "/{$iconFilename}";
 
     $activeClass = (isset($_SESSION['currentPage']) && $_SESSION['currentPage'] == $pageId) ? 'active' : '';
 
@@ -20,14 +20,12 @@ function renderNavItem($name, $iconFilename, $link, $pageId)
     echo "</li>";
 }
 
-function renderNavBar() 
+function renderNavBar()
 {
     // Ensure session is started to check roles
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-
-    $userRole = $_SESSION['user_role'] ?? 'guest';
 
     echo '<div class="nav-bar">';
     echo '<div class="nav-container">';
@@ -36,34 +34,13 @@ function renderNavBar()
     echo '</div>';
     echo '<ul class="nav-list" style="list-style: none;">';
 
-    switch ($userRole) {
-        case 'student':
-            renderNavItem('Home', 'home-icon.svg', '#', 'home');
-            renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
-            renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
-            renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
-            renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
-            break;
-
-        case 'lecturer':
-        case 'admin1':
-        case 'admin2':
-        case 'admin3':
-            // These roles share the same primary navigation structure in your logic
-            $dashboardPath = PAGES . "/{$userRole}/dashboard.php";
-            renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
-            renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
-            renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
-            renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
-            break;
-
-        default:
-            renderNavItem('Log In', 'login-square-icon.svg', APP . '/login-page.php', 'login');
-            break;
-    }
+    renderNavItem('Home', 'home-icon.svg', '#', 'home');
+    renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
+    renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
+    renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
+    renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
 
     echo '</ul>';
     echo '</div>';
     echo '</div>';
 }
-?>

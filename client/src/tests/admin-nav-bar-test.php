@@ -10,16 +10,15 @@ require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 include_once ROOT.COMPONENTS . "/header.php";
 include_once ROOT.COMPONENTS . "/footer.php";
-include_once ROOT.COMPONENTS . "/nav-bar.php";
+include_once ROOT.COMPONENTS . "/admin-nav-bar.php";
 
 $currentPage = 'home'; // Change this to test different active states
 $_SESSION['currentPage'] = $currentPage; // Set the current page for active state testing
 
-$userRole = 'student'; // Change this to test different roles
+$userRole = 'User Admin'; // Change this to test different roles
 $_SESSION['userRole'] = $userRole; // Set the user role in session for testing
 
-createHead('Test Page', ['global.css', 'nav-bar.css']);
-renderNavBar();
+createHead('Test Page', ['global.css', 'admin-nav-bar.css']);
 ?>
 
 <script src="<?php echo FEATURES . '/ripple-effect.js'; ?>"></script>
