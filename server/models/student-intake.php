@@ -18,20 +18,23 @@ class StudentIntake {
     }
 
     public function create($studentID, $intakeID):array {
-        $result = ["error" => True, "id" => ""];
         $sql = "INSERT INTO student_intake (student_id, intake_id) VALUES ('$studentID', '$intakeID');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = mysqli_insert_id($this->connection);
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
 
     public function delete($studentIntakeID):array {
-        $result = ["error" => True];
         $sql = "DELETE FROM student_intake WHERE student_intake_id = $studentIntakeID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result
     }

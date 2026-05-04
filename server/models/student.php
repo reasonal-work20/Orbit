@@ -26,18 +26,13 @@ class Student {
     }
 
     public function createStudent($userID):array {
-        $result = [
-            "error" => True,
-            "id" => ""
-        ];
-
-        $sql = "INSERT INTO student (user_id, status) 
-                VALUES ($userID, 'Active')";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
-            $result["id"] = mysqli_insert_id($this->connection);
+        $sql = "INSERT INTO student (user_id, status) VALUES ($userID, 'Active')";
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 
@@ -62,16 +57,16 @@ class Student {
         return $result;
     }
 
-    public function updateStudent($studentID, $status):array {
-        $result = ["error" => True];
-        
+    public function updateStudent($studentID, $status):array {        
         $sql = "UPDATE student
                 SET status = '$status'
                 WHERE student_id = '$studentID';";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 }

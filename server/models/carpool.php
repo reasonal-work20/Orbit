@@ -37,11 +37,12 @@ class Carpool {
 
         $sql = "INSERT INTO carpool (user_id, type, start, destination, time, car_colour, car_plate, car_model, capacity, note, status) 
                 VALUES ($userID, '$type', '$start', '$destination', '$time', '$carColour', '$carPlate', '$carModel', $capacity, '$note', 'Waiting');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = mysqli_insert_id($this->connection);
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 
@@ -85,19 +86,23 @@ class Carpool {
     }
 
     public function updateCarpool($carpoolID, $status):array {
-        $result = ["error" => True];
         $sql = "UPDATE carpool SET status = '$status' WHERE carpool_id = $carpoolID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
 
     public function deleteCarpool($carpoolID):array {
-        $result = ["error" => True ];
         $sql = "DELETE FROM carpool WHERE carpool_id = $carpoolID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }

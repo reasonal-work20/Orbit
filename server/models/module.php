@@ -16,26 +16,24 @@
 *               -> Returns associated array [error]
 */
 
-public class Module() {
+class Module {
     private $connection;
 
     public function __construct($database) {
-        $this->$connection = $database;
+        $this->connection = $database;
     }
 
     public function createModule($majorID, $name, $short) {
-        $result = [
-            "error" => True,
-            "id" => ""
-        ];
-
-        $moduleID = $majorID.$short;
-        $sql = "INSERT INTO module (module_id, major_id, name) VALUES ($moduleID, $majorID, '$name');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"]  $moduleID;
+        $result = [];
+        $moduleID = $majorID."-".$short;
+        $sql = "INSERT INTO module (module_id, major_id, name) VALUES ('$moduleID', '$majorID', '$name');";
+        try {
+            mysqli_query($this->connection, $sql);
+            $result["id"] = $moduleID;
             $result["error"] = False;
+        } catch (mysqli_sql_exception $e) {
+            $result["error"] = True;
         }
-
         return $result;
     }
 
@@ -61,19 +59,23 @@ public class Module() {
     }
 
     public function updateModule($moduleID, $name) {
-        $result = ["error" => True];
         $sql = "UPDATE module SET name = '$name' WHERE module_id = '$moduleID';";
-        if (!mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
 
     public function deleteModule($moduleID) {
-        $result = ["error" => True];
         $sql = "DELETE FROM module WHERE module_id = '$moduleID';";
-        if (!mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }

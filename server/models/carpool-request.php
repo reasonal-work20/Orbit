@@ -30,17 +30,13 @@ class CarpoolRequest {
     }
 
     public function createRequest($userID, $carpoolID):array {
-        $result = [
-            "error" => True,
-            "id" => 0
-        ];
-
         $sql = "INSERT INTO carpool_request (user_id, carpool_id, approval) VALUES ($userID, $carpoolID, 'Pending');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = mysqli_insert_id($this->connection);
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 
@@ -52,7 +48,6 @@ class CarpoolRequest {
             "carpoolID" => 0,
             "approval" => ""
         ];
-
         $sql = "SELECT * FROM carpool_request WHERE request_id = $id OR user_id = $id;";
         $statement = mysqli_query($this->connection, $sql);
         $request = mysqli_fetch_array($statement);
@@ -63,24 +58,27 @@ class CarpoolRequest {
             $result["approval"] = $request["approval"];
             $result["error"] = False;
         }
-
         return $result;
     }
 
     public function updateRequest($requestID, $approval):array {
-        $result = ["error" => True];
         $sql = "UPDATE carpool_request SET approval = '$approval' WHERE request_id = $requestID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
-    }
+  }
 
     public function deleteRequest($requestID):array {
-        $result = ["error" => True];
         $sql = "DELETE FROM carpool_request WHERE request_id = $requestID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }

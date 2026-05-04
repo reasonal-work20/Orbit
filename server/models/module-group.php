@@ -56,9 +56,11 @@ class ModuleGroup {
 
         $sql = "INSERT INTO module_group (module_group_id, course_module_id, hours, type)
                 VALUES ('$moduleGroupID', $courseModuleID, $hours, $type);";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = $moduleGroupID;
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["id" => $moduleGroupID, "error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
@@ -78,14 +80,16 @@ class ModuleGroup {
         return $result;
     }
 
-    // public function deleteModuleGroup($moduleGroupID):array {
-    //     $result = ["error" => True];
-    //     $sql = "DELETE FROM module_group WHERE module_group_id = '$moduleGroupID';";
-    //     if (mysqli_query($this->connection, $sql)) {
-    //         $result["error"] = False;
-    //     }
-    //     return $result;
-    // }
+    public function deleteModuleGroup($moduleGroupID):array {
+        $sql = "DELETE FROM module_group WHERE module_group_id = '$moduleGroupID';";
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
+        }
+        return $result;
+    }
 }
 
 ?>

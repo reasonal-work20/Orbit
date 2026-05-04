@@ -26,18 +26,14 @@ class Lecturer {
     }
 
     public function createLecturer($userID, $qualification):array {
-        $result = [
-            "error" => True,
-            "id" => ""
-        ];
-
         $sql = "INSERT INTO lecturer (user_id, qualification, status)
                 VALUES ($userID, '$qualification', 'Active');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = mysqli_insert_id($this->connection);
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 
@@ -65,15 +61,15 @@ class Lecturer {
     }
 
     public function updateLecturer($lecturerID, $qualification, $status) {
-        $result = ["error" => True];
-
         $sql = "UPDATE lecturer
                 SET qualification = '$qualification', status = '$status'
                 WHERE lecturer_id = '$lecturerID';";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 }

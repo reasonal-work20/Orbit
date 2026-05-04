@@ -30,19 +30,17 @@ class User {
     }
 
     public function createUser($name, $password, $email, $phone, $picture, $role):array {
-        $result = [
-            "error" => True,
-            "id" => 0
-        ];
-
+        $result = [];
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO user (name, password, email, phone, picture, role)
                 VALUES ('$name', '$hashPassword', '$email', '$phone', '$picture', '$role');";
-        if (mysqli_query($this->connection, $sql)) {
+        try {
+            mysqli_query($this->connection, $sql);
             $result["error"] = False;
             $result["id"] = mysqli_insert_id($this->connection);
+        } catch (mysqli_sql_exception $e) {
+            $result["error"] = True;
         }
-
         return $result;
     }
 
@@ -74,34 +72,31 @@ class User {
     }
 
     public function updateUser($userID, $name, $password, $email, $phone, $picture):array {
-        $result = ["error" => True];
-
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "UPDATE user
                 SET name = '$name', password = '$hashPassword', email = '$email', phone = '$phone'
                 WHERE user_id = $userID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
-        }
-
-        if ($picture && $picture !== "") {
-            $sql = "UPDATE user SET picture = '$picture' WHERE user_id = $userID;";
-            if (mysqli_query($this->connection, $sql)) {
-                $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            if ($picture) {
+                $sql = "UPDATE user SET picture = '$picture' WHERE user_id = $userID;";
             }
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 
     public function deleteUser($userID):array {
-        $result = ["error" => True];
-
         $sql = "DELETE FROM user WHERE user_id = $userID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
-
         return $result;
     }
 }

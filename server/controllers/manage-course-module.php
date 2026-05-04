@@ -6,6 +6,36 @@ require_once ROOT . MODELS . '/module-group.php';
 require_once ROOT . MODELS . '/intake.php';
 require_once ROOT . CONFIG;
 
+/**
+* Manage Course Controller
+*
+* Functions in class
+* getList           -> :param > moduleID
+*                   -> :output > array[[associated array], []]
+*                   -> :output key > [courseModuleID, lecturerID, name, intake, startDate, endDate]
+*
+* getCourseModule   -> :param > courseModuleID
+*                   -> :output > associated array [error, lecturerID, name, intake, startDate, endDate]
+*
+* getModuleGroup    -> :param > courseModuleID
+*                   -> :output > array of intake ID
+*
+* createCourseModule -> :param > associated array [moduleID, lecturerID, startDate, endDate]
+*                    -> :output > string error message
+*
+* createModuleGroup -> :param > associated array [courseModuleID, hours, type]
+*                   -> :output > string error message
+*
+* updateCourseModule -> :param > associated array [courseModuleID, lecturerID, startDate, endDate]
+*                    -> :output > string error message
+*
+* deleteCourseModule -> :param > courseModuleID
+*                    -> :output > string error message
+*
+* deleteModuleGroup -> :param > associated array [courseModuleID, type]
+*                   -> :output > string error message
+*/
+
 class ManageCourse {
     private $connection;
     private $courseModuleEditor;
@@ -69,7 +99,12 @@ class ManageCourse {
     }
 
     public function getModuleGroup($courseModuleID) {
-        return $this->moduleGroupEditor->getModuleIntake($courseModuleID);
+        $result = $this->moduleGroupEditor->getModuleGroup($courseModuleID);
+        if ($result["error"]) {
+            return [];
+        } else {
+            return $result["intakeID"];
+        }
     }
 
     public function createCourseModule($input) {
@@ -87,7 +122,7 @@ class ManageCourse {
         return $result;
     }
 
-    public function createGroupModule($input) {
+    public function createModuleGroup($input) {
         if ($type === "Lecture") {
             $error = $this->moduleGroupEditor->createModuleGroup($input["courseModuleID"], $input["hours"], $input["type"]);
             if ($error["error"]) {
@@ -136,6 +171,19 @@ class ManageCourse {
         } else {
             return "";
         }
+    }
+
+    public function deleteModuleGroup($input) {
+        $moduleGroup = $this->moduleGroupEditor->getModuleGroup($input["courseModuleID"], $input["type"]);
+        foreach ($moduleGroup as $row) {
+            if ($row["type"] === $input["type"]) {
+                $error = $this->moduleGroupEditor->deleteModuleGroup($row["moduleGroupID"]);
+                if ($error["error"]) {
+                    return "An error has occurred.";
+                }
+            }
+        }
+        return "";
     }
 }
 ?>

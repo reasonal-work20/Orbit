@@ -28,9 +28,11 @@ public class Intake() {
         $intakeID = $courseID . date("ym", strtotime($start_date)) . $short;
         $sql = "INSERT INTO intake (intake_id, course_id, name, start_date, total_register, status)
                 VALUES ('$intakeID', '$courseID', '$name', '$startDate', 0, 'Active');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = $intakeID;
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => $intakeID];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
@@ -62,19 +64,23 @@ public class Intake() {
     }
 
     public function updateIntake($intakeID, $startDate, $status):array {
-        $result = ["error" => True];
         $sql = "UPDATE intake SET start_date = '$startDate', status = '$status' WHERE intake_id = '$intakeID';";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
 
     public function deleteIntake($intakeID):array {
-        $result = ["error" => True];
         $sql = "DELETE FROM intake WHERE intake_id = '$intakeID';";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }

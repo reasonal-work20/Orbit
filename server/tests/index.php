@@ -3,7 +3,17 @@
  * Entry point for testing.
 */
 require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT . MODELS . '/bus.php';
+require_once ROOT . CONTROLLERS . '/manage-module.php';
+
+$test = new ManageCourse();
+$x = $test->createModule([
+    "majorID" => "CT",
+    "short" => "NWT",
+    "name" => "Networking Technologies"
+]);
+echo $x;
+// $x = $test->getMajorList();
+// echo json_encode($x);
 ?>
 
 <html>

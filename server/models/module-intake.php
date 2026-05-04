@@ -21,11 +21,12 @@ class ModuleIntake {
     }
 
     public function createModuleIntake($intakeID, $courseModuleID) {
-        $result = ["error" => True, "id" => 0];
         $sql = "INSERT INTO module_intake (intake_id, course_module_id) VALUES ('$intakeID', '$courseModuleID');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["id"] = mysqli_insert_id($this->connection);
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
@@ -43,10 +44,12 @@ class ModuleIntake {
     }
 
     public function deleteModuleIntake($moduleIntakeID):array {
-        $result = ["error" => True];
         $sql = "DELETE FROM module_intake WHERE module_intake_id = $moduleIntakeID;";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }

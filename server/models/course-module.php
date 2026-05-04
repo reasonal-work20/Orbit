@@ -27,10 +27,12 @@ public class CourseModule() {
         $result = ["error" => True, "id" => 0];
         $sql = "INSERT INTO course_module (module_id, lecturer_id, start_date, end_date)
                 VALUES ('$moduleID', '$lecturerID', '$startDate', '$endDate');";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
-            $result["id"] = mysqli_insert_id($this->connection);
-        }
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
+        } 
         return $result;
     }
 
@@ -59,22 +61,25 @@ public class CourseModule() {
     }
 
     public function updateCourseModule($courseModuleID, $lecturerID, $startDate, $endDate):array {
-        $result = ["error" => True];
-
         $sql = "UPDATE course_module 
                 SET lecturer_id = '$lecturerID', start_date = '$startDate', end_date = '$endDate'
                 WHERE course_module_id = $courseModuleID";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }
 
     public function deleteCourseModule($courseModuleID) {
-        $result = ["error" => True];
         $sql = "DELETE FROM course_module WHERE course_module_id = $courseModuleID";
-        if (mysqli_query($this->connection, $sql)) {
-            $result["error"] = False;
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
         }
         return $result;
     }

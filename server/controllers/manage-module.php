@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT . MODELS . '/module.php';
 require_once ROOT . CONFIG;
+require_once ROOT . MODELS . '/module.php';
 
 /**
 * Manage Module Controller
@@ -68,15 +68,15 @@ class ManageCourse {
         }
     }
 
-    public function createModule($input):array {
-        $error = $this->moduleEditor->createModule($input["majorID"], $input["short"], $input["name"]);
+    public function createModule($input):string {
+        $error = $this->moduleEditor->createModule($input["majorID"], $input["name"], $input["short"]);
         if ($error["error"]) {
             return "An error has occurred while creating the module. Please ensure the short code has not been used."; 
         }
         return "";
     }
 
-    public function updateModule($input):array {
+    public function updateModule($input):string {
         $error = $this->moduleEditor->updateModule($input["moduleID"], $input["name"]);
         if ($error["error"]) {
             return "An error has occurred while updating the module name.";
@@ -84,12 +84,12 @@ class ManageCourse {
         return "";
     }
 
-    public function deleteModule($moduleID):array {
+    public function deleteModule($moduleID):string {
         $error = $this->moduleEditor->deleteModule($moduleID);
         if ($error["error"]) {
             return "An error has occurred while deleting the module.";
         }
-        return ""
+        return "";
     }
 }
 ?>
