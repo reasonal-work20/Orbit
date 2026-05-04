@@ -51,15 +51,14 @@ class ManageIntake {
                 $intake["startDate"],
                 $intake["totalRegister"],
                 $intake["status"]
-            ]
+            ];
         }
-
-        $result;
+        return $result;
     }
 
     public function getIntake($intakeID) {
         $result = $this->intakeEditor->getIntake($intakeID);
-        if ($error["error"]) {
+        if ($result["error"]) {
             return [];
         } else {
             return [
