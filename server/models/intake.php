@@ -16,16 +16,16 @@
 *               -> Returns an associated array [error]
 */
 
-public class Intake() {
+class Intake {
     private $connection;
 
     public function __construct($database) {
-        $this->$connection = $database;
+        $this->connection = $database;
     }
 
     public function createIntake($courseID, $name, $short, $startDate):array {
         $result = ["error" => True, "id" => ""];
-        $intakeID = $courseID . date("ym", strtotime($start_date)) . $short;
+        $intakeID = $courseID . date("ym", strtotime($startDate)) . $short;
         $sql = "INSERT INTO intake (intake_id, course_id, name, start_date, total_register, status)
                 VALUES ('$intakeID', '$courseID', '$name', '$startDate', 0, 'Active');";
         if (mysqli_query($this->connection, $sql)) {
@@ -44,7 +44,7 @@ public class Intake() {
             "startDate" => "",
             "totalRegister" => 0,
             "status" => ""
-        ]
+        ];
 
         $sql = "SELECT * FROM intake WHERE intake_id = '$intakeID';";
         $statement = mysqli_query($this->connection, $sql);

@@ -33,7 +33,7 @@ class StudentIntake {
         if (mysqli_query($this->connection, $sql)) {
             $result["error"] = False;
         }
-        return $result
+        return $result;
     }
 }
 ?>

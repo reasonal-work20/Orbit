@@ -16,11 +16,11 @@
 *               -> Returns associated array [error]
 */
 
-public class Module() {
+class Module {
     private $connection;
 
     public function __construct($database) {
-        $this->$connection = $database;
+        $this->connection = $database;
     }
 
     public function createModule($majorID, $name, $short) {
@@ -32,7 +32,7 @@ public class Module() {
         $moduleID = $majorID.$short;
         $sql = "INSERT INTO module (module_id, major_id, name) VALUES ($moduleID, $majorID, '$name');";
         if (mysqli_query($this->connection, $sql)) {
-            $result["id"]  $moduleID;
+            $result["id"] = $moduleID;
             $result["error"] = False;
         }
 

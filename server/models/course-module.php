@@ -16,7 +16,7 @@
 *                       -> Returns an associated array [error]
 */
 
-public class CourseModule() {
+class CourseModule {
     private $connection;
 
     public function __construct($connection) {
