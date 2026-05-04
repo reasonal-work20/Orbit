@@ -11,7 +11,7 @@ function getCarpool($data) {
         "filter" => $data["filter"],
         "role" => $_SESSION["role"]
     ];
-    $result = $carpoolController->getAvailable($result);
+    $result = $carpoolController->getAvailable($input);
     return $result;
 }
 
