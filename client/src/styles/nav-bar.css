@@ -169,7 +169,7 @@
   gap: 4px;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 768px) {
   .nav-container {
     padding: 0px 24px;
   }

@@ -2,6 +2,7 @@
 define('ROOT', $_SERVER['DOCUMENT_ROOT']);
 
 /** Constants used in the frontend (client side). */
+define('INDEX', '/Orbit/client/index.php');
 define('STYLES', '/Orbit/client/src/styles');
 define('PAGES', '/Orbit/client/src/pages');
 define('SHARED', '/Orbit/client/src/shared');

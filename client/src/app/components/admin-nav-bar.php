@@ -8,7 +8,7 @@ function renderNavItem($name, $iconFilename, $link, $pageId)
 
     $activeClass = (isset($_SESSION['currentPage']) && $_SESSION['currentPage'] == $pageId) ? 'active' : '';
 
-    echo "<li class='nav-item {$activeClass} id={$pageId}''></li>";
+    echo "<li class='nav-item {$activeClass}' id='{$pageId}'>";
     echo "<a href='{$link}'>";
     echo "<div class='icon'>";
     if (file_exists($svgPath)) {
@@ -29,72 +29,50 @@ function renderNavBar()
     $userRole = $_SESSION['userRole'] ?? 'guest';
 
     echo '<div class="nav-bar">';
-    echo '<div class="nav-container">';
+    
     echo '<div class="logo-wrapper">';
-    echo '<img class="logo" src="' . ASSETS . '/icons/orbit-logo.svg">';
+    echo '<img class="logo" src="' . ASSETS . '/icons/orbit-logo.svg" alt="Orbit Logo">';
     echo '</div>';
-    echo '<ul class="nav-list" style="list-style: none;">';
+
+    echo '<div class="nav-wrapper">';
+    echo '<ul class="nav-list">';
+    
     switch ($userRole) {
         case 'User Admin':
             $dashboardPath = PAGES . "/{$userRole}/dashboard.php";
             renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
-            renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
             renderNavItem('Manage Users', 'calendar-icon.svg', '#', 'manageusers');
             renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
             break;
+            
         case 'Course Admin':
             $dashboardPath = PAGES . "/{$userRole}/dashboard.php";
             renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
-            renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
             renderNavItem('Manage Course', 'calendar-icon.svg', '#', 'managecourses');
             renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
             break;
+            
         case 'Schedule Admin':
             $dashboardPath = PAGES . "/{$userRole}/dashboard.php";
             renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
-            renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
             renderNavItem('Manage Schedules', 'calendar-icon.svg', '#', 'manageschedules');
             renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
             break;
+            
         default:
             renderNavItem('Log In', 'login-square-icon.svg', APP . '/login-page.php', 'login');
+            break;
+    }
+    echo '</ul>';
+    echo '</div>';
+
+    if ($userRole !== 'guest') {
+        echo '<ul class="nav-list logout-section">';
+        renderNavItem('Log Out', 'logout-square-icon.svg', SERVICES . '/logout-service.php', 'logout');
+        echo '</ul>';
     }
 
-    echo '</ul>';
-    renderNavItem('Log Out', 'login-square-icon.svg', APP . '/login-page.php', 'login');
-    echo '</div>';
     echo '</div>';
 }
 
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-
-<body>
-    <div class="nav-bar">
-        <div class="logo-wrapper">
-            <img class="logo" src="<?php echo ASSETS . '/icons/orbit-logo.svg'?>">
-        </div>
-        <div class="nav-wrapper">
-            <ul class="nav-list">
-                <?php
-                renderNavItem('Home', 'home-icon.svg', '#', 'home');
-                renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
-                renderNavItem('Manage Users', 'calendar-icon.svg', '#', 'manageusers');
-                renderNavItem('More',  'more-icon-vertical.svg', '#', 'more');
-                ?>
-            </ul>
-        </div>
-        <?php renderNavItem('Log Out', 'login-square-icon.svg', '#', 'more'); ?>
-    </div>
-</body>
-
-</html>
