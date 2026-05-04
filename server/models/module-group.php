@@ -66,17 +66,22 @@ class ModuleGroup {
     }
 
     public function getModuleGroup($courseModuleID) {
-        $result = ["error" => True, "moduleGroup" => []];
-        $sql = "SELECT * FROM module_group WHERE course_module_id = '$courseModuleID';";
-        $statement = mysqli_query($this->connection, $sql);
-        switch ($row = mysqli_fetch_array($statement)) {
-            $result[] = [
-                $row["module_group_id"],
-                $row["hours"],
-                $row["type"]
+        $result = [
+            "error" => true, 
+            "moduleGroup" => []
             ];
-            $result["error"] = False;
+        $sql = "SELECT * FROM module_group WHERE course_module_id = ?;";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bind_param("i", $courseModuleID);
+
+        if ($stmt->execute()) {
+            $result['error'] = false;
+            $res = $stmt->get_result();
+            while ($row = $res->fetch_assoc()) {
+                $result['moduleGroup'][] = $row;
+            }
         }
+        $stmt->close();
         return $result;
     }
 

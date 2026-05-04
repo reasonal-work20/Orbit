@@ -24,11 +24,22 @@ class Module {
     }
 
     public function createModule($majorID, $name, $short) {
+<<<<<<< HEAD
         $result = [];
         $moduleID = $majorID."-".$short;
         $sql = "INSERT INTO module (module_id, major_id, name) VALUES ('$moduleID', '$majorID', '$name');";
         try {
             mysqli_query($this->connection, $sql);
+=======
+        $result = [
+            "error" => True,
+            "id" => ""
+        ];
+
+        $moduleID = $majorID.$short;
+        $sql = "INSERT INTO module (module_id, major_id, name) VALUES ($moduleID, $majorID, '$name');";
+        if (mysqli_query($this->connection, $sql)) {
+>>>>>>> d7f451b81f6ea5ee29a1102fc178643445ad3eaa
             $result["id"] = $moduleID;
             $result["error"] = False;
         } catch (mysqli_sql_exception $e) {

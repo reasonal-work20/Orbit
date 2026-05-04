@@ -36,7 +36,7 @@ class StudentIntake {
         } catch (mysqli_sql_exception $e) {
             $result = ["error" => True];
         }
-        return $result
+        return $result;
     }
 }
 ?>
