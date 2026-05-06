@@ -1,43 +1,43 @@
-MR1,
-P1,
-P2,
-P3,
-MR2,
-VAS,
-FSec,
-APCA,
-Cisco,
-SOC,
-A0501,
-A0502,
-A0503,
-A0504,
-A0505,
-Exam,
-TL501,
-B0501,
-B0502,
-B0503,
-B0504,
-B0505,
-B0506,
-B0507,
-B0508,
-B0509,
-B0510,
-S0501,
-S0502,
-SCOA,
-VGM,
-GLS,
-ST51,
-ST52,
-ST53,
-ST54,
-ST55,
-ST56,
-ST57,
-EV51,
-EV52,
-EV53,
-EV54,
+MR1,Meeting Room 1,5,Other Facilities
+P1,Presentation 1,5,Other Facilities
+P2,Presentation 2,5,Other Facilities
+P3,Presentation 3,5,Other Facilities
+MR2,Meeting Room 2,5,Other Facilities
+VAS,Visionary AI Studio,5,Other Facilities
+FSec,Forensics and Cybersecurity Research Centre,5,Other Facilities
+APCA,Asia Pacific Center for Analytics,5,Other Facilities
+Cisco,Cisco Networking Academy,5,Other Facilities
+SOC,Security Operations Center,5,Other Facilities
+A0501,A-05-01,5,Classroom
+A0502,A-05-02,5,Classroom
+A0503,A-05-03,5,Classroom
+A0504,A-05-04,5,Classroom
+A0505,A-05-05,5,Classroom
+Exam,Exam Hall,5,Other Facilities
+TL501,Tech Lab 5-01 Financial Trading Center,Labs / Workshops / Studios / Suites
+B0501,B-05-01,5,Classroom
+B0502,B-05-02,5,Classroom
+B0503,B-05-03,5,Classroom
+B0504,B-05-04,5,Classroom
+B0505,B-05-05,5,Classroom
+B0506,B-05-06,5,Classroom
+B0507,B-05-07,5,Classroom
+B0508,B-05-08,5,Classroom
+B0509,B-05-09,5,Classroom
+B0510,B-05-10,5,Classroom
+S0501,S-05-01,5,Classroom
+S0502,S-05-02,5,Classroom
+SCOA,School of Architecture,5,Other Facilities
+VGM,Video Game Mini Museum,5,Other Facilities
+GLS,Game Lab and Studio,5,Other Facilities
+ST51,First Staircase L5,5,Connector
+ST52,Block B Staircase L5,5,Connector
+ST53,Block D Staircase L5,5,Connector
+ST54,Block E Staircase L5,5,Connector
+ST55,Last Staircase L5,5,Connector
+ST56,Middle Staircase L5,5,Connector
+ST57,Block C Staircase L5,5,Connector
+EV51,First Elevator L5,5,Connector
+EV52,Block B Elevator L5,5,Connector
+EV53,Block E Elevator L5,5,Connector
+EV54,Block C Elevator L5,5,Connector
