@@ -1,39 +1,50 @@
-7Audi2,
-B0701,
-B0702,
-B0703,
-B0704,
-B0705,
-B0706,
-B0707,
-B0708,
-B0709,
-D0701,
-D0702,
-D0703,
-D0704,
-D0705,
-D0706,
-D0707,
-D0708,
-D0709,
-D0710,
-D0711,
-D0712,
-D0713,
-D0714,
-D0715,
-D0716,
-D0717,
-E0701,
-E0702,
-E0703,
-E0704,
-E0705,
-E0706,
-E0707,
-E0708,
-E0709,
-7Audi1,
-S0701,
-S0702,
+7Audi2,Auditorium 2 L7,7,Auditorium / Lecture Halls
+B0701,B-07-01,7,Classroom
+B0702,B-07-02,7,Classroom
+B0703,B-07-03,7,Classroom
+B0704,B-07-04,7,Classroom
+B0705,B-07-05,7,Classroom
+B0706,B-07-06,7,Classroom
+B0707,B-07-07,7,Classroom
+B0708,B-07-08,7,Classroom
+B0709,B-07-09,7,Classroom
+D0701,D-07-01,7,Classroom
+D0702,D-07-02,7,Classroom
+D0703,D-07-03,7,Classroom
+D0704,D-07-04,7,Classroom
+D0705,D-07-05,7,Classroom
+D0706,D-07-06,7,Classroom
+D0707,D-07-07,7,Classroom
+D0708,D-07-08,7,Classroom
+D0709,D-07-09,7,Classroom
+D0710,D-07-10,7,Classroom
+D0711,D-07-11,7,Classroom
+D0712,D-07-12,7,Classroom
+D0713,D-07-13,7,Classroom
+D0714,D-07-14,7,Classroom
+D0715,D-07-15,7,Classroom
+D0716,D-07-16,7,Classroom
+D0717,D-07-17,7,Classroom
+E0701,E-07-01,7,Classroom
+E0702,E-07-02,7,Classroom
+E0703,E-07-03,7,Classroom
+E0704,E-07-04,7,Classroom
+E0705,E-07-05,7,Classroom
+E0706,E-07-06,7,Classroom
+E0707,E-07-07,7,Classroom
+E0708,E-07-08,7,Classroom
+E0709,E-07-09,7,Classroom
+7Audi1,Auditorium 1 L7,7,Auditorium / Lecture Halls
+S0701,S-07-01,7,Classroom
+S0702,S-07-02,7,Classroom
+ST71,First Staircase L7,7,Connector
+ST72,Block B Staircase L7,7,Connector
+ST73,Block D Staircase L7,7,Connector
+ST74,Block E Staircase L7,7,Connector
+ST75,Last Staircase L7,7,Connector
+ST76,Middle Staircase L7,7,Connector
+ST77,Block C Staircase L7,7,Connector
+EV71,First Elevator L7,7,Connector
+EV72,Block B Elevator L7,7,Connector
+EV73,Block E Elevator L7,7,Connector
+EV74,Block C Elevator L7,7,Connector
