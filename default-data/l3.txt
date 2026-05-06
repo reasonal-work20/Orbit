@@ -1,0 +1,27 @@
+Audi7,Auditorium 7,3,Auditorium / Lecture Halls
+PMR,Postgraduate Meeting Room,3,Other Facilities
+PC,Postgraduate Center,3,Other Facilities
+Audi6,Auditorium 6,3,Auditorium / Lecture Halls
+CL308,CAD/CAM Lab 3-08,3,Labs / Workshops / Studios / Suites
+RL307,Robotics Lab 3-07,3,Labs / Workshops / Studios / Suites
+PP306,PLC & Pneumatics Lab 3-06,3,Labs / Workshops / Studios / Suites
+RE305,Robotic Engineering 3-05,3,Labs / Workshops / Studios / Suites
+ETSC,Engineering Tech Support Center,3,Labs / Workshops / Studios / Suites
+PL1,Power Lab 1,3,Labs / Workshops / Studios / Suites
+PL2,Power Lab 2,3,Labs / Workshops / Studios / Suites
+EPI,Engineering Project Incubator,3,Labs / Workshops / Studios / Suites
+DL302,Design Lab 3-02,3,Labs / Workshops / Studios / Suites
+FL301,Fabrication Lab 3-01,3,Labs / Workshops / Studios / Suites
+Audi4,Auditorium 4,3,Auditorium / Lecture Halls
+Audi5,Auditorium 5,3,Auditorium / Lecture Halls
+ST31,First Staircase L3,3,Connector
+ST32,Block B Staircase L3,3,Connector
+ST33,Block D Staircase L3,3,Connector
+ST34,Block E Staircase L3,3,Connector
+ST35,Last Staircase L3,3,Connector
+ST36,Middle Staircase L3,3,Connector
+ST37,Block C Staircase L3,3,Connector
+EV31,First Elevator L3,3,Connector
+EV32,Block B Elevator L3,3,Connector
+EV33,Block E Elevator L3,3,Connector
+EV34,Block C Elevator L3,3,Connector

@@ -1,0 +1,43 @@
+A0401,A-04-01,4,Classroom
+A0402,A-04-02,4,Classroom
+A0403,A-04-03,4,Classroom
+A0404,A-04-04,4,Classroom
+A0405,A-04-05,4,Classroom
+B0401,B-04-01 Computer Lab,4,Classroom
+B0402,B-04-02,4,Auditorium / Lecture Halls
+B0403,B-04-03 Library,4,Other Facilities
+B0404,B-04-04 Senior Management Office,4,Other Facilities
+B0405,B-04-05 Academic Office,4,Other Facilities
+B0406,B-04-06 Admin Office,4,Other Facilities
+B0407,B-04-07,4,Auditorium / Lecture Halls
+B0408,B-04-08,4,Auditorium / Lecture Halls
+B0409,B-04-09,4,Auditorium / Lecture Halls
+B0410,B-04-10,4,Classroom
+AVBSO,Administrative Visa and Bursary Office,4,Other Facilities
+GCE,Google Centre of Excellence,4,Other Facilities
+TL402,Tech Lab 4-02,4,Labs / Workshops / Studios / Suites
+TL403,Tech Lab 4-03,4,Labs / Workshops / Studios / Suites
+TL404,Tech Lab 4-04,4,Labs / Workshops / Studios / Suites
+TL405,Tech Lab 4-05,4,Labs / Workshops / Studios / Suites
+TL406,Tech Lab 4-06,4,Labs / Workshops / Studios / Suites
+TL407,Tech Lab 4-07,4,Labs / Workshops / Studios / Suites
+S0402,S-04-02,4,Classroom
+Library,Library,4,Other Facilities
+S0401,S-04-01,4,Classroom
+CRDIOT,Center for Research & Development of IoT,4,Other Facilities
+MCL,Microprocessor / Communication Lab,4,Labs / Workshops / Studios / Suites
+DL,Digital Lab,4,Labs / Workshops / Studios / Suites
+MOL,Microwave Optic Lab,4,Labs / Workshops / Studios / Suites
+AIL,Analogue Instrumentation Lab,4,Labs / Workshops / Studios / Suites
+TS4,Technical Support,4,Other Facilities
+ST41,First Staircase L4,4,Connector
+ST42,Block B Staircase L4,4,Connector
+ST43,Block D Staircase L4,4,Connector
+ST44,Block E Staircase L4,4,Connector
+ST45,Last Staircase L4,4,Connector
+ST46,Middle Staircase L4,4,Connector
+ST47,Block C Staircase L4,4,Connector
+EV41,First Elevator L4,4,Connector
+EV42,Block B Elevator L4,4,Connector
+EV43,Block E Elevator L4,4,Connector
+EV44,Block C Elevator L4,4,Connector

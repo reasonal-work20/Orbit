@@ -8,7 +8,6 @@
         --Search-Bar-Gray: #757575;
         --Subtle-Outline-Grey: #EEEEEE;
         --Text-Dark-Nav: #42526D;
-        --Text-Light-Nav: #354764;
     }
 
     body {
@@ -49,15 +48,8 @@
         background-color: #cbd5e1;
     }
 
-    .LevelDropdown::-webkit-scrollbar-track,
-    .DirectoryList::-webkit-scrollbar-track {
-        background-color: var(--White);
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
-    .LevelDropdown::-webkit-scrollbar-track:hover,
+    .DirectoryList::-webkit-scrollbar-track,
     .DirectoryList::-webkit-scrollbar-track:hover,
-    .LevelDropdown::-webkit-scrollbar-track:active,
     .DirectoryList::-webkit-scrollbar-track:active {
         background-color: var(--White);
         margin-top: 20px;
@@ -114,7 +106,7 @@
         width: 1283px;
         padding: 20px;
         background: white;
-        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3); /* Increased shadow for visibility */
+        box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
         border-radius: 20px;
         justify-content: flex-end;
         align-items: center;
@@ -176,27 +168,16 @@
         overflow: hidden;
     }
 
-    .SearchIconHandle {
-        width: 5.49px;
-        height: 4px;
-        left: 15.29px;
-        top: 19.17px;
-        position: absolute;
-        transform: rotate(-45deg);
-        transform-origin: top left;
-        outline: 2px #4A4A4B solid;
-        outline-offset: -1px;
-    }
-
-    .SearchIconCircle {
-        width: 16px;
-        height: 16px;
-        left: 2px;
-        top: 2px;
-        position: absolute;
-        outline: 2px #4A4A4B solid;
-        outline-offset: -1px;
-    }
+    .SearchInput { 
+    border: 0;            
+    outline: none;           
+    background: transparent; 
+    flex: 1;                 
+    color: var(--Search-Bar-Gray);
+    font-size: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    
+}
 
 
     .LevelDropdown {
@@ -256,16 +237,6 @@
         color: var(--Text-Dark-Nav);
     }
 
-    .SearchText {
-        color: var(--Search-Bar-Gray);
-        font-size: 16px;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 300;
-        line-height: 24px;
-        letter-spacing: 0.80px;
-        word-wrap: break-word;
-    }
-
     .FilterRow {
         align-self: stretch;
         padding-left: 10px;
@@ -277,7 +248,7 @@
     }
 
     .BtnLevel {
-        width: 127px;
+        width: 130px;
         height: 42px;
         padding-top: 8px;
         padding-bottom: 8px;
@@ -313,7 +284,7 @@
     .BtnText {
         color: var(--White);
         font-size: 18px;
-        font-weight: 650px;
+        font-weight: 600;
         line-height: 20px;
         word-wrap: break-word;
     }
@@ -328,26 +299,11 @@
         display: inline-flex;
     }
 
-    .BtnChevron {
-        width: 11.61px;
-        height: 6.11px;
-        background: white;
-    }
-
     .BtnIconBox {
         width: 20px;
         height: 20px;
         position: relative;
         overflow: hidden;
-    }
-
-    .FilterIconShape {
-        width: 13.33px;
-        height: 15px;
-        left: 3.33px;
-        top: 2.50px;
-        position: absolute;
-        background: white;
     }
 
     .FilterDropdown {
@@ -500,6 +456,7 @@
         align-items: center;
         gap: 100px;
         display: inline-flex;
+        cursor: pointer;
     }
 
     .DirectoryItemCenter {
@@ -541,40 +498,15 @@
     }
 
     .MapSection {
-        height: 754px;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        flex: 1;
+        position: relative;
+        padding: 40px;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 15px;
-        display: inline-flex;
+        display: flex;
         box-sizing: border-box;
-    }
-
-    .MapHeader {
-        width: 157px;
-        height: 42px;
-        padding-left: 13px;
-        padding-right: 13px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        background: var(--Orbit-Blue);
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        display: inline-flex;
-        box-sizing: border-box;
-    }
-
-    .MapHeaderText {
-        color: var(--White);
-        font-size: 25px;
-        font-weight: 600;
-        line-height: 20px;
-        word-wrap: break-word;
     }
 
     .MapImageWrapper {
@@ -586,8 +518,70 @@
     }
 
     .MapImage {
-        width: 768px;
-        height: 650px;
-        outline: 2px black solid;
-        outline-offset: -1px;
+        width: 100%;
+        height: auto;
+        max-width: 800px;
+        outline: 1px black solid;
+        object-fit: contain;
+    }
+
+    .RoutingSection {
+        align-self: stretch;
+        padding: 10px 10px 0px 10px; 
+        display: flex;
+        flex-direction: column;
+        gap: 15px; 
+        margin-bottom: 10px; 
+    }
+
+    .RouteBox {
+        align-self: stretch;
+        height: 48px; 
+        padding: 0 20px;
+        background: var(--White);
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.08); 
+        border: 1px solid var(--Subtle-Outline-Grey); 
+        border-radius: 999px; 
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-sizing: border-box;
+    }
+
+    .RouteLabel {
+        color: var(--Search-Bar-Gray);
+        font-size: 16px;
+        font-family: Inter, sans-serif;
+        font-weight: 500;
+    }
+
+    .RouteDestination {
+        color: #1a1a1a; 
+        font-size: 16px;
+        font-weight: 700; 
+        font-family: Inter, sans-serif;
+    }
+
+    .RouteInput {
+        flex: 1; 
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #1a1a1a;
+        font-size: 16px;
+        font-family: Inter, sans-serif;
+        font-weight: 500;
+    }
+
+    .RouteInput::placeholder {
+        color: var(--Search-Bar-Gray);
+        font-weight: 500;
+    }
+
+    .RouteIconBox {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
