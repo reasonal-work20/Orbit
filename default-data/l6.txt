@@ -1,60 +1,60 @@
-ST61,
-ST62,
-ST63,
-ST64,
-ST65,
-ST66,
-ST67,
-EV61,
-EV62,
-EV63,
-EV64,
-A0601,
-A0602,
-A0603,
-A0604,
-A0605,
-CGI,
-iMac,
-XR,
-ANI,
-VFX,
-AVRS,
-B0601,
-B0602,
-B0603,
-B0604,
-B0605,
-B0606,
-B0607,
-B0608,
-B0609,
-B0610,
-S0601,
-S0602,
-TL601,
-TL602,
-TL603,
-TL604,
-TL605,
-TL606,
-TL607,
-TL608,
-TL609,
-TL610,
-TL611,
-TL612,
-TL613,
-TL614,
-D0602,
-D0604,
-D0605,
-D0606,
-D0607,
-D0608,
-D0609,
-D0610,
-D0611,
-D0612,
-D0613,
-6Audi,
+ST61,First Staircase L6,6,Connector
+ST62,Block B Staircase L6,6,Connector
+ST63,Block D Staircase L6,6,Connector
+ST64,Block E Staircase L6,6,Connector
+ST65,Last Staircase L6,6,Connector
+ST66,Middle Staircase L6,6,Connector
+ST67,Block C Staircase L6,6,Connector
+EV61,First Elevator L6,6,Connector
+EV62,Block B Elevator L6,6,Connector
+EV63,Block E Elevator L6,6,Connector
+EV64,Block C Elevator L6,6,Connector
+A0601,A-06-01,6,Classroom
+A0602,A-06-02,6,Classroom
+A0603,A-06-03,6,Classroom
+A0604,A-06-04,6,Classroom
+A0605,A-06-05,6,Classroom
+CGI,Tech Lab 6-15 (CGI Suite),6,Labs / Workshops / Studios / Suites
+iMac,Tech Lab 6-15 (iMac Suite),6,Labs / Workshops / Studios / Suites
+XR,XR Studio,6,Labs / Workshops / Studios / Suites
+ANI,Tech Lab 6-17 (Animation Suite),6,Labs / Workshops / Studios / Suites
+VFX,Tech Lab 6-18 (VFX Suite),6,Labs / Workshops / Studios / Suites
+AVRS,Tech Lab 6-19 (Audio Visual Production and Recording Studio),6,Labs / Workshops / Studios / Suites 
+B0601,B-06-01,6,Classroom
+B0602,B-06-02,6,Classroom
+B0603,B-06-03,6,Classroom
+B0604,B-06-04,6,Classroom
+B0605,B-06-05,6,Classroom
+B0606,B-06-06,6,Classroom
+B0607,B-06-07,6,Classroom
+B0608,B-06-08,6,Classroom
+B0609,B-06-09,6,Classroom
+B0610,B-06-10,6,Classroom
+S0601,S-06-01,6,Classroom
+S0602,S-06-02,6,Classroom
+TL601,Tech Lab 6-01,6,Labs / Workshops / Studios / Suites
+TL602,Tech Lab 6-02,6,Labs / Workshops / Studios / Suites 
+TL603,Tech Lab 6-03,6,Labs / Workshops / Studios / Suites
+TL604,Tech Lab 6-04,6,Labs / Workshops / Studios / Suites
+TL605,Tech Lab 6-05,6,Labs / Workshops / Studios / Suites
+TL606,Tech Lab 6-06,6,Labs / Workshops / Studios / Suites
+TL607,Tech Lab 6-07,6,Labs / Workshops / Studios / Suites
+TL608,Tech Lab 6-08,6,Labs / Workshops / Studios / Suites
+TL609,Tech Lab 6-09,6,Labs / Workshops / Studios / Suites
+TL610,Tech Lab 6-10,6,Labs / Workshops / Studios / Suites
+TL611,Tech Lab 6-11,6,Labs / Workshops / Studios / Suites
+TL612,Tech Lab 6-06,6,Labs / Workshops / Studios / Suites
+TL613,Tech Lab 6-13,6,Labs / Workshops / Studios / Suites
+TL614,Tech Lab 6-06,7,Labs / Workshops / Studios / Suites
+D0602,D-06-02,6,Classroom 
+D0604,D-06-04,6,Classroom
+D0605,D-06-05,6,Classroom
+D0606,D-06-06,6,Classroom
+D0607,D-06-07,6,Classroom
+D0608,D-06-08,6,Classroom
+D0609,D-06-09,6,Classroom
+D0610,D-06-10,6,Classroom
+D0611,D-06-11,6,Classroom
+D0612,D-06-12,6,Classroom
+D0613,D-06-13,6,Classroom
+6Audi2,Auditorium 2 L6,6,Auditorium / Lecture Halls
