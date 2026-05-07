@@ -1,0 +1,31 @@
+Audi3,Auditorium 3 L9,9,Auditorium / Lecture Halls
+C0901,C-09-01,9,Classroom
+C0902,C-09-02,9,Classroom
+D0901,D-09-01,9,Classroom
+D0902,D-09-02,9,Classroom
+D0903,D-09-03,9,Classroom
+D0904,D-09-04,9,Classroom
+D0905,D-09-05,9,Classroom
+D0906,D-09-06,9,Classroom
+D0907,D-09-07,9,Classroom
+D0908,D-09-08,9,Classroom
+D0909,D-09-09,9,Classroom
+D0910,D-09-10,9,Classroom
+D0911,D-09-11,9,Classroom
+D0912,D-09-12,9,Classroom
+E0901,E-09-01,9,Classroom
+E0902,E-09-02,9,Classroom
+E0903,E-09-03,9,Classroom
+E0904,E-09-04,9,Classroom
+E0905,E-09-05,9,Classroom
+E0906,E-09-06,9,Classroom
+E0907,E-09-07,9,Classroom
+E0908,E-09-08,9,Classroom
+E0909,E-09-09,9,Classroom
+E0910,E-09-10,9,Classroom
+E0911,E-09-11,9,Classroom
+ST91,First Staircase L9,9,Connector
+ST92,Block B Staircase L9,9,Connector
+ST93,Block D Staircase L9,9,Connector
+EV91,First Elevator L9,9,Connector
+EV92,Block B Elevator L9,9,Connector

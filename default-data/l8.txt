@@ -1,0 +1,53 @@
+D0801,D-08-01,8,Classroom
+D0802,D-08-02,8,Classroom
+D0803,D-08-03,8,Classroom
+D0804,D-08-04,8,Classroom
+D0805,D-08-05,8,Classroom
+D0806,D-08-06,8,Classroom
+D0807,D-08-07,8,Classroom
+D0808,D-08-08,8,Classroom
+D0809,D-08-09,8,Classroom
+D0810,D-08-10,8,Classroom
+D0811,D-08-11,8,Classroom
+D0812,D-08-12,8,Classroom
+D0813,D-08-13,8,Classroom
+D0814,D-08-14,8,Classroom
+D0815,D-08-15,8,Classroom
+E0801,E-08-01,8,Classroom
+E0802,E-08-02,8,Classroom
+E0803,E-08-03,8,Classroom
+E0804,E-08-04,8,Classroom
+E0805,E-08-05,8,Classroom
+E0806,E-08-06,8,Classroom
+E0807,E-08-07,8,Classroom
+E0808,E-08-08,8,Classroom
+E0809,E-08-09,8,Classroom
+E0810,E-08-10,8,Classroom
+E0811,E-08-11,8,Classroom
+B0801,B-08-01,8,Classroom
+B0802,B-08-02,8,Classroom
+B0803,B-08-03,8,Classroom
+B0804,B-08-04,8,Classroom
+B0805,B-08-05,8,Classroom
+B0806,B-08-06,8,Classroom
+B0807,B-08-07,8,Classroom
+B0808,B-08-08,8,Classroom
+B0809,B-08-09,8,Classroom
+B0810,B-08-10,8,Classroom
+S0801,S-08-01,8,Classroom
+S0802,S-08-02,8,Classroom
+S0803,S-08-03,8,Classroom
+S0804,S-08-04,8,Classroom
+S0805,S-08-05,8,Classroom
+S0806,S-08-06,8,Classroom
+S0807,S-08-07,8,Classroom
+8Audi1,Auditorium 1 L8,8,Auditorium / Lecture Halls
+ST81,First Staircase L8,8,Connector
+ST82,Block B Staircase L8,8,Connector
+ST83,Block D Staircase L8,8,Connector
+ST84,Block E Staircase L8,8,Connector
+ST85,Last Staircase L8,8,Connector
+ST86,Middle Staircase L8,8,Connector
+EV81,First Elevator L8,8,Connector
+EV82,Block B Elevator L8,8,Connector
+EV83,Block E Elevator L8,8,Connector
