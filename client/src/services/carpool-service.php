@@ -1,6 +1,54 @@
 <?php
-require_once $_SERVER['DOCUMENTATION_ROOT'] . '/Orbit/shared/constants.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . ROUTES . '/carpool-feature.php';
+
+if (isset($_GET["isActive"])) {
+    $result = getActive();
+    echo json_encode($result);
+}
+
+if (isset($_POST["newRide"])) {
+    $time = $_POST["time"];
+    $time = DateTime::createFromFormat('H:i', $time);
+    $formatTime = $time->format('Y-m-d H:i:s');
+    $_POST["time"] = $formatTime;
+    $result = newRide($_POST);
+    if ($result) {
+        echo "<script>
+        alert('$result');
+        </script>";
+    } else {
+        $path = FEATURES . '/transport/view-ride.php';
+        echo "<script>
+        window.location.href='$path';
+        </script>";
+    }
+}
+
+if (isset($_GET["host"])) {
+    $result = host($_SESSION["userID"]);
+    echo json_encode($result);
+}
+
+if (isset($_GET["requester"])) {
+    $result = requester($_GET["requester"]);
+    echo json_encode($result);
+}
+
+if (isset($_POST["cancelRide"])) {
+    $carpool = host($_SESSION["userID"]);
+    $result = cancelRide(["carpoolID" => $carpool["carpoolID"]]);
+    if ($result) {
+        echo "<script>
+        alert('$result');
+        </script>";
+    } else {
+        $path = FEATURES . '/transport/carpool-manage.php';
+        echo "<script>
+        window.location.href='$path';
+        </script>";
+    }
+}
 
 /**
  * !! IMPORTANT !!

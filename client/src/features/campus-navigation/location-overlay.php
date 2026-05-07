@@ -2,11 +2,11 @@
     <div class="OverlayCard">
         <div class="OverlayHeader">
             <div class="OverlayCloseIcon" onclick="closeOverlay()">
-                <img src="../assets/icons/return.svg" alt="Back" class="SvgIcon">
+                <img src="<?php echo ICONS; ?>/return.svg" alt="Back" class="SvgIcon">
             </div>
             <h2 id="OverlayTitle" class="OverlayTitle">Location Name</h2>
             <div class="OverlayCloseIcon" onclick="closeOverlay()">
-                <img src="../assets/icons/close.svg" alt="Close" class="SvgIcon">
+                <img src="<?php echo ICONS; ?>/close.svg" alt="Close" class="SvgIcon">
             </div>
         </div>
         
@@ -19,7 +19,7 @@
                 <span id="OverlayLevelBadgeText">Level ?</span>
             </div>
             <div class="OverlayBadgeCalendar">
-                <img src="../assets/icons/calendar-icon.svg" alt="Timetable" class="SvgIcon OverlayIconWhite">
+                <img src="<?php echo ICONS; ?>/calendar-icon.svg" alt="Timetable" class="SvgIcon OverlayIconWhite">
             </div>
         </div>
         

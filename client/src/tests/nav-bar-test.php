@@ -22,8 +22,6 @@ createHead('Test Page', ['global.css', 'nav-bar.css']);
 renderNavBar();
 ?>
 
-<script src="<?php echo FEATURES . '/ripple-effect.js'; ?>"></script>
-
 <?php 
 createFooter(false);
 ?>

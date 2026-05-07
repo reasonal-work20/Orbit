@@ -1,3 +1,11 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+require_once ROOT . COMPONENTS . '/nav-bar.php';
+
+$_SESSION['currentPage'] = 'transport';
+renderNavBar();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbit - Ride Details (Driver)</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="transportglobal.css">
+    <link rel="stylesheet" href="<?php echo STYLES; ?>/transport-global.css">
+    <link rel="stylesheet" href="<?php echo STYLES; ?>/nav-bar.css">
     <style>
         body { background-color: #f8f9fa; margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        
-        /* Navigation & Back Button */
-        .back-btn { background: white; border: none; padding: 10px 15px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); cursor: pointer; margin-bottom: 20px; transition: 0.2s; }
-        .back-btn:hover { background: #f1f2f6; }
         
         .main-card { background: white; border-radius: 24px; padding: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.03); }
         
@@ -71,20 +76,7 @@
     </style>
 </head>
 <body>
-
-    <header class="navigation-bar">
-        <a href="transportDesktop.php" class="logo"><img src="orbit-logo.svg" alt="Orbit Logo"></a>
-        <nav class="nav-links">
-            <a href="#" class="nav-item"><i class='bx bx-home-alt'></i><span>Home</span></a>
-            <a href="transportDesktop.php" class="nav-item active"><i class='bx bx-bus'></i><span>Transport</span></a>
-            <a href="#" class="nav-item"><i class='bx bx-map-alt'></i><span>Directory</span></a>
-            <a href="#" class="nav-item"><i class='bx bx-calendar'></i><span>Timetable</span></a>
-            <a href="#" class="nav-item"><i class='bx bx-dots-vertical-rounded'></i><span>More</span></a>
-        </nav>
-    </header>
-
     <div class="container">
-        <button class="back-btn" onclick="history.back()"><i class='bx bx-chevron-left'></i></button>
         <h2 style="margin-bottom: 25px; color: #2d3436; font-weight: 900; letter-spacing: -0.5px;">RIDE DETAILS</h2>
 
         <div class="main-card">
@@ -92,120 +84,96 @@
                 <div class="left-col">
                     <div class="driver-header">
                         <div class="profile">
-                            <img src="https://i.pravatar.cc/150?u=marcus" alt="Marcus Chen">
+                            <img src="" id="profile">
                             <div class="name-id">
-                                <h3>Marcus Chen</h3>
-                                <p>TP000001</p>
+                                <h3 id="name"></h3>
+                                <p id="studentID"></p>
                             </div>
                         </div>
                         <div class="departure-info">
-                            <h2>08:15</h2>
+                            <h2 id="time"></h2>
                             <p>Departure</p>
                         </div>
                     </div>
-                    <div><span class="fare-tag">Split Fare</span></div>
+                    <div><span class="fare-tag" id="type"></span></div>
 
                     <div class="route-box">
                         <div class="route-point">
                             <i class='bx bxs-map-pin'></i>
-                            <div><label>From</label><p>LRT Bukit Jalil</p></div>
+                            <div><label>From</label><p id="start"></p></div>
                         </div>
                         <div class="route-point end">
                             <i class='bx bxs-target-lock'></i>
-                            <div><label>To</label><p>Asia Pacific University (APU Campus)</p></div>
+                            <div><label>To</label><p id="destination"></p></div>
                         </div>
                     </div>
 
                     <div class="car-details-box">
                         <div class="car-info">
                             <label>Car Details</label>
-                            <p>White Proton (XYZ 1234)</p>
+                            <p id="car"></p>
                         </div>
-                        <div class="seats-left"><i class='bx bxs-user'></i> 3 Seats Left</div>
+                        <div class="seats-left"><i class='bx bxs-user'></i><div id="capacity"></div></div>
                     </div>
                 </div>
 
                 <div class="right-col">
                     <div class="note-box">
                         <label>Note</label>
-                        <p>Hi, I am going to campus and will pass by LRT Bukit Jalil. Does anyone want to hitch a ride? We'll just split the petrol price. ~RM1 each.</p>
+                        <p id="note"></p>
                     </div>
 
                     <div class="requests-box">
                         <label>Requests</label>
                         <div id="request-list">
-                            <div class="request-item">
-                                <span class="request-name">Terry Chong</span>
-                                <div class="req-actions">
-                                    <button class="btn-action btn-reject"><i class='bx bx-x'></i></button>
-                                    <button class="btn-action btn-approve"><i class='bx bx-check'></i></button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="footer-actions">
-                <button class="btn-cancel" onclick="handleCancel()">Cancel Ride</button>
-                <button class="btn-waiting" id="statusBtn">Waiting <i class='bx bxs-chevron-down'></i></button>
-            </div>
+            <form method="post" action="<?php echo SERVICES; ?>/carpool-service.php" class="footer-actions">
+                <button class="btn-cancel" name="cancelRide" type="submit">Cancel Ride</button>
+                <select class="btn-waiting" id="statusBtn" onclick="">
+                    <option value="Waiting">Waiting</option>
+                    <option value="Full">Full</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+            </form>
         </div>
     </div>
 
     <script>
-        const statusBtn = document.getElementById('statusBtn');
-
-        if (statusBtn) {
-            statusBtn.addEventListener('click', function() {
-                let currentStatus = this.innerText.trim();
-
-                // Step 1: Confirm Completion
-                if (currentStatus.includes("Waiting")) {
-                    if (confirm("Are you sure you want to mark this ride as completed?")) {
-                        this.innerHTML = `Completed <i class='bx bxs-check-circle'></i>`;
-                        this.style.background = "#2d3436"; // Black background
-                        this.style.color = "white";
-                    }
-                } 
-                // Step 2: Confirm Deletion & Redirect
-                else if (currentStatus.includes("Completed")) {
-                    if (confirm("This will permanently delete the ride post and take you back to the dashboard. Proceed?")) {
-                        deleteRideAndRedirect();
-                    }
-                }
-            });
-        }
-
-        function handleCancel() {
-            if(confirm("Are you sure you want to cancel this ride? This will remove it from the dashboard.")) {
-                deleteRideAndRedirect();
+        (async () => {
+            let userID = <?php echo $_SESSION['userID'] ?>;
+            let response = await fetch('/Orbit/client/src/services/carpool-service.php?host=true');
+            let data = await response.json();
+            document.getElementById("name").innerHTML = data.name;
+            document.getElementById("studentID").innerHTML = data.hostID;
+            let format = { hour: "2-digit", minute: "2-digit", hour12: true };
+            let date = new Date(data.time);
+            document.getElementById("time").innerHTML = date.toLocaleTimeString("en-US", format);
+            document.getElementById("type").innerHTML = data.type;
+            document.getElementById("start").innerHTML = data.start;
+            document.getElementById("destination").innerHTML = data.destination;
+            document.getElementById("capacity").innerHTML = data.seat + " Seats Left";
+            if (data.carModel) {
+                document.getElementById("car").innerHTML = data.carModel + " " + data.carColour + " (" + data.carPlate + ")";
             }
-        }
-
-        function deleteRideAndRedirect() {
-            // 1. Identify which ride to delete
-            const rawIndex = localStorage.getItem('selected_ride_index');
-            let rides = JSON.parse(localStorage.getItem('orbit_rides')) || [];
-            
-            if (rawIndex !== null) {
-                const index = parseInt(rawIndex);
-
-                // 2. Remove from the array
-                if (index >= 0 && index < rides.length) {
-                    rides.splice(index, 1);
-                    
-                    // 3. Save the new array back to storage
-                    localStorage.setItem('orbit_rides', JSON.stringify(rides));
-                    
-                    // 4. Clean up the pointer
-                    localStorage.removeItem('selected_ride_index');
-                }
+            document.getElementById("statusBtn").value = data.status;
+            text = ""
+            for (const request of data.request) {
+                text = text + `<div class="request-item">
+                                <span class="request-name">${request.name}</span>
+                                <form class="req-actions" action = '<?php echo SERVICES; ?>/carpool-service.php' method='post'>
+                                    <input type="hidden" name="requesterID" value="${request.requestID}" />
+                                    <button class="btn-action btn-reject"><i class='bx bx-x'></i></button>
+                                    <button class="btn-action btn-approve"><i class='bx bx-check'></i></button>
+                                </form>
+                            </div>`;
             }
-
-            // 5. Final Step: Always take them back to the dashboard
-            window.location.href = 'transportDesktop.php';
-        }
+            document.getElementById("request-list").innerHTML = text;
+        })();
     </script>
 </body>
 </html>

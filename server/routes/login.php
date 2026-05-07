@@ -21,5 +21,5 @@ function login($data) {
         $_SESSION["role"] = $verify["role"];
         return ["error" => False, "message" => ""];
     }
-} 
+}
 ?>

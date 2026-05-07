@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 function renderNavItem($name, $iconFilename, $link, $pageId)
@@ -7,9 +6,8 @@ function renderNavItem($name, $iconFilename, $link, $pageId)
     $svgPath = ROOT . ICONS . "/{$iconFilename}";
 
     $activeClass = (isset($_SESSION['currentPage']) && $_SESSION['currentPage'] == $pageId) ? 'active' : '';
-
     echo "<li class='nav-item {$activeClass}' id='{$pageId}'>";
-    echo "<a href='{$link}'>";
+    echo "<a href='$link'>";
     echo "<div class='icon'>";
     if (file_exists($svgPath)) {
         include $svgPath;
@@ -22,11 +20,6 @@ function renderNavItem($name, $iconFilename, $link, $pageId)
 
 function renderNavBar()
 {
-    // Ensure session is started to check roles
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
     echo '<div class="nav-bar">';
     echo '<div class="nav-container">';
     echo '<div class="logo-wrapper">';
@@ -35,8 +28,8 @@ function renderNavBar()
     echo '<ul class="nav-list" style="list-style: none;">';
 
     renderNavItem('Home', 'home-icon.svg', '#', 'home');
-    renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
-    renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
+    renderNavItem('Transport', 'car-icon.svg', FEATURES . '/transport/transport.php', 'transport');
+    renderNavItem('Directory', 'map-icon.svg', FEATURES . '/campus-navigation/nav-map.php', 'directory');
     renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
     renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
 

@@ -11,7 +11,7 @@ require_once ROOT.CONTROLLERS.'/manage-user.php';
 * Functions in the class
 * getAvailable  -> Takes in an associated array and returns the list of available rides.
 *               -> Input Keys [search, role, filter]
-*               -> Output Keys [carpoolID, name, picture, hostID, time, start, destination, seat]
+*               -> Output Keys [carpoolID, name, picture, hostID, time, start, destination, seat, type]
 * 
 * requester     -> Takes in the carpoolID and returns the details of a carpool ride for the requester pov.
 *               -> Output Keys [carpoolID, name, picture, hostID, time, start, destination, seat, 
@@ -20,7 +20,7 @@ require_once ROOT.CONTROLLERS.'/manage-user.php';
 * host          -> Takes in the carpoolID and returns the details of a carpool ride for the host pov.
 *               -> Output Keys [carpoolID, name, picture, hostID, time, start, destination, seat, 
 *                  carColour, carPlate, carModel, note, requester]
-*               -> Note that requester is a list in the format [[userID, name], [userID, name]]
+*               -> Note that requester is a list in the format [[requestID, name], [requestID, name]]
 * 
 * getActive     -> Takes in userID and turns the status of the user and carpool ID.
 *               -> Output Keys [host, requester, carpoolID]
@@ -146,11 +146,11 @@ class CarpoolController {
         return $result;
     }
 
-    public function host($carpoolID) {
+    public function host($userID) {
         global $connect;
         $result = [];
 
-        $sql = "SELECT * FROM carpool WHERE carpool_id = $carpoolID;";
+        $sql = "SELECT * FROM carpool WHERE user_id = $userID AND status != 'Completed';";
         $statement = mysqli_query($connect, $sql);
         $carpool = mysqli_fetch_array($statement);
         if ($carpool) {
@@ -162,6 +162,7 @@ class CarpoolController {
             } elseif ($user["role"] === "Lecturer") {
                 $hostID = $user["lecturerID"];
             }
+            $carpoolID = $carpool["carpool_id"];
             $sqlCapacity = "SELECT COUNT(carpool_id) AS capacity FROM carpool_request WHERE carpool_id = $carpoolID AND approval = 'Approved';";
             $statementCapacity = mysqli_query($connect, $sqlCapacity);
             $capacity = mysqli_fetch_array($statementCapacity);
@@ -174,13 +175,14 @@ class CarpoolController {
             $requester = [];
             while ($row = mysqli_fetch_array($statementRequest)) {
                 $requester[] = [
-                    "userID" => $row["user_id"],
+                    "requestID" => $row["request_id"],
                     "name" => $row["name"]
                 ];
             }
 
             $data = [
                 "carpoolID" => $carpool["carpool_id"],
+                "type" => $carpool["type"],
                 "name" => $user["name"],
                 "picture" => $user["picture"],
                 "hostID" => $hostID,
@@ -192,9 +194,10 @@ class CarpoolController {
                 "carPlate" => $carpool["car_plate"],
                 "carModel" => $carpool["car_model"],
                 "note" => $carpool["note"],
-                "requester" => $requester
+                "requester" => $requester,
+                "status" => $carpool["status"]
             ];
-            $result[] = $data;
+            $result = $data;
         };
         return $result;
     }

@@ -49,8 +49,8 @@ if (isset($_SESSION['loginError'])) {
     <button type="submit" class="login-button">Log In</button>
 </form>
 
-<script src="<?php echo FEATURES?>/password-toggle.js"></script>
-<script src="<?php echo FEATURES?>/loading-overlay.js"></script>
+<script src="<?php echo APP ?>/password-toggle.js"></script>
+<script src="<?php echo APP ?>/loading-overlay.js"></script>
 
 <?php
 createFooter(false);

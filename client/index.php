@@ -1,5 +1,4 @@
 <?php 
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 // Include the header
@@ -18,7 +17,7 @@ createHead('Orbit', $cssFiles)
             Your personal campus navigator and transport manager
         </p>
         <div class="login-button">
-            <a href="<?php echo SHARED; ?>/login-page.php">Log In
+            <a href="<?php echo APP; ?>/login-page.php">Log In
                 <div class="icon">
                     <?php include_once ROOT.ASSETS . "/icons/login-square-icon.svg" ?>
                 </div>

@@ -6,20 +6,23 @@ $data = $_POST;
 $result = login($data);
 if ($result["error"]) {
     $_SESSION['loginError'] = $result["message"]; // Displays message to login page
-    header("Location: " . SHARED . "/login-page.php");
+    header("Location: " . APP . "/login-page.php");
 } else {
     switch ($_SESSION['role']) {
         case 'User Admin':
-            header("Location: " . APP . "/user-admin-dashboard.php");
+            header("Location: " . PAGES . "/user-admin-dashboard.php");
             break;
         case 'Course Admin':
-            header("Location: " . APP . "/course-admin-dashboard.php");
+            header("Location: " . PAGES . "/course-admin-dashboard.php");
             break;
         case 'Schedule Admin':
-            header("Location: " . APP . "/schedule-admin-dashboard.php");
+            header("Location: " . PAGES . "/schedule-admin-dashboard.php");
+            break;
+        case 'Student':
+            header("Location: " . FEATURES . "/transport/transport.php");
             break;
         default:
-            header("Location: " . APP . "/home.php");
+            header("Location: " . PAGES . "/home.php");
     }
     /**
      * $_SESSION['userID'] already set.

@@ -21,9 +21,9 @@ function requester($carpoolID) {
     return $data;
 }
 
-function host($carpoolID) {
+function host($userID) {
     global $carpoolController;
-    $data = $carpoolController->host($carpoolID);
+    $data = $carpoolController->host($userID);
     return $data;
 }
 
@@ -72,8 +72,8 @@ function approveRequest($data):string {
 function newRequest($data):string {
     global $carpoolController;
     $input = [
-        "userID" = $_SESSION["userID"],
-        "carpoolID" = $data["carpoolID"]
+        "userID" => $_SESSION["userID"],
+        "carpoolID" => $data["carpoolID"]
     ];
     $error = $carpoolController->newRequest($input);
     return $error;

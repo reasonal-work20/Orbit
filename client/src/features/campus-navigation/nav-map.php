@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+require_once ROOT . COMPONENTS . "/header.php";
+require_once ROOT . COMPONENTS . "/footer.php";
+require_once ROOT . COMPONENTS . "/nav-bar.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Campus Directory </title>
-    <link rel="stylesheet" href="../styles/nav-map.css">
-    <link rel="stylesheet" href="../styles/nav-bar.css">
-    <link rel="stylesheet" href="../styles/location-overlay.css">
-</head>
+$_SESSION['currentPage'] = 'directory';
+$cssFiles = ['nav-map.css', 'location-overlay.css', 'global.css', 'nav-bar.css'];
+createHead('Campus Directory', $cssFiles);
+renderNavBar();
+?>
+
 
 <body>
-    <?php include 'nav-bar.php'; ?>
-
     <div class="AppWrapper">
         <main class="MainLayout">
             <div class="ContentCard">
@@ -22,7 +21,7 @@
                         <div class="SearchBar">
                             <div class="SearchIconWrapper">
                                 <div class="SearchIconBox">
-                                    <img src="../assets/icons/search-icon.svg" alt="Search Icon" class="SvgIcon">
+                                    <img src="<?php echo ICONS; ?>/search-icon.svg" alt="Search Icon" class="SvgIcon">
                                 </div>
                             </div>
                         <input type="text" class="SearchInput" placeholder="Search by landmark or location">
@@ -33,7 +32,7 @@
                         <div class="BtnLevel" style="position: relative; cursor: pointer;" onclick="document.getElementById('LevelMenu').style.display = document.getElementById('LevelMenu').style.display === 'none' ? 'flex' : 'none';">
                             <div class="BtnText" id="SelectedLevel">Level 3</div>
                             <div class="BtnIconWrapper">
-                                <img src="../assets/icons/drop-down-arrow.svg" alt="Dropdown Arrow" class="SvgIcon">
+                                <img src="<?php echo ICONS; ?>/drop-down-arrow.svg" alt="Dropdown Arrow" class="SvgIcon">
                             </div>
                             
                             <div id="LevelMenu" class="LevelDropdown" style="display: none; top: 100%; margin-top: 5px;">
@@ -52,7 +51,7 @@
                         <div style="position: relative;">
                             <div class="BtnFilter" style="cursor: pointer;" onclick="toggleFilterMenu()">
                                 <div class="BtnIconBox">
-                                    <img src="../assets/icons/filter-icon.svg" alt="Search Icon" class="SvgIcon">
+                                    <img src="<?php echo ICONS; ?>/filter-icon.svg" alt="Search Icon" class="SvgIcon">
                                 </div>
                                 <div class="BtnText">Filter</div>
                             </div>

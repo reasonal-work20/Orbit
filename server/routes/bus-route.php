@@ -4,13 +4,17 @@ require_once ROOT . MODELS . '/bus.php';
 
 $bus = new Bus();
 
-function getAll($data) {
-    $result = $bus->getAll($data);
-    return $result;
+if (isset($_GET['fewSelectedRoute'])) {
+    $result = $bus->getFew($_GET['fewSelectedRoute'], 9);
+    echo json_encode([
+        'start' => $result[0][0],
+        'destination' => $result[0][1],
+        'time' => $result[0][2]
+    ]);
 }
 
-function getFew($data) {
-    $result = $bus->getFew($data["busRoute"], $data["number"]);
-    return $result;
+if (isset($_GET['all'])) {
+    $result = $bus->getAll("All");
+    echo json_encode(["schedule" => $result]);
 }
 ?>

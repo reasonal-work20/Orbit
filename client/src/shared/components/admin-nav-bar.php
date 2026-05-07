@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 function renderNavItem($name, $iconFilename, $link, $pageId)

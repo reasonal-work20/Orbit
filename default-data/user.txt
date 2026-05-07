@@ -8,7 +8,7 @@ require_once ROOT . CONTROLLERS . '/manage-user.php';
 
 $test = new ManageUser();
 $test->create([
-    "name" => "Wendy Tan",
+    "name" => "John Smith",
     "password" => "w3ndyT@N",
     "email" => "TP000001@mail.apu.edu.my",
     "phone" => "+60123456789",
@@ -107,15 +107,3 @@ $test->create([
 ]);
 
 ?>
-
-<html>
-<head>
-    <title>Campus Navigation Test</title>
-</head>
-
-<body>
-    <h1>Tests</h1>
-    <?php
-    ?>
-</body>
-</html>

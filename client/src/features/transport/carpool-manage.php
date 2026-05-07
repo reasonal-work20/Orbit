@@ -1,3 +1,11 @@
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+require_once ROOT . COMPONENTS . '/nav-bar.php';
+
+$_SESSION['currentPage'] = 'transport';
+renderNavBar();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbit - Carpool Management</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="transportglobal.css">
+    <link rel="stylesheet" href="<?php echo STYLES; ?>/transport-global.css">
+    <link rel="stylesheet" href="<?php echo STYLES; ?>/nav-bar.css">
     <style>
         .filter-tabs { background: #e9ecef; border-radius: 12px; display: flex; padding: 5px; margin-bottom: 30px; }
         .tab-item { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 15px; cursor: pointer; color: #495057; font-weight: 700; font-size: 0.8rem; border-radius: 10px; }
@@ -45,21 +54,22 @@
 </head>
 <body>
 
-<header class="navigation-bar">
-    <a href="#" class="logo">ORBIT</a>
-    <nav class="nav-links">
-        <a href="#" class="nav-item"><i class='bx bx-home-alt'></i><span>Home</span></a>
-        <!-- FIXED REDIRECT -->
-        <a href="transportDesktop.php" class="nav-item active"><i class='bx bx-bus'></i><span>Transport</span></a>
-        <a href="#" class="nav-item"><i class='bx bx-map-alt'></i><span>Directory</span></a>
-        <a href="#" class="nav-item"><i class='bx bx-calendar'></i><span>Timetable</span></a>
-        <a href="#" class="nav-item"><i class='bx bx-dots-vertical-rounded'></i><span>More</span></a>
-    </nav>
-</header>
+<script>
+    async function checkActive() {
+        let response = await fetch ('/Orbit/client/src/services/carpool-service.php?isActive=true');
+        let data = await response.json();
+        if (data.host) {
+            window.location.href="<?php echo FEATURES; ?>/transport/view-ride.php?carpool=" + data.carpoolID;
+        } else if (data.requester) {
+            window.location.href="<?php echo FEATURES; ?>/transport/view-ride-passenger.php?carpool=" + data.carpoolID;
+        }
+    }
+    checkActive();
+</script>
 
 <div class="container">
     <!-- FIXED BACK BUTTON -->
-    <button class="back-btn" style="background: white; border: none; width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; margin-bottom: 25px;" onclick="location.href='transportDesktop.php'">
+    <button class="back-btn" style="background: white; border: none; width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); cursor: pointer; margin-bottom: 25px;" onclick="location.href='<?php echo FEATURES; ?>/transport/transport.php'">
         <i class='bx bx-chevron-left'></i>
     </button>
 
@@ -77,8 +87,7 @@
             <input type="text" id="searchInput" placeholder="Search by landmark or location" onkeyup="filterRides()">
         </div>
         <div class="btn-group">
-            <button class="btn-my-rides">My Rides</button>
-            <a href="createRide.php" class="btn-post">+ Post Ride</a>
+            <a href="<?php echo FEATURES; ?>/transport/create-ride.php" class="btn-post">+ Post Ride</a>
         </div>
     </div>
 
@@ -95,31 +104,10 @@
         filterRides();
     }
 
-    // UPDATED: Finds the correct index in the MASTER list
-    function openRideDetails(rideID) {
-        const rides = JSON.parse(localStorage.getItem('orbit_rides') || '[]');
-        const globalIndex = rides.findIndex(r => r.id === rideID);
-        
-        if (globalIndex !== -1) {
-            localStorage.setItem('selected_ride_index', globalIndex);
-            location.href = 'viewRide.php';
-        }
-    }
-
     function filterRides() {
         const query = document.getElementById('searchInput').value.toLowerCase();
         const rides = JSON.parse(localStorage.getItem('orbit_rides') || '[]');
         const list = document.getElementById('carpool-list');
-
-        const filtered = rides.filter(ride => {
-            // Using || for flexible data names
-            const fromLoc = (ride.from || ride.origin || "").toLowerCase();
-            const toLoc = (ride.to || ride.destination || "").toLowerCase();
-            
-            const matchesSearch = fromLoc.includes(query) || toLoc.includes(query);
-            const matchesFilter = activeFilter === 'ALL' || ride.type === activeFilter;
-            return matchesSearch && matchesFilter;
-        });
 
         if(filtered.length === 0) {
             list.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:#b2bec3; padding:50px;">No rides found.</p>`;
@@ -154,8 +142,6 @@
             </div>
         `).join('');
     }
-
-    window.onload = filterRides;
 </script>
 </body>
 </html>
