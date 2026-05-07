@@ -8,6 +8,7 @@ FSec,Forensics and Cybersecurity Research Centre,5,Other Facilities
 APCA,Asia Pacific Center for Analytics,5,Other Facilities
 Cisco,Cisco Networking Academy,5,Other Facilities
 SOC,Security Operations Center,5,Other Facilities
+CR,Cyber Range,5,Other Facilities
 A0501,A-05-01,5,Classroom
 A0502,A-05-02,5,Classroom
 A0503,A-05-03,5,Classroom
