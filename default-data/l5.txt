@@ -15,7 +15,7 @@ A0503,A-05-03,5,Classroom
 A0504,A-05-04,5,Classroom
 A0505,A-05-05,5,Classroom
 Exam,Exam Hall,5,Other Facilities
-TL501,Tech Lab 5-01 Financial Trading Center,Labs / Workshops / Studios / Suites
+TL501,Tech Lab 5-01 Financial Trading Center,5,Labs / Workshops / Studios / Suites
 B0501,B-05-01,5,Classroom
 B0502,B-05-02,5,Classroom
 B0503,B-05-03,5,Classroom
@@ -29,6 +29,7 @@ B0510,B-05-10,5,Classroom
 S0501,S-05-01,5,Classroom
 S0502,S-05-02,5,Classroom
 SCOA,School of Architecture,5,Other Facilities
+ARST,Architecture Studio,5,Other Facilities
 VGM,Video Game Mini Museum,5,Other Facilities
 GLS,Game Lab and Studio,5,Other Facilities
 ST51,First Staircase L5,5,Connector

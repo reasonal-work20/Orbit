@@ -99,11 +99,6 @@ renderNavBar();
                                         <div class="FilterLabel">Elevator Only</div>
                                         <div class="RadioUnchecked"></div>
                                     </div>
-                                    
-                                    <div class="FilterOption Padded" onclick="selectRadio(this)">
-                                        <div class="FilterLabel">Emergency Exits</div>
-                                        <div class="RadioUnchecked"></div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . CONFIG;
 
-$file = fopen(ROOT . '/Orbit/default-data/l4.txt', 'r');
+$file = fopen(ROOT . '/Orbit/default-data/l9.txt', 'r');
 if ($file) {
     while (($line = fgets($file)) !== false) {
         $cleanLine = str_replace(array("\r", "\n"), '', $line);
