@@ -13,10 +13,10 @@
 Orbit
 ├── client/                 # Frontend
 |   ├── src/
-|   |   ├── app/            # Global setup
+|   |   ├── app/            # Global setup. Starting point for features (entry point)
 |   |   ├── assets/         # Static assets (images, icons, fonts)
-|   |   ├── features/       # Organized by features in the system
-|   |   ├── pages/          # Route level pages - login, dashboard
+|   |   ├── features/       # Organized by features and contains the components specialized for the feature.
+|   |   ├── pages/          # Assembly of the full UI page
 |   |   ├── shared/         # Shared components
 |   |   ├── styles/         # CSS
 |   |   ├── services/       # Sends data to the backend and redirects to the correct pages. 
