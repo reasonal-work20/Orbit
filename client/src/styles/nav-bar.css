@@ -1,0 +1,200 @@
+.nav-bar {
+  width: 100%;
+  background: #fff;
+  box-shadow:
+    0 1px 0 0 rgba(0, 0, 0, 0.03),
+    0 2px 2px 0 rgba(0, 0, 0, 0.03),
+    0 5px 5px 0 rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+  display: flex;
+  height: 64px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 96px;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+}
+
+.logo {
+  width: 68px;
+  height: 32px;
+  aspect-ratio: 17/8;
+}
+
+.nav-button-container {
+  align-self: stretch;
+  padding: 0 10px;
+}
+
+.nav-list {
+  display: flex;
+  width: 500px;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.nav-item {
+  display: flex;
+  flex: 1;
+  cursor: pointer;
+}
+
+.nav-item a:hover {
+  background: #ebedf0;
+}
+
+.nav-item a:active {
+  background: #e6f2ff;
+}
+
+.nav-item.active a {
+  background-color: #e6f2ff;
+  color: #007aff;
+}
+
+.nav-item.active svg path {
+  stroke: #007aff;
+}
+
+.nav-item a {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  padding: 2px 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 1;
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard syntax */
+
+  text-decoration: none;
+  color: var(--Foundation-Neutral-N600, #354764);
+
+  /* Small/Medium */
+  font-family: Inter;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px; /* 150% */
+}
+
+#login a {
+  display: flex;
+  flex-direction: row;
+  padding: 8px 16px;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: #007aff; /* Primary Blue */
+  color: #ffffff; /* White text */
+  font-size: 1rem;
+  font-weight: 700; /* Make it a bit bolder than links */
+  border-radius: 8px; /* Matches your login form style */
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+/* Hover state: Slightly darker blue */
+#login a:hover {
+  background-color: #006ce0;
+  color: #ffffff;
+}
+
+/* Active state: Subtle scale down and even darker blue */
+#login a:active {
+  background-color: #005bbd;
+  transform: scale(0.98);
+}
+
+/* Fix the SVG icon color inside the blue button if there is one */
+#login a svg path {
+  stroke: #ffffff;
+}
+
+.ripple {
+  position: absolute;
+  background: rgba(0, 122, 255, 0.2);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  animation: ripple-animation 0.6s linear;
+}
+
+@keyframes ripple-animation {
+  from {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  to {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+.nav-item-icon {
+  width: 24px;
+  height: auto;
+}
+
+.nav-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0px 24px;
+  }
+
+  .nav-list {
+    justify-content: space-around;
+    padding: 10px 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    border-radius: var(--Screen-content-padding, 20px)
+      var(--Screen-content-padding, 20px) 0 0;
+    background: var(--Background-primary, #fff);
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-item {
+    flex: 1;
+    padding: 4px 0px;
+  }
+
+  .nav-item a {
+    width: 100%;
+  }
+}

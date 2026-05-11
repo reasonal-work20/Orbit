@@ -77,6 +77,19 @@ class ManageUser {
         }
         $statement = mysqli_query($connect, $sql);
         while ($user = mysqli_fetch_array($statement)) {
+            switch ($user["role"]) {
+                case "Student":
+                    $individual = $this->studentEditor->getStudent($user["user_id"]);
+                    $error = $individual["error"];
+                    break;
+                case "Lecturer":
+                    $individual = $this->lecturerEditor->getLecturer($user["user_id"]);
+                    $error = $individual["error"];
+                    break;
+            }
+            if ($error) {
+                return [];
+            }
             $data = [
                 "userID" => $user["user_id"],
                 "name" => $user["name"],
@@ -84,7 +97,8 @@ class ManageUser {
                 "email" => $user["email"],
                 "phone" => $user["phone"],
                 "picture" => $user["picture"],
-                "role" => $user["role"]
+                "role" => $user["role"],
+                "status" => $individual["status"]
             ];
             $result[] = $data;
         }

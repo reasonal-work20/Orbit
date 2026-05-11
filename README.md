@@ -20,7 +20,7 @@ Orbit
 |   |   ├── shared/         # Shared components
 |   |   ├── styles/         # CSS
 |   |   ├── services/       # Sends data to the backend and redirects to the correct pages. 
-|   |   ├── upload/         # Folder storing all the user profile picture.
+|   |   ├── uploads/         # Folder storing all the user profile picture.
 |   ├── index.php
 |
 ├── server/                 # Backend

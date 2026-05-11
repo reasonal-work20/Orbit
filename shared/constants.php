@@ -12,12 +12,14 @@ define('STYLES', '/Orbit/client/src/styles');
 define('SHARED', '/Orbit/client/src/shared');
 define('ASSETS', '/Orbit/client/src/assets');
 define('ICONS', '/Orbit/client/src/assets/icons');
-define('IMAGES', '/Orbit/client/src/assets/images');
-define('APP', '/Orbit/client/src/app');
+define('APP', '/Orbit/client/src/app/redirect.php?page=');
 define('COMPONENTS', '/Orbit/client/src/shared/components');
 define('FEATURES', '/Orbit/client/src/features');
 define('SERVICES', '/Orbit/client/src/services');
 define('UPLOADS', '/Orbit/client/src/uploads');
+define('PAGES', '/Orbit/client/src/pages');
+define('MODALS', '/Orbit/client/src/shared/modals');
+define('NAVIGATION', '/Orbit/client/src/shared/navigation-bar');
 
 /** Constants used in the backend (server side). */
 define('CONFIG', '/Orbit/server/config/config.php');
