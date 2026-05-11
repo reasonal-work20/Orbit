@@ -19,39 +19,41 @@ require_once ROOT . CONTROLLERS . '/navigate-controller.php';
 $mapController = new MapController();
 $navigateController = new NavigateController();
 
-function getLocation($data):array {
+if (isset($_GET["getLocation"])) {
     global $mapController;
-    $mode["mode"] = $data["mode"];
+    $mode["mode"] = $_GET["mode"];
     switch ($mode) {
         case "floor":
-            $mode["floor"] = $data["floor"];
+            $mode["floor"] = $_GET["floor"];
             break;
         case "search":
-            $mode["search"] = $data["search"];
+            $mode["search"] = $_GET["search"];
             break;
     }
-    return $mapController->getNodeList($mode);
+    $result = $mapController->getNodeList($mode);
+    header('Content-Type: application/json');
+    echo json_encode($result);
 }
 
-function getMap($condition):array {
+if (isset($_GET["getMap"])) {
     global $mapController, $navigateController;
-    $mode = ["mode" => $condition["mode"]];
+    $mode = ["mode" => $_GET["mode"]];
     $mapSvg = ["svg" => ""];
 
     switch ($mode["mode"]) {
         case "point":
-            $floor = $condition["floor"];
-            $mode["id"] = [$condition["point"]];
+            $floor = $_GET["floor"];
+            $mode["id"] = [$_GET["point"]];
             $svg = $mapController->getMap($floor, $mode);
             $mapSvg["svg"] = $svg;
             break;
         
         case "route":
-            $startData = $mapController->getNode($condition["start"]);
-            $endData = $mapController->getNode($condition["end"]);
-            $start = ["point" => $condition["start"], "floor" => $startData["floor"]];
-            $end = ["point" => $condition["end"], "floor" => $endData["floor"]];
-            $type = $condition["type"];
+            $startData = $mapController->getNode($_GET["start"]);
+            $endData = $mapController->getNode($_GET["end"]);
+            $start = ["point" => $_GET["start"], "floor" => $startData["floor"]];
+            $end = ["point" => $_GET["end"], "floor" => $endData["floor"]];
+            $type = $_GET["type"];
 
             $navigateResult = $navigateController->navigate($start, $end, $type);
             $path = $navigateResult["path"];
@@ -83,11 +85,12 @@ function getMap($condition):array {
             break;
         
         default:
-            $floor = $condition["floor"];
+            $floor = $_GET["floor"];
             $svg = $mapController->getMap($floor, $mode);
             $mapSvg["svg"] = $svg;
             break;
-    }    
-    return $mapSvg;
+    } 
+    header('Content-Type: application/json');
+    echo json_encode($mapSvg);
 }
 ?>

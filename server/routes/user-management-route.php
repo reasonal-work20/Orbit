@@ -17,6 +17,7 @@ function getAllUser($search) {
 }
 
 function getUser($id) {
+    global $manageUser;
     $data = $manageUser->get($id);
     return $data;
 }
