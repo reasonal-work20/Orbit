@@ -6,7 +6,7 @@
   --text-muted: #64748b;
 }
 
-.create-user-form {
+.create-form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -198,7 +198,7 @@
 }
 
 @media (max-width: 640px) {
-  .create-user-form {
+  .create-form {
     width: 100%;
     max-width: none;
     border-radius: 0;

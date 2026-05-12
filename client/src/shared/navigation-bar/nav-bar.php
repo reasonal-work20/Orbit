@@ -36,7 +36,7 @@ function renderNavBar()
 
     renderNavItem('Home', 'home-icon.svg', '#', 'home');
     renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
-    renderNavItem('Directory', 'map-icon.svg', '#', 'directory');
+    renderNavItem('Directory', 'map-icon.svg', APP . "directory", 'directory');
     renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
     renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
 

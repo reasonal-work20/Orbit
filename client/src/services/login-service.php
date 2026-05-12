@@ -19,7 +19,7 @@ if ($result["error"]) {
             $path = APP . "scheduleAdmin";
             break;
         case 'Student':
-            $path = APP . "student";
+            $path = APP . "directory";
             break;
         default:
             $path = INDEX;

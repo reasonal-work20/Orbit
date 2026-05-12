@@ -43,9 +43,9 @@ TL608,Tech Lab 6-08,6,Labs / Workshops / Studios / Suites
 TL609,Tech Lab 6-09,6,Labs / Workshops / Studios / Suites
 TL610,Tech Lab 6-10,6,Labs / Workshops / Studios / Suites
 TL611,Tech Lab 6-11,6,Labs / Workshops / Studios / Suites
-TL612,Tech Lab 6-06,6,Labs / Workshops / Studios / Suites
+TL612,Tech Lab 6-12,6,Labs / Workshops / Studios / Suites
 TL613,Tech Lab 6-13,6,Labs / Workshops / Studios / Suites
-TL614,Tech Lab 6-06,7,Labs / Workshops / Studios / Suites
+TL614,Tech Lab 6-14,6,Labs / Workshops / Studios / Suites
 D0602,D-06-02,6,Classroom 
 D0604,D-06-04,6,Classroom
 D0605,D-06-05,6,Classroom

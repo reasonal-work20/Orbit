@@ -8,7 +8,7 @@ require_once ROOT . LOGIC . '/highlight-svg.php';
 *
 * Functions in the class
 * getNodeList   -> Takes in an associated array used as filter and returns a list of nodes.
-*               -> input array [mode, floor, search, type]
+*               -> input array [floor, type]
 *               -> modes [default, floor, search, type]
 *
 * getNode       -> Takes in the id of a location and returns the data of selected location. 
@@ -19,28 +19,24 @@ require_once ROOT . LOGIC . '/highlight-svg.php';
 */
 
 class MapController {
-    public function getNodeList($mode):array {
+    public function getNodeList($search):array {
         global $connect;
         $result = [];
 
-        switch ($mode["mode"]) {
-            case "floor":
-                $level = $mode["floor"];
-                $sql = "SELECT * FROM location WHERE floor = '$level';";
-                break;
-            case "search":
-                $search = $mode["search"];
-                $sql = "SELECT * FROM location WHERE name LIKE '%$search%';";
-                break;
-            case "type":
-                $type = $mode["type"];
-                $sql = "SELECT * FROM location WHERE type = '$type';";
-                break;
-            default:
-                $sql = "SELECT * FROM location;";
-                break;
+        if ($search["floor"] && $search["type"]) {
+            $floor = $search["floor"];
+            $type = $search["type"];
+            $sql = "SELECT * FROM location WHERE floor = '$floor' AND type = '$type';";
+        } elseif ($search["floor"]) {
+            $floor = $search["floor"];
+            $sql = "SELECT * FROM location WHERE floor = '$floor';";
+        } elseif ($search["type"]) {
+            $type = $search["type"];
+            $sql = "SELECT * FROM location WHERE type = '$type';";
+        } else {
+            $sql = "SELECT * FROM location;";
         }
- 
+
         $statement = mysqli_query($connect, $sql);
         while ($location = mysqli_fetch_array($statement)) {
             $data = [

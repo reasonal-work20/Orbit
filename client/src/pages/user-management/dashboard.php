@@ -28,7 +28,6 @@ renderNavBar();
 renderContentTopBar($name, $role);
 ?>
 
-<script src="<?php echo FEATURES . '/modal-script.js'; ?>"></script>
 <?php
 createFooter(false);
 ?>

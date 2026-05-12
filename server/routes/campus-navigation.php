@@ -21,18 +21,11 @@ $navigateController = new NavigateController();
 
 if (isset($_GET["getLocation"])) {
     global $mapController;
-    $mode["mode"] = $_GET["mode"];
-    switch ($mode) {
-        case "floor":
-            $mode["floor"] = $_GET["floor"];
-            break;
-        case "search":
-            $mode["search"] = $_GET["search"];
-            break;
-    }
-    $result = $mapController->getNodeList($mode);
+    $search["floor"] = $_GET["floor"];
+    $search["type"] = $_GET["type"];
+    $result = $mapController->getNodeList($search);
     header('Content-Type: application/json');
-    echo json_encode($result);
+    echo json_encode(["result" => $result]);
 }
 
 if (isset($_GET["getMap"])) {
@@ -53,7 +46,7 @@ if (isset($_GET["getMap"])) {
             $endData = $mapController->getNode($_GET["end"]);
             $start = ["point" => $_GET["start"], "floor" => $startData["floor"]];
             $end = ["point" => $_GET["end"], "floor" => $endData["floor"]];
-            $type = $_GET["type"];
+            $type = $_GET["route"];
 
             $navigateResult = $navigateController->navigate($start, $end, $type);
             $path = $navigateResult["path"];
@@ -90,7 +83,10 @@ if (isset($_GET["getMap"])) {
             $mapSvg["svg"] = $svg;
             break;
     } 
-    header('Content-Type: application/json');
-    echo json_encode($mapSvg);
+    // header('Content-Type: application/json');
+    // echo json_encode($mapSvg);
+    $_SESSION['map'] = $mapSvg;
+    $path = PAGES . '/campus-navigation/dashboard.php';
+    echo "<script>window.location.href='$path';</script>";
 }
 ?>

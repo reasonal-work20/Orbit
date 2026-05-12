@@ -1,7 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . SHARED . '/form/form-component.php';
-require_once ROOT . MODALS . '/modal.php';
 require_once ROOT . SERVICES . '/manage-user-service.php';
 
 $path = MODALS . '/modal-script.js';
@@ -86,7 +85,7 @@ function getCreateFormContent($modalName, $userID = false) {
         $mode = "editUser";
     }
 ?>
-    <form class="create-user-form" id="user-form" method="post" action="<?php echo SERVICES ?>/manage-user-service.php" enctype="multipart/form-data">
+    <form class="create-form" id="user-form" method="post" action="<?php echo SERVICES ?>/manage-user-service.php" enctype="multipart/form-data">
         <div class="form-body">
             <?php
             renderFormInput("name", "Name", "text", "text-input", "Enter full name", true, $user['name']);
