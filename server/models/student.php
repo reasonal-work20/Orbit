@@ -39,12 +39,13 @@ class Student {
     public function getStudent($id):array {
         $result = [
             "error" => True,
-            "studentID" => "",
-            "userID" => 0,
-            "status" => ""
         ];
 
-        $sql = "SELECT * FROM student WHERE student_id = '$id' OR user_id = $id;";
+        $sql = "SELECT u.student_id AS student_id, u.user_id AS user_id, u.status AS status, i.intake_id AS intake_id, i.name AS name 
+                FROM student u
+                LEFT JOIN student_intake s ON s.student_id = u.student_id
+                LEFT JOIN intake i ON i.intake_id = s.intake_id
+                WHERE u.student_id = '$id' OR u.user_id = $id;";
         $statement = mysqli_query($this->connection, $sql);
         $student = mysqli_fetch_array($statement);
         if ($student) {
@@ -52,6 +53,8 @@ class Student {
             $result["studentID"] = $student["student_id"];
             $result["userID"] = $student["user_id"];
             $result["status"] = $student["status"];
+            $result["intakeID"] = $student["intake_id"];
+            $result["programme"] = $student["name"];
         }
 
         return $result;

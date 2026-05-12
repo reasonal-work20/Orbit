@@ -10,6 +10,11 @@ $email = htmlspecialchars($user['email']);
 $picture = $user['picture'] ?? UPLOADS . '/default-profile.png';
 $contact = $user['phone'] ?? 'N/A';
 $programme = $user['programme'] ?? 'N/A';
+if ($programme != 'N/A') {
+    $tag = $user['intakeID'] . "|" . $user['programme'];
+} else {
+    $tag = $user['role'];
+}
 
 $profileHtml = "
 <div class='profile-container'>
@@ -19,7 +24,7 @@ $profileHtml = "
         </div>
         <div class='name-section'>
             <span class='profile-name'>{$name}</span>
-            <div class='id-tag'>TP012456 | UCDF2407ICT(SE)</div>
+            <div class='id-tag'>{$tag}</div>
         </div>
     </div>
 

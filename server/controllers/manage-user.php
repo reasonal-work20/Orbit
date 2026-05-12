@@ -109,13 +109,6 @@ class ManageUser {
     public function get($id):array {
         $result = [
             "error" => True,
-            "userID" => 0,
-            "name" => "",
-            "password" => "",
-            "email" => "",
-            "phone" => "",
-            "picture" => "",
-            "role" => ""
         ];
 
         $user = $this->userEditor->getUser($id);
@@ -140,6 +133,8 @@ class ManageUser {
                 if (!$result["error"]) {
                     $result["studentID"] = $student["studentID"];
                     $result["status"] = $student["status"];
+                    $result["intakeID"] = $student["intakeID"];
+                    $result["programme"] = $student["programme"];
                 }
                 break;
             case "Lecturer":
