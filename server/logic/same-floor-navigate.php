@@ -30,6 +30,7 @@ function sameFloorNavigate($start, $end, $type) {
      */
     $graph = graph(["mode" => "checkpoint to checkpoint", "floor" => $start["floor"], "type" => $type]);
     $path = [];
+    $floor = [];
     $distance = 99999;
     foreach ($startCheckpoint[0] as $point1) {
         foreach ($endCheckpoint[0] as $point2) {

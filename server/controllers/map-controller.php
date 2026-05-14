@@ -70,7 +70,7 @@ class MapController {
         $svg->load(ROOT . DATA . "/map-l$level.svg");
 
         if ($mode["mode"] !== "default") {
-            $nodeList = $this->getNodeList(["mode" => "floor", "floor" => $level]);
+            $nodeList = $this->getNodeList(["mode" => "floor", "floor" => $level, "type" => ""]);
             $nodeIdList = [];
             foreach ($nodeList as $row) {
                 $nodeIdList[] = $row["locationID"];

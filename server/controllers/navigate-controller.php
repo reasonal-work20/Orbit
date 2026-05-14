@@ -34,14 +34,13 @@ class NavigateController {
         } else {
             $directFloor = graph(["mode" => "floor to floor", "type" => $type]);
             $connectorList = [[], []];
-            foreach ($directFloor[1] as $probableConnect) {
+            foreach ($directFloor[1] as $rowIndex => $probableConnect) {
                 if (!in_array($start["floor"], $probableConnect) || !in_array($end["floor"], $probableConnect)) {
                     continue;
                 }
                 $startIndex = array_search($start["floor"], $probableConnect);
                 $endIndex = array_search($end["floor"], $probableConnect);
                 if ($startIndex < $endIndex) {
-                    $rowIndex = array_search($probableConnect, $directFloor[1]);
                     $connectorList[0][] = $directFloor[0][$rowIndex][$startIndex];
                     $connectorList[1][] = $directFloor[0][$rowIndex][$endIndex];
                 }

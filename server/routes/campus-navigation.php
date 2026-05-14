@@ -41,9 +41,9 @@ if (isset($_GET["getMap"])) {
 
     switch ($mode["mode"]) {
         case "point":
-            $floor = $_GET["floor"];
+            $node = $mapController->getNode($_GET["point"]);
             $mode["id"] = [$_GET["point"]];
-            $svg = $mapController->getMap($floor, $mode);
+            $svg = $mapController->getMap($node["floor"], $mode);
             $mapSvg["svg"][] = $svg;
             break;
         
@@ -89,10 +89,7 @@ if (isset($_GET["getMap"])) {
             $mapSvg["svg"][] = $svg;
             break;
     } 
-    // header('Content-Type: application/json');
-    // echo json_encode($mapSvg);
-    $_SESSION['map'] = $mapSvg;
-    $path = PAGES . '/campus-navigation/dashboard.php';
-    echo "<script>window.location.href='$path';</script>";
+    header('Content-Type: application/json');
+    echo json_encode($mapSvg);
 }
 ?>

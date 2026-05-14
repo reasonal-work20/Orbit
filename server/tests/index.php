@@ -3,109 +3,11 @@
  * Entry point for testing.
 */
 require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT . CONTROLLERS . '/manage-module.php';
-require_once ROOT . CONTROLLERS . '/manage-user.php';
+require_once ROOT . CONTROLLERS . '/map-controller.php';
+require_once ROOT . CONTROLLERS . '/navigate-controller.php';
 
-$test = new ManageUser();
-$test->create([
-    "name" => "Wendy Tan",
-    "password" => "w3ndyT@N",
-    "email" => "TP000001@mail.apu.edu.my",
-    "phone" => "+60123456789",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Alice Wong",
-    "password" => "Al!ce123",
-    "email" => "TP000002@mail.apu.edu.my",
-    "phone" => "+60123456780",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Brian Lee",
-    "password" => "Br!an456",
-    "email" => "TP000003@mail.apu.edu.my",
-    "phone" => "+60123456781",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Cheryl Tan",
-    "password" => "Ch3ryl789",
-    "email" => "TP000004@mail.apu.edu.my",
-    "phone" => "+60123456782",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Daniel Lim",
-    "password" => "D@niel321",
-    "email" => "TP000005@mail.apu.edu.my",
-    "phone" => "+60123456783",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Emily Ng",
-    "password" => "Em!ly654",
-    "email" => "TP000006@mail.apu.edu.my",
-    "phone" => "+60123456784",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Farid Hassan",
-    "password" => "F@rid987",
-    "email" => "TP000007@mail.apu.edu.my",
-    "phone" => "+60123456785",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Grace Lau",
-    "password" => "Gr@ce111",
-    "email" => "TP000008@mail.apu.edu.my",
-    "phone" => "+60123456786",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Henry Tan",
-    "password" => "HenrY222",
-    "email" => "TP000009@mail.apu.edu.my",
-    "phone" => "+60123456787",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Isabelle Chong",
-    "password" => "Is@belle333",
-    "email" => "TP000010@mail.apu.edu.my",
-    "phone" => "+60123456788",
-    "picture" => "",
-    "role" => "Student"
-]);
-
-$test->create([
-    "name" => "Jason Teoh",
-    "password" => "J@son444",
-    "email" => "TP000011@mail.apu.edu.my",
-    "phone" => "+60123456789",
-    "picture" => "",
-    "role" => "Student"
-]);
-
+$mapController = new MapController();
+$navigateController = new NavigateController();
 ?>
 
 <html>
@@ -116,6 +18,45 @@ $test->create([
 <body>
     <h1>Tests</h1>
     <?php
+    $_GET['start'] = 'ST74';
+    $_GET['end'] = 'ST83';
+    $_GET['route'] = 'stair';
+    $mode["mode"] = 'route';
+
+    $startData = $mapController->getNode($_GET["start"]);
+    $endData = $mapController->getNode($_GET["end"]);
+    $start = ["point" => $_GET["start"], "floor" => $startData["floor"]];
+    $end = ["point" => $_GET["end"], "floor" => $endData["floor"]];
+    $type = $_GET["route"];
+
+    $navigateResult = $navigateController->navigate($start, $end, $type);
+    $path = $navigateResult["path"];
+    $floor = $navigateResult["floor"];
+    
+    $idList = [];
+    $pathName = [];
+    for ($index = 0; $index < count($path); $index++) {
+        if (array_key_exists($floor[$index], $idList)) {
+            $idList[$floor[$index]][] = $path[$index];
+        } else {
+            $idList[$floor[$index]] = [$path[$index]];
+        }
+
+        $node = $mapController->getNode($path[$index]);
+        if ($node["name"] !== "") {
+            $pathName[] = $node["name"];
+        } elseif (end($pathName) !== "Walk") {
+            $pathName[] = "Walk";
+        }
+    }
+    
+    $mapSvg["svg"] = [];
+    foreach ($idList as $floor => $id) {
+        $x = $mapController->getMap($floor, ["mode" => $mode["mode"], "id" => $id]);
+        $mapSvg["svg"][] = $mapController->getMap($floor, ["mode" => $mode["mode"], "id" => $id]);
+    }
+    $mapSvg["path"] = $pathName;
+    echo json_encode($pathName);
     ?>
 </body>
 </html>
