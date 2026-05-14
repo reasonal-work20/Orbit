@@ -42,7 +42,7 @@ function renderUserTable($users)
                         </div>
                     </td>
                     <td>
-                        <form class="actions" method="post" action="<?php echo PAGES ?>/user-management/manage-user-page.php">
+                        <form class="actions" method="post" action="<?php echo PAGES ?>/user-management/dashboard.php">
                             <input type="hidden" name="userID" value="<?php echo $user['userID']; ?>" >
                             <input type="hidden" name="name" value="<?php echo $user['name']; ?>" >
                             <button class="action-btn" id="edit-btn" name="edit" type="submit">

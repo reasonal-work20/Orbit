@@ -9,6 +9,7 @@
 
 .campus-container {
   display: flex;
+  gap: 24px;
   justify-content: space-around;
 }
 
@@ -49,9 +50,8 @@
 }
 
 .map {
-  height: 620px;
+  height: 670px;
   overflow: auto;
-  scrollbar-width: none;
 }
 
 @media (max-width: 640px) {

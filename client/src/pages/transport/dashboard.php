@@ -10,8 +10,8 @@ if (!isset($_SESSION['userID'])) {
 }
 
 // Highlight current page on navigation bar
-$_SESSION['currentPage'] = 'directory';
-$cssFiles = ["nav-bar.css", "nav-map.css", "form.css"];
+$_SESSION['currentPage'] = 'transport';
+$cssFiles = ["nav-bar.css", "form.css"];
 createHead("Orbit | Campus Navigation", $cssFiles, false);
 
 
@@ -20,17 +20,8 @@ renderNavBar();
 ?>
 
 <div class="page-content">
-    <div class="campus-container">
-        <div class="left-side">
-            <?php require_once ROOT . FEATURES . '/campus-navigation/campus-search.php'; ?>
-        </div>
-
-        <div class="map" id="mapFrame">
-            <div id="map"></div>
-        </div>
-    </div>
 </div>
-<script src="<?php echo FEATURES ?>/campus-navigation/search-location.js"></script>
+
 <?php
 createFooter(false);
 ?>

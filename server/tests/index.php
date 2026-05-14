@@ -3,60 +3,51 @@
  * Entry point for testing.
 */
 require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
-require_once ROOT . CONTROLLERS . '/map-controller.php';
-require_once ROOT . CONTROLLERS . '/navigate-controller.php';
-
-$mapController = new MapController();
-$navigateController = new NavigateController();
 ?>
 
 <html>
 <head>
-    <title>Campus Navigation Test</title>
+    <title>Test</title>
 </head>
 
 <body>
     <h1>Tests</h1>
-    <?php
-    $_GET['start'] = 'ST74';
-    $_GET['end'] = 'ST83';
-    $_GET['route'] = 'stair';
-    $mode["mode"] = 'route';
-
-    $startData = $mapController->getNode($_GET["start"]);
-    $endData = $mapController->getNode($_GET["end"]);
-    $start = ["point" => $_GET["start"], "floor" => $startData["floor"]];
-    $end = ["point" => $_GET["end"], "floor" => $endData["floor"]];
-    $type = $_GET["route"];
-
-    $navigateResult = $navigateController->navigate($start, $end, $type);
-    $path = $navigateResult["path"];
-    $floor = $navigateResult["floor"];
-    
-    $idList = [];
-    $pathName = [];
-    for ($index = 0; $index < count($path); $index++) {
-        if (array_key_exists($floor[$index], $idList)) {
-            $idList[$floor[$index]][] = $path[$index];
-        } else {
-            $idList[$floor[$index]] = [$path[$index]];
-        }
-
-        $node = $mapController->getNode($path[$index]);
-        if ($node["name"] !== "") {
-            $pathName[] = $node["name"];
-        } elseif (end($pathName) !== "Walk") {
-            $pathName[] = "Walk";
-        }
-    }
-    
-    $mapSvg["svg"] = [];
-    foreach ($idList as $floor => $id) {
-        $x = $mapController->getMap($floor, ["mode" => $mode["mode"], "id" => $id]);
-        $mapSvg["svg"][] = $mapController->getMap($floor, ["mode" => $mode["mode"], "id" => $id]);
-    }
-    $mapSvg["path"] = $pathName;
-    echo json_encode($pathName);
-    ?>
+    <h3>Location Highlighted:</h3>
+    <p id="count"></p>
+    <button onclick="test()">Next</button>
+    <p id="detail"></p>
+    <div id="map"></div>
 </body>
+
+<script>
+let count = 0;
+let locationList = [];
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function get() {
+  const response = await fetch('/Orbit/client/src/services/campus-navigation-service.php?floor=&type=&getLocation=%23');
+  const result = await response.json();
+  locationList = result.result;
+
+  // start looping automatically
+  while (count < locationList.length) {
+    let row = locationList[count];
+    document.getElementById("detail").innerHTML = row.name;
+
+    const response2 = await fetch(`/Orbit/client/src/services/campus-navigation-service.php?mode=point&point=${row.locationID}&getMap=%23`);
+    const result2 = await response2.json();
+    document.getElementById("map").innerHTML = result2.svg[0];
+
+    count++;
+    document.getElementById("count").innerHTML = count;
+
+    await sleep(500); // wait 0.5 seconds before next
+  }
+}
+
+get();
+</script>
 </html>

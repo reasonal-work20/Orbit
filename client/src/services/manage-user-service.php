@@ -13,7 +13,7 @@ if (isset($_POST["newUser"])) {
     if ($error) {
         $_SESSION["error"] = $error;
     }
-    $path = PAGES . "/user-management/manage-user-page.php";
+    $path = PAGES . "/user-management/dashboard.php";
     header("Location: " . $path);
     /** Return value of error is a string value. "" means no error occurred. */
 }
@@ -23,14 +23,14 @@ if (isset($_POST["editUser"])) {
     if ($error) {
         $_SESSION['error'] = $error;
     }
-    $path = PAGES . "/user-management/manage-user-page.php";
+    $path = PAGES . "/user-management/dashboard.php";
     header("Location: " . $path);
     /** Return value of error is a string value. "" means no error occurred. */
 }
 
 if (isset($_GET["userID"])) {
     $error = deleteUser($_GET);
-    $path = PAGES . "/user-management/manage-user-page.php";
+    $path = PAGES . "/user-management/dashboard.php";
     header("Location: " . $path);
     /** Return value of error is a string value. "" means no error occurred. */
 }

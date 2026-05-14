@@ -35,7 +35,7 @@ function renderNavBar()
     echo '<ul class="nav-list" style="list-style: none;">';
 
     renderNavItem('Home', 'home-icon.svg', '#', 'home');
-    renderNavItem('Transport', 'car-icon.svg', '#', 'transport');
+    renderNavItem('Transport', 'car-icon.svg', APP . 'transport', 'transport');
     renderNavItem('Directory', 'map-icon.svg', APP . "directory", 'directory');
     renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
     renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
