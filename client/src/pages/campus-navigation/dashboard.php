@@ -62,7 +62,7 @@ renderNavBar();
         <div class="map">
             <?php
             if (isset($_SESSION["map"])) {
-                $mapList = $_SESSION["map"];
+                $mapList = $_SESSION["map"]["svg"];
                 foreach ($mapList as $map) {
                     echo $map;
                 }

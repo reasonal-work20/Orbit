@@ -55,8 +55,8 @@ class NavigateController {
                 $connector2 = ["point" => $connectorList[1][$index], "floor" => $end["floor"]];
                 $graph1 = graph(["mode" => "checkpoint to checkpoint", "floor" => $start["floor"], "type" => $type]);
                 $graph2 = graph(["mode" => "checkpoint to checkpoint", "floor" => $end["floor"], "type" => $type]);
-                $part1 = sameFloorNavigate($start, $connector1, "stair");
-                $part2 = sameFloorNavigate($connector2, $end, "stair");
+                $part1 = sameFloorNavigate($start, $connector1, $type);
+                $part2 = sameFloorNavigate($connector2, $end, $type);
                 $total = $part1["distance"] + $part2["distance"];
                 if ($total < $distance) {
                     $path = array_merge($part1["path"], $part2["path"]);

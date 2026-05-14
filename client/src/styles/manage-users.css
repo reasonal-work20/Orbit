@@ -7,6 +7,12 @@
   width: 100%;
 }
 
+.table-container {
+  align-self: stretch;
+  max-height: 70vh;
+  overflow: auto;
+}
+
 .manage-users-container {
   display: flex;
   padding: 20px;

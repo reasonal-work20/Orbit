@@ -28,17 +28,23 @@ if (isset($_GET["getLocation"])) {
     echo json_encode(["result" => $result]);
 }
 
+function getLocation($search) {
+    global $mapController;
+    $result = $mapController->getNodeList($search);
+    return $result;
+}
+
 if (isset($_GET["getMap"])) {
     global $mapController, $navigateController;
     $mode = ["mode" => $_GET["mode"]];
-    $mapSvg = ["svg" => ""];
+    $mapSvg = ["svg" => []];
 
     switch ($mode["mode"]) {
         case "point":
             $floor = $_GET["floor"];
             $mode["id"] = [$_GET["point"]];
             $svg = $mapController->getMap($floor, $mode);
-            $mapSvg["svg"] = $svg;
+            $mapSvg["svg"][] = $svg;
             break;
         
         case "route":
@@ -80,7 +86,7 @@ if (isset($_GET["getMap"])) {
         default:
             $floor = $_GET["floor"];
             $svg = $mapController->getMap($floor, $mode);
-            $mapSvg["svg"] = $svg;
+            $mapSvg["svg"][] = $svg;
             break;
     } 
     // header('Content-Type: application/json');

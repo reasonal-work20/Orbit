@@ -34,6 +34,9 @@ function sameFloorNavigate($start, $end, $type) {
     foreach ($startCheckpoint[0] as $point1) {
         foreach ($endCheckpoint[0] as $point2) {
             $result = dijkstra($point1, $point2, $graph);
+            if (empty($result)) {
+                continue;
+            }
             if ($result["distance"] < $distance) {
                 $path = array_unique(array_merge([$start["point"]], $result["path"], [$end["point"]]));
                 $path = array_values($path);

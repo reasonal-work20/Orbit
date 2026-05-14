@@ -1,6 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . SHARED . '/form/form-component.php';
+require_once ROOT . SERVICES . '/campus-navigation-service.php';
 
 $path = MODALS . '/modal-script.js';
 echo "<script src='$path'></script>";
@@ -40,13 +41,16 @@ function getSearchFormContent($modalName) {
 function getRouteContent($modalName) {
     ob_start();
 ?>
-    <form class="create-form" id="find-form" method="post" action="#" enctype="multipart/form-data">
+    <form class="create-form" id="find-form" method="get" action="<?php echo PAGES . '/campus-navigation/dashboard.php' ?>" enctype="multipart/form-data">
         <div class="form-body">
             <?php
-            renderFormSelect("start", "Starting Location", [
-            ], "select-input");
-            renderFormSelect("destination", "Destination Location", [
-            ], "select-input");
+            $locationList = getLocation(["floor" => "", "type" => ""]);
+            $options = [];
+            foreach ($locationList as $row) {
+                $options[$row['locationID']] = $row['name'];
+            }
+            renderFormSelect("start", "Starting Location", $options, "select-input");
+            renderFormSelect("end", "Destination Location", $options, "select-input");
             renderFormSelect("route", "Route Option", [
                 "stair" => "Staircase / Elevator",
                 "elevator" => "Elevator Only"
@@ -55,7 +59,8 @@ function getRouteContent($modalName) {
         </div>
 
         <div class="form-actions">
-            <button type="submit" name="navigate" class="confirm-btn">Confirm</button>
+            <input type="hidden" name="mode" value="route" />
+            <button type="submit" name="getMap" class="confirm-btn">Confirm</button>
         </div>
     </form>
 <?php

@@ -72,10 +72,16 @@ class User {
     }
 
     public function updateUser($userID, $name, $password, $email, $phone, $picture):array {
-        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "UPDATE user
-                SET name = '$name', password = '$hashPassword', email = '$email', phone = '$phone'
-                WHERE user_id = $userID;";
+        if (trim($password)) {
+            $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "UPDATE user
+                    SET name = '$name', password = '$hashPassword', email = '$email', phone = '$phone'
+                    WHERE user_id = $userID;";
+        } else {
+            $sql = "UPDATE user
+                    SET name = '$name', email = '$email', phone = '$phone'
+                    WHERE user_id = $userID;";
+        }
         try {
             mysqli_query($this->connection, $sql);
             if ($picture) {

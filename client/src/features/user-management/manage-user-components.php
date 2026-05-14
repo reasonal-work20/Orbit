@@ -9,6 +9,7 @@ echo "<script src='$path'></script>";
 function renderUserTable($users)
 {
 ?>
+    <div class="table-container">
     <table class="users-table">
         <thead>
             <tr>
@@ -71,6 +72,7 @@ function renderUserTable($users)
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
 <?php
 }
 
@@ -79,10 +81,12 @@ function getCreateFormContent($modalName, $userID = false) {
     $user = ['name' => '', 'email' => '', 'password' => '', 'phone' => '', 'role' => '', 'qualification' => ''];
     $password = true;
     $mode = "newUser";
+    $pictureId = "pictureNew";
     if ($userID) {
         $user = getUser($userID);
         $password = false;
         $mode = "editUser";
+        $pictureId = "pictureEdit";
     }
 ?>
     <form class="create-form" id="user-form" method="post" action="<?php echo SERVICES ?>/manage-user-service.php" enctype="multipart/form-data">
@@ -98,7 +102,7 @@ function getCreateFormContent($modalName, $userID = false) {
             renderFormInput("qualification", "Qualification", "text", "text-input", "Qualification", false, $user['qualification']);
             echo '</div>';
 
-            renderImageUploadWithPreview("picture", "Choose Image");
+            renderImageUploadWithPreview("$pictureId", "Choose Image");
             if ($userID) {
                 renderSegmentedControl("status", "Status", ['Active', 'Inactive'], true, $user['status']);
             }
@@ -124,7 +128,7 @@ function renderImageUploadWithPreview($id, $title)
             <div id='preview-$id' class='image-preview'>
                 <span>No Image Selected</span>
             </div>
-            <input type='file' id='$id' name='$id' accept='image/*' class='file-input' onchange=\"previewImage(event, 'preview-$id')\">
+            <input type='file' id='$id' name='picture' accept='image/*' class='file-input' onchange=\"previewImage(event, 'preview-$id')\">
         </div>
     </div>
     ";

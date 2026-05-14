@@ -51,6 +51,12 @@ renderContentTopBar($name, $role);
     <div class="manage-users-container">
         <div class="title-btn-wrapper">
             <span class="manage-users-header">Users List</span>
+            <form action="#" method="get" style="display:flex; gap:10px;">
+                <div class='form-input'>
+                    <input type='text' id='search' name="search" class='text-input' placeholder='Search ...'>
+                </div>
+                <button type="submit" class="confirm-btn">Search</button>
+            </form>
             <div class="add-user-btn" onClick="openModal('createUserView')">
                 <span class="btn-text">
                     Add New User
@@ -67,7 +73,11 @@ renderContentTopBar($name, $role);
         <hr class="divider">
 
         <?php
-        $allUsers = getAllUser("");
+        if (isset($_GET["search"])) {
+            $allUsers = getAllUser($_GET["search"]);
+        } else {
+            $allUsers = getAllUser("");
+        }
         if (!empty($allUsers)) {
             renderUserTable($allUsers);
         } else {

@@ -19,10 +19,6 @@ if (isset($_POST["newUser"])) {
 }
 
 if (isset($_POST["editUser"])) {
-    if (!trim($_POST['password'])) {
-        $user = getUser($_POST['userID']);
-        $_POST['password'] = $user['password'];
-    }
     $error = updateUser($_POST, $_FILES);
     if ($error) {
         $_SESSION['error'] = $error;

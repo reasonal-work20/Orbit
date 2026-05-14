@@ -43,3 +43,9 @@
   font-weight: 700;
   line-height: normal;
 }
+
+.map {
+  height: 620px;
+  resize: both;
+  overflow: auto;
+}
