@@ -41,7 +41,7 @@ function createUser($inputData, $inputFile) {
         $file = substr($data["name"], 0, 2) . "-" . time() . "." . $extension;
         $temp = $inputFile["picture"]["tmp_name"];
         $path = ROOT.UPLOADS."/".$file;
-        move_uploaded_file($temp, $path);
+        copy($temp, $path);
         $data["picture"] = $file;
     } else {
         return "Error with the picture uploaded.";

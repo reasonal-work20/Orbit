@@ -33,32 +33,6 @@ renderNavBar();
 
 <div class="page-content">
     <div class="campus-container">
-        <div class="title-btn-wrapper">
-            <span class="campus-header">APU Campus Map</span>
-            <div class="campus-btn" onClick="openModal('searchCampus')">
-                <span class="btn-text">
-                    SEARCH
-                </span>
-                <?php
-                $userPlusIcon = ROOT . ICONS . '/search-icon.svg';
-                if (file_exists($userPlusIcon)) {
-                    include_once $userPlusIcon;;
-                }
-                ?>
-            </div>
-            <div class="campus-btn" onClick="openModal('findRoute')">
-                <span class="btn-text">
-                    FIND ROUTE
-                </span>
-                <?php
-                $userPlusIcon = ROOT . ICONS . '/find-route-icon.svg';
-                if (file_exists($userPlusIcon)) {
-                    include_once $userPlusIcon;;
-                }
-                ?>
-            </div>
-        </div>
-
         <div class="map">
             <?php
             if (isset($_SESSION["map"])) {
