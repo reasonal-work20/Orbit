@@ -3,6 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . LOGIC . '/dijkstra.php';
 require_once ROOT . LOGIC . '/same-floor-navigate.php';
 require_once ROOT . MODELS . '/graph.php';
+require_once ROOT . CONTROLLERS . '/map-controller.php';
 
 /**
 * Note to change the json file.
@@ -66,9 +67,36 @@ class NavigateController {
         }
 
         if (empty($path)) {
+            $startCheckpoint = graph(["mode" => "room to checkpoint", "floor" => $start["floor"], "point" => $start["point"], "type" => $type]);
+            $endCheckpoint = graph(["mode" => "room to checkpoint", "floor" => $end["floor"], "point" => $end["point"], "type" => $type]);
+            if (!$startCheckpoint) {
+                $startCheckpoint = $start['point'];
+                $startDisplay = [];
+            } else {
+                $startCheckpoint = $startCheckpoint[0][0];
+                $startDisplay = [$start['point']];
+            }
+            if (!$endCheckpoint) {
+                $endCheckpoint = $end['point'];
+                $endDisplay = [];
+            } else {
+                $endCheckpoint = $endCheckpoint[0][0];
+                $endDisplay = [$end['point']];
+            }
+
             $graph = graph(["mode" => "all", "type" => $type]);
-            $result = dijkstra($start["point"], $end["point"], $graph);
-            $path = $result["path"];
+            $result = dijkstra($startCheckpoint, $endCheckpoint, $graph);
+            $path = array_merge($startDisplay, $result["path"], $endDisplay);
+            $floor = [];
+            $mapController = new MapController();
+            foreach ($path as $node) {
+                $detail = $mapController->getNode($node);
+                if ($detail["floor"]) {
+                    $floor[] = $detail["floor"];
+                } else {
+                    $floor[] = $floor[count($floor)-1];
+                }
+            }
         }
         return ["path" => $path, "floor" => $floor];
     }

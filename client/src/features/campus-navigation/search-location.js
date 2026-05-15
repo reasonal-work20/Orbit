@@ -72,13 +72,11 @@ async function findRoute() {
     var result = await getMap(parameters);
     var path = result.path;
     var mapList = result.svg;
-
-    var mapIndex = 0;
+    
     var htmlText = "";
     for (var node of path) {
         var currentIndex = path.indexOf(node);
         if (currentIndex + 1 == path.length) {
-            htmlText += mapList[mapIndex];
             break;
         }
         if (node == "Walk") {
@@ -89,10 +87,11 @@ async function findRoute() {
             htmlText += `<h3>Go from ${node} until ${nextNode}</h3>\n`;
         } else {
             nextNode = path[currentIndex + 1];
-            htmlText += mapList[mapIndex];
             htmlText += `<h3>Take the ${route} from ${node} to ${nextNode}</h3>`;
-            mapIndex += 1;
         }
+    }
+    for (var map of mapList) {
+        htmlText += map;
     }
     document.getElementById('map').innerHTML = htmlText;
     loadingOverlay.style.display = 'none';

@@ -50,6 +50,7 @@
 }
 
 .map {
+  width: fit-content;
   height: 670px;
   overflow: auto;
 }

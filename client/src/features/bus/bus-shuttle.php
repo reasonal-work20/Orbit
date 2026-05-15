@@ -1,5 +1,4 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 
 // Initialize variables
@@ -67,3 +66,25 @@ function renderTimeWrapper($timeString)
     </div>
 <?php
 }
+
+function renderCard() 
+{
+?>
+    <div class="bus-shuttle-wrapper" id="lrtToCampus">
+        <div class="title">LRT BUKIT JALIL -> APU CAMPUS</div>
+        <div class="times-container">
+            <?php
+            $campusTimes = getUpcomingShuttleTimes('lrt-to-campus.txt', $currentTime);
+            if (!empty($campusTimes)) {
+                foreach ($campusTimes as $time) {
+                    renderTimeWrapper($time);
+                }
+            } else {
+                echo '<p class="no-shuttle">No more shuttles today</p>';
+            }
+            ?>
+        </div>
+    </div>
+<?php
+}
+?>
