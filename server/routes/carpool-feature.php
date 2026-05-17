@@ -69,6 +69,12 @@ function approveRequest($data):string {
     return $error;
 }
 
+function rejectRequest($requestID):string {
+    global $carpoolController;
+    $error = $carpoolController->rejectRequest($requestID);
+    return $error;
+}
+
 function newRequest($data):string {
     global $carpoolController;
     $input = [
@@ -79,9 +85,9 @@ function newRequest($data):string {
     return $error;
 }
 
-function cancelRequest($data):string {
+function cancelRequest():string {
     global $carpoolController;
-    $error = $carpoolController->cancelRequest($data);
+    $error = $carpoolController->cancelRequest();
     return $error;
 }
 ?>

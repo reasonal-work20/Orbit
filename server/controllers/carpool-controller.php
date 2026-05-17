@@ -67,7 +67,7 @@ class CarpoolController {
             $sql = "SELECT * FROM carpool c LEFT JOIN user u ON c.user_id = u.user_id
                     WHERE c.start LIKE '%$search$' OR c.destination LIKE '%$search%'
                     AND u.role = '$role' AND c.status = 'Waiting';";
-        } elseif ($filter) {
+        } elseif ($filter === 'Volunteer' || $filter === 'Split Fare') {
             $sql = "SELECT * FROM carpool c LEFT JOIN user u ON c.user_id = u.user_id
                     WHERE c.type = '$filter' AND u.role = '$role' AND c.status = 'Waiting';";
         } else {
@@ -92,6 +92,7 @@ class CarpoolController {
             $data = [
                 "carpoolID" => $carpool["carpool_id"],
                 "name" => $user["name"],
+                "type" => $carpool["type"],
                 "picture" => $user["picture"],
                 "hostID" => $hostID,
                 "time" => $carpool["time"],
@@ -131,6 +132,7 @@ class CarpoolController {
                 "picture" => $user["picture"],
                 "hostID" => $hostID,
                 "time" => $carpool["time"],
+                "type" => $carpool["type"],
                 "start" => $carpool["start"],
                 "destination" => $carpool["destination"],
                 "seat" => $remainderSeat,
@@ -141,7 +143,7 @@ class CarpoolController {
                 "phone" => $user["phone"],
                 "email" => $user["email"]
             ];
-            $result[] = $data;
+            $result = $data;
         }
         return $result;
     }
@@ -176,7 +178,8 @@ class CarpoolController {
             while ($row = mysqli_fetch_array($statementRequest)) {
                 $requester[] = [
                     "requestID" => $row["request_id"],
-                    "name" => $row["name"]
+                    "name" => $row["name"],
+                    "approval" => $row['approval']
                 ];
             }
 
@@ -209,7 +212,7 @@ class CarpoolController {
         $statement = mysqli_query($connect, $sql);
         $checkCarpool = mysqli_fetch_array($statement);
         if (!$checkCarpool) {
-            $sql = "SELECT request_id FROM carpool_request WHERE user_id = '$userID';";
+            $sql = "SELECT * FROM carpool_request WHERE user_id = '$userID';";
             $statement = mysqli_query($connect, $sql);
             $checkRequest = mysqli_fetch_array($statement);
             if (!$checkRequest) {
@@ -284,6 +287,15 @@ class CarpoolController {
         }
     }
 
+    public function rejectRequest($requestID) {
+        $error = $this->requestEditor->deleteRequest($requestID);
+        if ($error['error']) {
+            return "An error has occurred while rejecting the request.";
+        } else {
+            return "";
+        }
+    }
+
     public function newRequest(array $input):string {
         global $connect;
         $carpoolID = $input["carpoolID"];
@@ -305,8 +317,9 @@ class CarpoolController {
         }
     }
 
-    public function cancelRequest(array $input):string {
-        $error = $this->requestEditor->deleteRequest($input["requestID"]);
+    public function cancelRequest():string {
+        $carpoolRequest = $this->requestEditor->getRequest($_SESSION['userID']);
+        $error = $this->requestEditor->deleteRequest($carpoolRequest['requestID']);
         if ($error["error"]) {
             return "An error has occurred while canceling the request.";
         } else {

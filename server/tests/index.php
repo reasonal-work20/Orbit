@@ -31,7 +31,7 @@ require $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
   let locationID = [];
 
   async function get() {
-    const response = await fetch('/Orbit/client/src/services/campus-navigation-service.php?floor=8&type=&getLocation=#');
+    const response = await fetch('/Orbit/client/src/services/campus-navigation-service.php?floor=9&type=&getLocation=#');
     const result = await response.json();
     locationID = result.result;
   }
