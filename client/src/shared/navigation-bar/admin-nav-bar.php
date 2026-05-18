@@ -36,12 +36,8 @@ function renderNavBar()
     
     switch ($userRole) {
         case 'User Admin':
-            $dashboardPath = PAGES . "/user-management/dashboard.php";
             $manageUsersPath = PAGES . "/user-management/dashboard.php";
-            $morePath = PAGES . "/user-management/more-page.php";
-            renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
             renderNavItem('Manage Users', 'manage-users-icon.svg', $manageUsersPath, 'manageusers');
-            renderNavItem('More', 'more-icon-vertical.svg', $morePath, 'more');
             break;
             
         case 'Course Admin':

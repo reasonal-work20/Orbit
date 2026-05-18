@@ -21,6 +21,9 @@ if ($result["error"]) {
         case 'Student':
             $path = APP . "directory";
             break;
+        case 'Lecturer':
+            $path = APP . "directory";
+            break;
         default:
             $path = INDEX;
     }

@@ -67,7 +67,7 @@ class CarpoolController {
             $sql = "SELECT * FROM carpool c LEFT JOIN user u ON c.user_id = u.user_id
                     WHERE c.start LIKE '%$search$' OR c.destination LIKE '%$search%'
                     AND u.role = '$role' AND c.status = 'Waiting';";
-        } elseif ($filter === 'Volunteer' || $filter === 'Split Fare') {
+        } elseif ($filter === 'VOLUNTEER' || $filter === 'SPLIT FARE') {
             $sql = "SELECT * FROM carpool c LEFT JOIN user u ON c.user_id = u.user_id
                     WHERE c.type = '$filter' AND u.role = '$role' AND c.status = 'Waiting';";
         } else {

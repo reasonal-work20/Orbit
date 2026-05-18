@@ -116,7 +116,6 @@ renderNavBar();
 
         let response = await fetch(`/Orbit/client/src/services/carpool-service.php?search=${query}&filter=${activeFilter}&getAvailable=#`);
         let carpoolList = await response.json();
-        console.log(carpoolList);
         list.innerHTML = '';
 
         if (carpoolList.length === 0) {

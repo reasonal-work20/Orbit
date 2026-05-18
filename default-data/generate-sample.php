@@ -23,7 +23,7 @@ $female = [
     'size' => filesize("C:\\Users\\User\\Downloads\\sample profile\\Student (1).png")
 ];
 
-$file = fopen(ROOT . '/Orbit/default-data/user.txt', 'r');
+$file = fopen(ROOT . '/Orbit/default-data/temp.txt', 'r');
 if ($file) {
     $firstName = fgets($file);
     $lastName = fgets($file);
@@ -40,21 +40,30 @@ if ($file) {
     $maleList = explode(",", $maleList);
     $femaleList = explode(",", $femaleList);
 
-    $count = 11;
+    $count = 1;
+    $q = 0;
+    $qualification = [
+        "Doctor of  Philosophy in Information System",
+        "Doctor of Philosophy in Data Science",
+        "Master in Information Technology",
+        "Master of Business Administration",
+        "Master of Entrepreneurship"
+    ];
     foreach ($firstName as $name1) {
         foreach ($lastName as $name2) {
             $name = $name1 . " " . $name2;
-            $password = "Tp" . str_pad($count, 6, "0", STR_PAD_LEFT) . "@0101";
-            $email = "TP" .str_pad($count, 6, "0", STR_PAD_LEFT) . "@mail.apu.edu.my";
+            $password = "L" . str_pad($count, 6, "0", STR_PAD_LEFT) . "@0101";
+            $email = "L" .str_pad($count, 6, "0", STR_PAD_LEFT) . "@mail.apu.edu.my";
             $phone = "+6012-5599623";
-            $role = "Student";
+            $role = "Lecturer";
 
             $input = [
                 "name" => $name,
                 "password" => $password,
                 "email" => $email,
                 "phone" => $phone,
-                "role" => $role
+                "role" => $role,
+                "qualification" => $qualification[$q]
             ];
 
             if (in_array($name1, $maleList)) {
@@ -65,6 +74,10 @@ if ($file) {
             $error = createUser($input, $_FILES);
             echo $error;
             $count += 1;
+            $q += 1;
+            if ($q == count($qualification)) {
+                $q = 0;
+            }
         }
     }
 }

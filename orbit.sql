@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 14, 2026 at 02:27 PM
+-- Generation Time: May 17, 2026 at 02:28 PM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -43,7 +43,20 @@ CREATE TABLE IF NOT EXISTS `carpool` (
   `status` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`carpool_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carpool`
+--
+
+INSERT INTO `carpool` (`carpool_id`, `user_id`, `type`, `start`, `destination`, `time`, `car_colour`, `car_plate`, `car_model`, `capacity`, `note`, `status`) VALUES
+(1, 103, 'VOLUNTEER', 'APU Campus', 'LRT Bukit Jalil', '2026-05-17 02:30:00', 'White', 'XYZ3001', 'Proton Saga', 3, '', 'Waiting'),
+(2, 28, 'VOLUNTEER', 'APU Campus', 'M Vertica', '2026-05-17 06:30:00', 'Black', 'XYZ3002', 'Honda City', 3, 'Meet at the lobby.', 'Waiting'),
+(3, 540, 'VOLUNTEER', 'Park Hill', 'APU', '2026-05-17 01:15:00', 'Blue', 'XYZ3003', 'Perodua Myvi', 2, '', 'Waiting'),
+(4, 128, 'VOLUNTEER', 'APU', 'Vista Komanwel A', '2026-05-17 08:16:00', 'Black', 'XYZ3004', 'Proton Exora', 4, '', 'Waiting'),
+(5, 660, 'SPLIT FARE', 'LRT Bukit Jalil', 'APU Campus', '2026-05-17 00:20:00', '', '', '', 2, 'I can get a Grab for RM 9. Split with 4 people so around RM 2.25 each', 'Waiting'),
+(6, 20, 'SPLIT FARE', 'LRT Awan Besar', 'APU Campus', '2026-05-17 05:22:00', '', '', '', 3, 'I am looking for people to share a Grab with. I haven\'t book the Grab yet so I can\'t give the number.', 'Waiting'),
+(7, 232, 'SPLIT FARE', 'APU', 'Fortune Park', '2026-05-17 08:30:00', 'White', 'XYZ4001', 'Proton Saga', 3, 'I have a Grab that is arriving at 4.30 pm. Anyone who wants to carpool to Fortune Park please contact me immediately', 'Waiting');
 
 -- --------------------------------------------------------
 
@@ -60,7 +73,17 @@ CREATE TABLE IF NOT EXISTS `carpool_request` (
   PRIMARY KEY (`request_id`),
   KEY `user_id` (`user_id`),
   KEY `carpool_id` (`carpool_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carpool_request`
+--
+
+INSERT INTO `carpool_request` (`request_id`, `user_id`, `carpool_id`, `approval`) VALUES
+(1, 978, 1, 'Approved'),
+(2, 43, 4, 'Pending'),
+(3, 309, 1, 'Pending'),
+(4, 739, 5, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -153,6 +176,45 @@ CREATE TABLE IF NOT EXISTS `lecturer` (
   PRIMARY KEY (`lecturer_id`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lecturer`
+--
+
+INSERT INTO `lecturer` (`lecturer_id`, `user_id`, `qualification`, `status`) VALUES
+('L000001', 1014, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000002', 1015, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000003', 1016, 'Master in Information Technology', 'Active'),
+('L000004', 1017, 'Master of Business Administration', 'Active'),
+('L000005', 1018, 'Master of Entrepreneurship', 'Active'),
+('L000006', 1019, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000007', 1020, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000008', 1021, 'Master in Information Technology', 'Active'),
+('L000009', 1022, 'Master of Business Administration', 'Active'),
+('L000010', 1023, 'Master of Entrepreneurship', 'Active'),
+('L000011', 1024, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000012', 1025, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000013', 1026, 'Master in Information Technology', 'Active'),
+('L000014', 1027, 'Master of Business Administration', 'Active'),
+('L000015', 1028, 'Master of Entrepreneurship', 'Active'),
+('L000016', 1029, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000017', 1030, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000018', 1031, 'Master in Information Technology', 'Active'),
+('L000019', 1032, 'Master of Business Administration', 'Active'),
+('L000020', 1033, 'Master of Entrepreneurship', 'Active'),
+('L000021', 1034, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000022', 1035, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000023', 1036, 'Master in Information Technology', 'Active'),
+('L000024', 1037, 'Master of Business Administration', 'Active'),
+('L000025', 1038, 'Master of Entrepreneurship', 'Active'),
+('L000026', 1039, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000027', 1040, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000028', 1041, 'Master in Information Technology', 'Active'),
+('L000029', 1042, 'Master of Business Administration', 'Active'),
+('L000030', 1043, 'Master of Entrepreneurship', 'Active'),
+('L000031', 1044, 'Doctor of  Philosophy in Information System', 'Active'),
+('L000032', 1045, 'Doctor of Philosophy in Data Science', 'Active'),
+('L000033', 1046, 'Master in Information Technology', 'Active');
 
 --
 -- Triggers `lecturer`
@@ -1677,7 +1739,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `picture` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1014 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1047 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `user`
@@ -2699,7 +2761,40 @@ INSERT INTO `user` (`user_id`, `name`, `password`, `email`, `phone`, `picture`, 
 (1010, 'Elijah Wu', '$2y$10$4HD1s91GSS1DQWoVOBOpQOG7rioxSq89uPhnz3dxSNfGbVKZke6jq', 'TP001007@mail.apu.edu.my', '+6012-5599623', 'El-1778728557.png', 'Student'),
 (1011, 'Elijah Zhou', '$2y$10$xzqQn3Qet4EmLCdqna5Eh.c1OF70Vx.p9CGF2S1AsW9x5xPFfpC1q', 'TP001008@mail.apu.edu.my', '+6012-5599623', 'El-1778728557.png', 'Student'),
 (1012, 'Elijah Lau', '$2y$10$F5mUnO7KNGI1RQREdPR2h.xX0zYUjPTUwanAWj2EWwwVE/6FIqqzy', 'TP001009@mail.apu.edu.my', '+6012-5599623', 'El-1778728557.png', 'Student'),
-(1013, 'Elijah Carter', '$2y$10$cXzDpDk8jKgZK3fdrviRKOjwHrCCciLEHthV6z6TjxMhrMGg0d2wG', 'TP001010@mail.apu.edu.my', '+6012-5599623', 'El-1778728557.png', 'Student');
+(1013, 'Elijah Carter', '$2y$10$cXzDpDk8jKgZK3fdrviRKOjwHrCCciLEHthV6z6TjxMhrMGg0d2wG', 'TP001010@mail.apu.edu.my', '+6012-5599623', 'El-1778728557.png', 'Student'),
+(1014, 'Monica Tan', '$2y$10$BdPnxkR8imMLN.W.PembiutDC9et1MsucduachoIxH/1UnJ3FkAAK', 'L000001@mail.apu.edu.my', '+6012-5599623', 'Mo-1779026575.png', 'Lecturer'),
+(1015, 'Monica Choo', '$2y$10$K0gvwd/oE.Z/aAJjLeodiOZq8quMLfenmgY0.GaY/R13nSCRP/LU2', 'L000002@mail.apu.edu.my', '+6012-5599623', 'Mo-1779026575.png', 'Lecturer'),
+(1016, 'Monica Chan', '$2y$10$d.wSCWhdIPEtQo65JsEOMOHzjRU3wIEZmswQuLn5y0NYz/5WR.f.u', 'L000003@mail.apu.edu.my', '+6012-5599623', 'Mo-1779026575.png', 'Lecturer'),
+(1017, 'Lucy Tan', '$2y$10$NAStIRiDyFxOIZNbam0uweZyrev//TC377DdMVgC.mV2L/1PYlFYe', 'L000004@mail.apu.edu.my', '+6012-5599623', 'Lu-1779026575.png', 'Lecturer'),
+(1018, 'Lucy Choo', '$2y$10$eCbEG0oABlfBYThnBNkB/erWkYbgaSK3AnwDCGDxk/nmoTn6TpJTS', 'L000005@mail.apu.edu.my', '+6012-5599623', 'Lu-1779026575.png', 'Lecturer'),
+(1019, 'Lucy Chan', '$2y$10$YpKEssRZqwOEEpRNPB5jn.14NL1KSmXot5bzfoK05q7MWTuyzdwWO', 'L000006@mail.apu.edu.my', '+6012-5599623', 'Lu-1779026576.png', 'Lecturer'),
+(1020, 'Wendy Tan', '$2y$10$urm2B85ynfDut4N34BBG8u8caZUl3IKQ9ZcoyM.R0QdGWMpubH.Mu', 'L000007@mail.apu.edu.my', '+6012-5599623', 'We-1779026576.png', 'Lecturer'),
+(1021, 'Wendy Choo', '$2y$10$fgD/iHXo1erdWl8EOWy/xeswnFxpSTSGFP66XszIazV/kFX4UOsnS', 'L000008@mail.apu.edu.my', '+6012-5599623', 'We-1779026576.png', 'Lecturer'),
+(1022, 'Wendy Chan', '$2y$10$LDhCfmMYc3ZkX8/.n3GWK.cpgIPRil3smfvprn5bZGCjXWXm91rMe', 'L000009@mail.apu.edu.my', '+6012-5599623', 'We-1779026576.png', 'Lecturer'),
+(1023, 'Anna Tan', '$2y$10$mEEaU.r8kEtVOmS4pRdtdu0aiJ0NPKMpHDJMop2KSDQENK8zS2k3e', 'L000010@mail.apu.edu.my', '+6012-5599623', 'An-1779026576.png', 'Lecturer'),
+(1024, 'Anna Choo', '$2y$10$7xbUIZXQVHWqWBNLS8DxdOY/LQsbpTFboG8vLINyOL5xo066V5Zy2', 'L000011@mail.apu.edu.my', '+6012-5599623', 'An-1779026576.png', 'Lecturer'),
+(1025, 'Anna Chan', '$2y$10$cmyx4usAzCYRne8ImxXAQupDRNd6Q5kR3Q/SdI5VFm0STJ2KnyTd.', 'L000012@mail.apu.edu.my', '+6012-5599623', 'An-1779026576.png', 'Lecturer'),
+(1026, 'Rita Tan', '$2y$10$w/EBKoNw4kfFfolvTSvXUubSjNeGeQFTNYp84WPrkN8JlfDHzLLbu', 'L000013@mail.apu.edu.my', '+6012-5599623', 'Ri-1779026576.png', 'Lecturer'),
+(1027, 'Rita Choo', '$2y$10$NL8UZ37GCOKU/8O35Fm2dem0aRPpuFrdPY8G9KD7n6ZhnuDfVMdiK', 'L000014@mail.apu.edu.my', '+6012-5599623', 'Ri-1779026576.png', 'Lecturer'),
+(1028, 'Rita Chan', '$2y$10$qyIOdKC3CuNZTxJvVEEC1eIiInfIaG2C14LubJFEe911cLFCtbtse', 'L000015@mail.apu.edu.my', '+6012-5599623', 'Ri-1779026576.png', 'Lecturer'),
+(1029, 'Lily Tan', '$2y$10$BywrWlMzYHrEVqiDfe3U0Ouy3P7/9fn6QY3dOYF2l5oacbgad42IS', 'L000016@mail.apu.edu.my', '+6012-5599623', 'Li-1779026576.png', 'Lecturer'),
+(1030, 'Lily Choo', '$2y$10$wFmrhB2RTWOm3108jMCnVOYU5G3u.i5LOV0VUSdy5FHEPgsCMXI1C', 'L000017@mail.apu.edu.my', '+6012-5599623', 'Li-1779026577.png', 'Lecturer'),
+(1031, 'Lily Chan', '$2y$10$E1ov0Sc2px0gn/40/DvXXeG7JFexQQ3gq8ucbg4uLBISf8ao6igGu', 'L000018@mail.apu.edu.my', '+6012-5599623', 'Li-1779026577.png', 'Lecturer'),
+(1032, 'Marcus Tan', '$2y$10$gIImRVBlstTQQZdXvQ78i.c2JLhZ8cBMgzqmE8DDg8nxUCg8SHLXu', 'L000019@mail.apu.edu.my', '+6012-5599623', 'Ma-1779026577.png', 'Lecturer'),
+(1033, 'Marcus Choo', '$2y$10$qS7fiil9g03/SkXbk5QXgukq0nq7WAvwVSi24VmW3CsTxz.0PgzZS', 'L000020@mail.apu.edu.my', '+6012-5599623', 'Ma-1779026577.png', 'Lecturer'),
+(1034, 'Marcus Chan', '$2y$10$IeyF/K0qnc/QKAR7QVrrqetiH6wQLQAuYj9D2gWrnhadN2uLsh/a2', 'L000021@mail.apu.edu.my', '+6012-5599623', 'Ma-1779026577.png', 'Lecturer'),
+(1035, 'Daniel Tan', '$2y$10$99Aua6n/sE8tMzD9WXYw.O8xFfR/PCcoLmsYM5g1UxGZhlmjTG3C6', 'L000022@mail.apu.edu.my', '+6012-5599623', 'Da-1779026577.png', 'Lecturer'),
+(1036, 'Daniel Choo', '$2y$10$Y.py0gUzNB4kpkO8SivY0Ov2eCAOyKenKbL1qR19aIHLE4l9jghXK', 'L000023@mail.apu.edu.my', '+6012-5599623', 'Da-1779026577.png', 'Lecturer'),
+(1037, 'Daniel Chan', '$2y$10$owVzWn8CxAE4qQTlyujIXePAG356iHCtQG4n8nxnUnpYl8c.k0vA2', 'L000024@mail.apu.edu.my', '+6012-5599623', 'Da-1779026577.png', 'Lecturer'),
+(1038, 'Adam Tan', '$2y$10$fWhYA7ucXp7FJJfSyr7Qcez0m7pXVn0Gywp6sAT0q7M87XaBFoMme', 'L000025@mail.apu.edu.my', '+6012-5599623', 'Ad-1779026577.png', 'Lecturer'),
+(1039, 'Adam Choo', '$2y$10$InbOnQdHv//jlTMGG5tZwe1mgxe2US6cvuumNF5k0P5LSzJcW54B6', 'L000026@mail.apu.edu.my', '+6012-5599623', 'Ad-1779026577.png', 'Lecturer'),
+(1040, 'Adam Chan', '$2y$10$oCyAyrYjsSPKm4MqvaZrgOjDDF.WAFG3QkjoloREcnF2d9x0Wau5C', 'L000027@mail.apu.edu.my', '+6012-5599623', 'Ad-1779026577.png', 'Lecturer'),
+(1041, 'Bryan Tan', '$2y$10$siO4zyztrIEFSd2b6OS6wejX9y3FTi8njlbCT1bYch/vg6F4l89zG', 'L000028@mail.apu.edu.my', '+6012-5599623', 'Br-1779026577.png', 'Lecturer'),
+(1042, 'Bryan Choo', '$2y$10$IfjysCLp2qyrabq9tF2DiuiI0e4zjR58FJOH/LMd41i2uko3DDCMS', 'L000029@mail.apu.edu.my', '+6012-5599623', 'Br-1779026578.png', 'Lecturer'),
+(1043, 'Bryan Chan', '$2y$10$7kzeTdypDSp1VfVxWRew0udBkcN4mH6qqHj552XzFNYOmSuwDlU9K', 'L000030@mail.apu.edu.my', '+6012-5599623', 'Br-1779026578.png', 'Lecturer'),
+(1044, 'Peter Tan', '$2y$10$gfFcKB4kbJ64LE1NnHbUtutBwPbapGSmaiJxHoIpcLgczI3XeMq6m', 'L000031@mail.apu.edu.my', '+6012-5599623', 'Pe-1779026578.png', 'Lecturer'),
+(1045, 'Peter Choo', '$2y$10$1jnmanAKjgEJnjr8m1bH2.2fvF5YNQzSxPax7VYRfURfMq5fteBMS', 'L000032@mail.apu.edu.my', '+6012-5599623', 'Pe-1779026578.png', 'Lecturer'),
+(1046, 'Peter Chan', '$2y$10$wKMgBc3UK7UkmIHZpgPeI.gdgprcROELSWxULW8NbCT/UbycmgofK', 'L000033@mail.apu.edu.my', '+6012-5599623', 'Pe-1779026578.png', 'Lecturer');
 
 --
 -- Constraints for dumped tables
