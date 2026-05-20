@@ -7,6 +7,11 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
+if (isset($_SESSION['error'])) {
+    echo '<div class="error-message">' . htmlspecialchars($_SESSION['error']) . '</div>';
+    unset($_SESSION['error']);
+}
+
 $_SESSION['currentPage'] = 'transport';
 renderNavBar();
 ?>
@@ -20,6 +25,7 @@ renderNavBar();
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="<?php echo STYLES; ?>/transport-global.css">
     <link rel="stylesheet" href="<?php echo STYLES; ?>/nav-bar.css">
+    <link rel="stylesheet" href="<?php echo STYLES; ?>/global.css">
     <style>
         body { background-color: #f8f9fa; margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
@@ -104,11 +110,11 @@ renderNavBar();
 
                     <div class="route-box">
                         <div class="route-point">
-                            <i class='bx bxs-map-pin'></i>
+                            <i class='bx'>&#xee19</i>
                             <div><label>From</label><p id="start"></p></div>
                         </div>
                         <div class="route-point end">
-                            <i class='bx bxs-target-lock'></i>
+                            <i class='bx'>&#xec3d</i>
                             <div><label>To</label><p id="destination"></p></div>
                         </div>
                     </div>
@@ -118,7 +124,7 @@ renderNavBar();
                             <label>Car Details</label>
                             <p id="car"></p>
                         </div>
-                        <div class="seats-left"><i class='bx bxs-user'></i><div id="capacity"></div></div>
+                        <div class="seats-left"><i class='bx'>&#xeee1</i><div id="capacity"></div></div>
                     </div>
                 </div>
 
@@ -174,8 +180,8 @@ renderNavBar();
                 if (request.approval === "Approved") {
                     button = "";
                 } else {
-                    button = `<button type='submit' class='btn-action btn-reject' name='rejectRequest'><i class='bx bx-x'></i></button>
-                              <button type='submit' class='btn-action btn-approve' name='approveRequest'><i class='bx bx-check'></i></button>`;
+                    button = `<button type='submit' class='btn-action btn-reject' name='rejectRequest'><i class='bx'>&#xec8d</i></button>
+                              <button type='submit' class='btn-action btn-approve' name='approveRequest'><i class='bx'>&#xea41</i></button>`;
                 }
                 text = text + `<div class="request-item">
                                 <span class="request-name">${request.name}</span>

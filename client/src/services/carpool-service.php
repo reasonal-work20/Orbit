@@ -90,22 +90,24 @@ if (isset($_POST['approveRequest'])) {
         "requestID" => $requesterID,
         "approval" => "Approved"
     ]);
-    if (!$error) {
-        $path = PAGES . '/transport/dashboard.php';
-        echo "<script>
-        window.location.href='$path';
-        </script>";
+    if ($error) {
+        $_SESSION['error'] = $error;
     }
+    $path = PAGES . '/transport/dashboard.php';
+    echo "<script>
+    window.location.href='$path';
+    </script>";
 }
 
 if (isset($_POST['rejectRequest'])) {
     $requesterID = $_POST['requesterID'];
     $error = rejectRequest($requesterID);
-    if (!$error) {
-        $path = PAGES . '/transport/dashboard.php';
-        echo "<script>
-        window.location.href='$path';
-        </script>";
+    if ($error) {
+        $_SESSION['error'] = $error;
     }
+    $path = PAGES . '/transport/dashboard.php';
+    echo "<script>
+    window.location.href='$path';
+    </script>";
 }
 ?>

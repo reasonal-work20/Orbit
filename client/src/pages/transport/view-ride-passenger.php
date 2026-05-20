@@ -7,6 +7,11 @@ if (!isset($_SESSION['userID'])) {
     exit();
 }
 
+if (isset($_SESSION['error'])) {
+    echo '<div class="error-message">' . htmlspecialchars($_SESSION['error']) . '</div>';
+    unset($_SESSION['error']);
+}
+
 $_SESSION['currentPage'] = 'transport';
 renderNavBar();
 ?>
@@ -18,8 +23,10 @@ renderNavBar();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orbit - Ride Details (Passenger)</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="<?php echo STYLES; ?>/global.css">
     <link rel="stylesheet" href="<?php echo STYLES; ?>/transport-global.css">
     <link rel="stylesheet" href="<?php echo STYLES; ?>/nav-bar.css">
+    
     <style>
         body { background-color: #f8f9fa; margin: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
@@ -81,7 +88,7 @@ renderNavBar();
 </head>
 <body>
     <div class="container">
-        <button class="back-btn" onclick="window.location.href='<?php echo PAGES; ?>/transport/carpool-manage.php'"><i class='bx bx-chevron-left'></i></button>
+        <button class="back-btn" onclick="window.location.href='<?php echo PAGES; ?>/transport/carpool-manage.php'"><i class='bx'>&#xea4d</i></button>
         <h2 style="margin-bottom: 25px; color: #2d3436; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase;">RIDE DETAILS</h2>
 
         <div class="main-card">
@@ -106,11 +113,11 @@ renderNavBar();
 
                     <div class="route-box">
                         <div class="route-point">
-                            <i class='bx bxs-map-pin'></i>
+                            <i class='bx'>&#xee19</i>
                             <div><label>From</label><p id="start"></p></div>
                         </div>
                         <div class="route-point end">
-                            <i class='bx bxs-target-lock'></i>
+                            <i class='bx'>&#xec3d</i>
                             <div><label>To</label><p id="destination"></p></div>
                         </div>
                     </div>
@@ -120,7 +127,7 @@ renderNavBar();
                             <label>Car Details</label>
                             <p id="car">White Proton (XYZ 1234)</p>
                         </div>
-                        <div class="seats-left" id="seat"><i class='bx bxs-user'></i></div>
+                        <div class="seats-left"><i class='bx'>&#xeee1</i><div id="seat"></div></div>
                     </div>
                 </div>
 

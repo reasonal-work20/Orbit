@@ -79,10 +79,10 @@ renderNavBar();
         
         <div class="bus-card">
             <div class="bus-route">
-                <div id="start">APU Campus</div> <i class='bx bx-right-arrow-alt'></i> 
+                <div id="start">APU Campus</div> <i class='bx'>&#xebe6</i> 
                 <span id="dest-text" style="color: #9b59b6; margin-left: 5px;"><div id="destination">LRT Bukit Jalil</div></span>
                 <div class="dropdown-trigger">
-                    <i class='bx bx-chevron-down'></i>
+                    <i class='bx'>&#xed35</i>
                     <select class="bus-route-select" id="bus-select" onchange="updateBus(this.value)">
                         <option value="LRT-BUKIT JALIL >> APU">LRT-BUKIT JALIL >> APU</option>
                         <option value="M VERTICA >> APU">M VERTICA >> APU</option>
@@ -158,11 +158,11 @@ renderNavBar();
                         </div>
                     </div>
                     <div class='route-path'>
-                        <div class='step'><i class='bx bxs-map-pin'></i><div><label>From</label><p>${carpool.start}</p></div></div>
-                        <div class='step end'><i class='bx bxs-target-lock'></i><div><label>To</label><p>${carpool.destination}</p></div></div>
+                        <div class='step'><i class='bx'>&#xee19</i><div><label>From</label><p>${carpool.start}</p></div></div>
+                        <div class='step end'><i class='bx'>&#xec3d</i><div><label>To</label><p>${carpool.destination}</p></div></div>
                     </div>
                     <div class='cp-footer'>
-                        <div class='seats'><i class='bx bxs-user'></i> ${carpool.seat} Seats Left</div>
+                        <div class='seats'><i class='bx'>&#xeee1</i> ${carpool.seat} Seats Left</div>
                         <button class='btn-view' onclick='window.location.href="<?php echo PAGES; ?>/transport/view-ride-passenger.php?carpool=${carpool.carpoolID}"'>View</button>
                     </div>
                 </div>
