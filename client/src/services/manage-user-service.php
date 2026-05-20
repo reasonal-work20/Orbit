@@ -35,6 +35,15 @@ if (isset($_GET["userID"])) {
     /** Return value of error is a string value. "" means no error occurred. */
 }
 
+if (isset($_POST['updatePassword'])) {
+    $error = updatePassword($_POST);
+    if ($error) {
+        $_SESSION['error'] = $error;
+    }
+    $path = PAGES . '/more/settings-page.php';
+    header("Location: " . $path);
+}
+
 /**
  * getAllUser($search)  -> $search is string keyword to search through user's name
  *                      -> Array looks like [[], [], []]

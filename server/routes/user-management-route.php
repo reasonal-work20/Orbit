@@ -51,6 +51,19 @@ function createUser($inputData, $inputFile) {
     return $error;
 }
 
+function updatePassword($inputData) {
+    global $manageUser;
+    $error = "";
+    $oldPassword = $inputData['current-password'];
+    $newPassword = $inputData['password'];
+    $user = $manageUser->get($_SESSION['userID']);
+    if (password_verify($oldPassword, $user['password'])) {
+        $user['password'] = $newPassword;
+        $error = $manageUser->update($user);
+    }
+    return $error;
+}
+
 function updateUser($inputData, $inputFile) {
     global $manageUser;
     $data = [

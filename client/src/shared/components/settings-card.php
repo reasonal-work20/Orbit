@@ -1,10 +1,8 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
+require_once ROOT . SHARED . '/form/form-component.php';
 
-require_once ROOT . COMPONENTS . '/manage-user-components.php'; // Manage user components (For the form)
-
-function renderAdminSettingsCard()
+function renderUserSettingsCard()
 {
     ob_start(); ?>
     <div class="settings-card" style="width: 100%">
@@ -43,17 +41,14 @@ function renderSettingsProfileForm()
 {
     ob_start(); ?>
 
-    <form class="settings-form" method="post" id="update-profile-form" action="#"> <!-- Edit the action here! -->
-        <?php
-        renderImageUploadWithPreview("profile-image-upload", "Profile Picture");
-        ?>
+    <form class="settings-form" method="post" id="update-profile-form" action="<?php echo SERVICES; ?>/manage-user-service.php">
         <h4 class="change-password"> Change Password </h4>
         <?php
-        renderFormInput("current-password", "Current Password", "password", "text-input", "Enter current password", false);
-        renderFormInput("password", "New Password", "password", "text-input", "Enter new password", false);
-        renderFormInput("password", "Repeat New Password", "password", "text-input", "Confirm your new password", false);
+        renderFormInput("current-password", "Current Password", "password", "text-input", "Enter current password");
+        renderFormInput("password", "New Password", "password", "text-input", "Enter new password");
+        renderFormInput("password", "Repeat New Password", "password", "text-input", "Confirm your new password");
         ?>
-        <button type="submit" class="submit-button" id="update-settings-btn" disabled>Update Profile</button>
+        <button type="submit" name="updatePassword" class="submit-button" id="update-settings-btn" disabled>Update Profile</button>
     </form>
 <?php
 }
@@ -82,7 +77,4 @@ function renderSettingNavItem($title, $id)
     echo ob_get_clean();
     return;
 }
-
-
-
 ?>

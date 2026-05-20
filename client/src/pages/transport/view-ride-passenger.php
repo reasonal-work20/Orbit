@@ -166,7 +166,7 @@ renderNavBar();
             if (error) {
                 return;
             }
-            btn.innerHTML = "Request Sent <i class='bx bxs-check-circle'></i>";
+            btn.innerHTML = "Request Sent <i class='bx'>&#xed31</i>";
             btn.style.background = "#2ecc71";
             btn.disabled = true;
             

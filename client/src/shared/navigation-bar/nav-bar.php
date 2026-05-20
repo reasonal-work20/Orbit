@@ -38,7 +38,7 @@ function renderNavBar()
     renderNavItem('Transport', 'car-icon.svg', APP . 'transport', 'transport');
     renderNavItem('Directory', 'map-icon.svg', APP . "directory", 'directory');
     renderNavItem('Timetable', 'calendar-icon.svg', '#', 'timetable');
-    renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
+    renderNavItem('More', 'more-icon-vertical.svg', APP . 'more', 'more');
 
     echo '</ul>';
     echo '</div>';

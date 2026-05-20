@@ -1,0 +1,366 @@
+.page-content {
+  display: flex;
+  padding: 20px;
+  padding: 20px 96px;
+  width: 100%;
+  height: fit-content;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  transition: 0.2s ease;
+}
+
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  height: fit-content;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  animation: fadeUpAndIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes fadeUpAndIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.title-back-button {
+  display: flex;
+  flex-direction: row;
+  padding: 4px 8px;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.settings-card a {
+  text-decoration: none;
+}
+
+.title-back-button:hover,
+.title-back-button:hover .icon svg path,
+.title-back-button:hover .title {
+  color: #243757;
+  stroke: #243757;
+}
+
+.title-back-button .icon {
+  padding: 0;
+  display: flex;
+}
+
+.title-back-button .icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.title-back-button .icon svg path {
+  stroke-width: 3px;
+  stroke: #000;
+}
+
+.title-back-button .title {
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.divider {
+  width: 100%;
+  border: 0;
+  background: #e2e8f0;
+  height: 2px;
+}
+
+.settings-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+/* NAVIGATION STYLING */
+
+.settings-navigation {
+  /* This should change for mobile (The width)*/
+  display: flex;
+  width: 40%;
+  max-width: 300px;
+  min-width: 100px;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.settings-navigation .nav-item {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+
+  border-radius: 4px 0 0 4px;
+  transition: 0.1s ease-in-out;
+}
+
+.settings-navigation .nav-item.active-tab {
+  border-radius: 4px 0 0 4px;
+  font-weight: 600;
+  border-right: 4px solid var(--Foundation-Blue-blue-500, #007aff);
+  background: var(--Foundation-Neutral-N20, #f5f6f7);
+}
+
+.settings-navigation .nav-item.active-tab:hover {
+  background: #ebedf0;
+  border-right: 8px solid var(--Foundation-Blue-blue-500, #007aff);
+}
+
+.settings-navigation .nav-item.active-tab:active {
+  transform: scale(0.98);
+}
+
+.settings-form {
+  display: none;
+  width: 100%;
+}
+
+.settings-form.active {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.change-password {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px); /* Micro-move upwards for a premium feel */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FORM STYLING */
+/* Input & Select Styling */
+
+.form-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px; /* Increased slightly for a cleaner gutter between label and input */
+  align-self: stretch;
+  margin-bottom: 16px; /* Spacing between input rows */
+}
+
+/* Target the label inside your form-input block */
+.form-input label {
+  width: 150px; /* Gives every single label the exact same width */
+  min-width: 150px; /* Prevents flexbox from squishing the label text */
+  text-align: left; /* Keeps label text aligned cleanly to the left */
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--Foundation-Neutral-N700, #2c3e50);
+}
+
+.text-input {
+  flex-grow: 1; /* Forces the input to fill up all remaining horizontal space */
+  height: 44px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+  background-color: #fff;
+  box-sizing: border-box;
+  border: 2px solid var(--Foundation-Neutral-N50, #c2c7d0);
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Image Upload Section */
+.image-upload-sect {
+  background: #f5f6f7;
+  padding: 24px;
+  border-radius: 4px;
+  border: 2px solid var(--Foundation-Neutral-N50, #c2c7d0);
+}
+
+.image-upload-sect label {
+  color: #000;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 22px; /* 157.143% */
+}
+
+.image-preview {
+  width: 90px;
+  height: 90px;
+  border: 2px dashed #cbd5e0;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.image-preview span {
+  color: #6b788e;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: center;
+}
+
+/* Targets the "Choose File" button itself */
+.file-input::file-selector-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+}
+
+/* Hover state for the button */
+.file-input::file-selector-button:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e0;
+}
+
+/* SUBMIT BUTTON STYLE */
+
+.submit-button[disabled] {
+  opacity: 0.5;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  cursor: not-allowed;
+  pointer-events: none; /* Block accidental click triggers completely */
+  box-shadow: none;
+}
+
+.submit-button.btn-ready {
+  opacity: 1;
+  cursor: pointer;
+  pointer-events: auto;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  border: 1px solid var(--Foundation-Blue-blue-500, #007aff);
+  background: #007aff;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: none;
+  transition:
+    background-color 0.2s,
+    transform 0.1s ease;
+}
+
+.submit-button.btn-ready:active {
+  transform: scale(0.98);
+}
+
+/* MOBILE ADJUSTMENTS */
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 12px 0;
+    padding-bottom: 100px;
+  }
+
+  .settings-card {
+    padding: 20px;
+    border-radius: 0px;
+  }
+
+  .settings-content {
+    flex-direction: column;
+  }
+
+  .settings-navigation {
+    flex-direction: row;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .settings-navigation .nav-item.active-tab {
+    border-radius: 4px 4px 0 0;
+    font-weight: 600;
+    border-right: 0px;
+    box-shadow: inset 0 -4px 0 0 var(--Foundation-Blue-blue-500, #007aff);
+    background: var(--Foundation-Neutral-N20, #f5f6f7);
+  }
+
+  .settings-navigation .nav-item.active-tab:hover {
+    background: #ebedf0;
+    border-radius: 4px 4px 0 0;
+    border-right: 0px;
+    box-shadow: inset 0 -6px 0 0 var(--Foundation-Blue-blue-500, #007aff);
+  }
+
+  .settings-navigation .nav-item.active-tab:active {
+    transform: scale(0.98);
+  }
+
+  .form-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    align-self: stretch;
+  }
+
+  .text-input {
+    width: 100%;
+  }
+}

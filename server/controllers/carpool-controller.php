@@ -256,6 +256,16 @@ class CarpoolController {
             $error = $this->carpoolEditor->deleteCarpool($input["carpoolID"]);
         } else {
             $error = $this->carpoolEditor->updateCarpool($input["carpoolID"], $input["status"]);
+            if ($input['status'] !== 'Waiting') {
+                $carpool = $this->carpoolEditor->getCarpool($input['carpoolID']);
+                $requestList = $this->host($carpool['userID']);
+                $requestList = $requestList['requester'];
+                foreach ($requestList as $request) {
+                    if ($request['approval'] !== 'Approved') {
+                        $this->rejectRequest($request['requestID']);
+                    }
+                }
+            }
         }
         if ($error["error"]) {
             return "An error has occurred while updating the ride status.";
@@ -280,6 +290,13 @@ class CarpoolController {
                 return "An error has occurred while updating the request.";
             } else {
                 if ($check["capacity"] >= $carpool["capacity"]) {
+                    $requestList = $this->host($carpool['userID']);
+                    $requestList = $requestList['requester'];
+                    foreach ($requestList as $request) {
+                        if ($request['approval'] !== 'Approved') {
+                            $this->rejectRequest($request['requestID']);
+                        }
+                    }
                     $error = $this->changeStatus(["carpoolID" => $carpoolID, "status" => "Full"]);
                 } 
                 return "";

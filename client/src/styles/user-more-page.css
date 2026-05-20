@@ -1,0 +1,131 @@
+.page-content {
+  display: flex;
+  padding: 20px;
+  padding: 20px 96px;
+  width: 100%;
+  height: fit-content;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  transition: 0.2s ease;
+}
+
+.more-actions-container {
+  display: flex;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
+}
+
+.more-actions-container .title {
+  color: #000;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.48px;
+}
+
+.more-card-grid {
+  display: inline-grid;
+  row-gap: 20px;
+  column-gap: 20px;
+  align-self: stretch;
+  grid-template-columns: repeat(auto-fit, minmax(calc(25% - 20px), 1fr));
+}
+
+.more-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px;
+  gap: 10px;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 12px;
+
+  position: relative;
+  isolation: isolate;
+
+  background-color: rgba(255, 255, 255, 1); /* Ensure it has a base color */
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.12);
+}
+
+.more-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(
+    98deg,
+    rgba(108, 255, 253, 0.5) 0%,
+    rgba(0, 149, 255, 0.5) 100.25%
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+.more-card:hover::before {
+  opacity: 1;
+}
+
+.more-card:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  transition: transform 0.05s ease-out, box-shadow 0.05s ease-out;
+}
+
+.more-card-grid a {
+  text-decoration: none;
+}
+
+.more-card .title {
+  color: var(--Foundation-Neutral-N800, #15294b);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 125% */
+}
+
+.more-card .description {
+  color: var(--Foundation-Neutral-N100, #7a8699);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px; /* 128.571% */
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: 12px 0;
+    padding-bottom: 100px;
+  }
+  .more-actions-container {
+    padding: 20px;
+    border-radius: 0px;
+  }
+}
+
+/* Small Laptops: 3 Columns */
+@media (max-width: 768px) {
+  .more-card-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+/* Desktops: Hard Capped at 4 Columns */
+@media (min-width: 992px) {
+  .more-card-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

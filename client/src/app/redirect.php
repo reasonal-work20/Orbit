@@ -17,6 +17,16 @@ switch ($page) {
         break;
     case "transport":
         $path = PAGES . '/transport/dashboard.php';
+        break;
+    case "more":
+        $path = PAGES . '/more/more-page.php';
+        break;
+    case "bus":
+        $path = PAGES . '/transport/bus-shuttle.php';
+        break;
+    case "settings":
+        $path = PAGES . '/more/settings-page.php';
+        break;
 }
 header("Location: " . $path);
 ?>
