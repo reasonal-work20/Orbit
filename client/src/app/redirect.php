@@ -27,6 +27,9 @@ switch ($page) {
     case "settings":
         $path = PAGES . '/more/settings-page.php';
         break;
+    case "dashboard":
+        $path = PAGES . '/dashboard/dashboard.php';
+        break;
 }
 header("Location: " . $path);
 ?>

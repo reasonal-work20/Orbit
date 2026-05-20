@@ -35,42 +35,10 @@ function renderQuickAccessCard($role)
             <!-- This will be the render quick access button function -->
             <!-- Logic of role switching can be done here too for different quick access cards. -->
             <?php
-            switch ($role) {
-                case 'Student':
-                    $carpoolUrl = PAGES . '/carpool-hub.php'; // Change This
-                    renderQuickAccessButton("Carpool", "car-icon.svg", $carpoolUrl);
-
-                    $directoryUrl = PAGES . '/navigation-map.php'; // Change This
-                    renderQuickAccessButton("Campus Directory", "map-icon.svg", $directoryUrl);
-
-                    $directoryUrl = PAGES . '/navigation-map.php'; // Change This
-                    renderQuickAccessButton("Campus Directory", "map-icon.svg", $directoryUrl);
-
-                    $directoryUrl = PAGES . '/navigation-map.php'; // Change This
-                    renderQuickAccessButton("Campus Directory", "map-icon.svg", $directoryUrl);
-                    break;
-                case 'Lecturer':
-                    $carpoolUrl = PAGES . '/carpool-hub.php'; // Change This
-                    renderQuickAccessButton("Carpool", "car-icon.svg", $carpoolUrl);
-
-                    $directoryUrl = PAGES . '/navigation-map.php'; // Change This
-                    renderQuickAccessButton("Campus Directory", "map-icon.svg", $directoryUrl);
-
-                    $directoryUrl = PAGES . '/navigation-map.php'; // Change This
-                    renderQuickAccessButton("Campus Directory", "map-icon.svg", $directoryUrl);
-
-                    $directoryUrl = PAGES . '/navigation-map.php'; // Change This
-                    renderQuickAccessButton("Campus Directory", "map-icon.svg", $directoryUrl);
-                    break;
-                case 'User Admin':
-                    $carpoolUrl = PAGES . '/user-admin/dashboard.php';
-                    renderQuickAccessButton("Carpool", "car-icon.svg", $carpoolUrl);
-
-                    $directoryUrl = PAGES . '/user-admin/more-page.php'; // Change This
-                    renderQuickAccessButton("More Actions", "more-icon-vertical.svg", $directoryUrl);
-                    break;
-                // < ------------------ Add more cases ---------------------- >
-            }
+            renderQuickAccessButton("Carpool", "car-icon.svg", APP . 'transport');
+            renderQuickAccessButton("Campus Directory", "map-icon.svg", APP . 'directory');
+            renderQuickAccessButton("Bus Shuttle", "bus-icon.svg", APP . 'bus');
+            renderQuickAccessButton("Timetable", "map-icon.svg", '#');
             ?>
         </div>
     </div>

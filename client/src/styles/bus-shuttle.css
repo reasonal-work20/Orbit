@@ -1,0 +1,135 @@
+.upcoming-trip-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+
+  border-radius: var(--Container-corner-radius, 10px);
+  background: var(--Foundation-Neutral-N0, #fff);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.2s ease;
+}
+
+.upcoming-trip-card .card-head {
+  display: flex;
+  padding: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.upcoming-trip-card .card-head .title {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px; /* 100% */
+}
+
+.upcoming-trip-card .card-head .show-more {
+  color: var(--Foundation-Neutral-N100, #7a8699);
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 125% */
+  text-decoration: none;
+}
+
+.upcoming-trip-card .card-head .show-more:hover {
+  color: #3395ff;
+}
+
+.upcoming-trip-card .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: fit-content;
+  align-self: stretch;
+  gap: 10px;
+}
+
+.bus-shuttle-wrapper {
+  display: flex;
+  padding: var(--Screen-content-padding, 20px) 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--Content-gap-medium, 4px);
+  align-self: stretch;
+  transition: 0.2s ease-out;
+}
+
+#campusToLrt {
+  border-left: 4px solid var(--Foundation-Purple-purple-600, #9f4bca);
+}
+
+#campusToLrt .title {
+  color: var(--Foundation-Purple-purple-600, #9f4bca);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+#campusToLrt:hover {
+  border-left: 8px solid var(--Foundation-Purple-purple-600, #9f4bca);
+}
+
+#lrtToCampus {
+  border-left: 4px solid var(--Foundation-Green-green-500, #34c759);
+}
+
+#lrtToCampus .title {
+  color: var(--Foundation-Green-green-500, #34c759);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+#lrtToCampus:hover {
+  border-left: 8px solid var(--Foundation-Green-green-500, #34c759);
+}
+
+.times-container {
+  display: flex;
+  padding: 10px 0;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.bus-shuttle-wrapper .time-wrapper {
+  display: flex;
+  padding: 12px;
+  align-items: flex-start;
+  gap: 10px;
+
+  border-radius: var(--Button-corner-radius, 8px);
+  background: var(--Foundation-Neutral-N20, #f5f6f7);  
+}
+
+.bus-shuttle-wrapper .time-wrapper .time {
+  color: #000;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+@media (max-width: 728px) {
+  .upcoming-trip-card {
+    border-radius: 0px;
+  }
+}

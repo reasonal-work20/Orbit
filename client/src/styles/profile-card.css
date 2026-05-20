@@ -1,0 +1,95 @@
+.profile-card {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.profile-card .profile-pic {
+  display: flex;
+  width: 64px;
+  height: 64px;
+  gap: 10px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  align-items: center;
+  border: 2px solid #006fe8;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.profile-card .profile-pic img {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+}
+
+.profile-card .info-actions-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.info-actions-wrapper .user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  width: fit-content;
+}
+
+.info-actions-wrapper .user-info .username {
+  color: #006fe8;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.4px;
+  text-transform: uppercase;
+}
+
+.info-actions-wrapper .user-info .student-id {
+  color: var(--Foreground-SecondaryFlat, #4a4a4b);
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-transform: uppercase;
+}
+
+.info-actions-wrapper .logout-button {
+  width: 24px;
+  height: 24px;
+  aspect-ratio: 1/1;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  text-decoration: none;
+  transition: 0.2s all ease-out;
+}
+
+.info-actions-wrapper .logout-button:hover svg {
+  transform: scale(1.02);
+}
+
+.info-actions-wrapper .logout-button:hover svg path{
+  stroke: #006fe8;
+}
+
+.info-actions-wrapper .logout-button:active svg {
+  transform: scale(0.9);
+}
+
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 0 20px;
+  }
+}

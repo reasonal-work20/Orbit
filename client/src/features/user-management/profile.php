@@ -7,9 +7,9 @@ require_once ROOT . MODALS . '/modal.php';
 $user = getUser($_SESSION['userID']);
 $name = htmlspecialchars($user['name']);
 $email = htmlspecialchars($user['email']);
-$picture = $user['picture'] ?? UPLOADS . '/default-profile.png';
-$contact = $user['phone'] ?? 'N/A';
-$programme = $user['programme'] ?? 'N/A';
+$picture = $user['picture'] ? UPLOADS . '/' . $user['picture'] : UPLOADS . '/default-profile.png';
+$contact = $user['phone'] ? $user['phone'] : 'N/A';
+$programme = isset($user['programme']) ? $user['programme'] : 'N/A';
 if ($programme != 'N/A') {
     $tag = $user['intakeID'] . "|" . $user['programme'];
 } else {
