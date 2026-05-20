@@ -42,9 +42,9 @@ function renderNavBar()
             
         case 'Course Admin':
             $dashboardPath = PAGES . "/course-management/dashboard.php";
-            renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
-            renderNavItem('Manage Course', 'calendar-icon.svg', '#', 'managecourses');
-            renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
+            $manageIntakePath = PAGES . "/course-management/manage-intake.php";
+            renderNavItem('Manage Course', 'calendar-icon.svg', $dashboardPath, 'managecourses');
+            renderNavItem('Manage Intake', 'calendar-icon.svg', $manageIntakePath, 'manageintakes');
             break;
             
         case 'Schedule Admin':

@@ -17,7 +17,7 @@ class ManageIntake {
     }
 
     public function createIntake($input) {
-        $error = $this->intakeEditor->createIntake($input["courseID"], $input["name"], $input["short"], $input["startDate"]);
+        $error = $this->intakeEditor->createIntake($input["courseID"], $input["name"], $input["short"], $input["startDate"], $input['status']);
         if ($error["error"]) {
             return "An error has occurred while creating the intake.";
         } else {
@@ -34,6 +34,16 @@ class ManageIntake {
         }
     }
 
+    public function getCourseType() {
+        $result = [];
+        $sql = "SELECT * FROM course;";
+        $statement = mysqli_query($this->connection, $sql);
+        while ($course = mysqli_fetch_array($statement)) {
+            $result[$course['course_id']] = $course['type'];
+        }
+        return $result;
+    }
+
     public function getIntakeList($search) {
         $result = [];
         if ($search === "") {
@@ -45,12 +55,12 @@ class ManageIntake {
         $statement = mysqli_query($this->connection, $sql);
         while ($intake = mysqli_fetch_array($statement)) {
             $result[] = [
-                $intake["intakeID"], 
-                $intake["courseID"],
-                $intake["name"],
-                $intake["startDate"],
-                $intake["totalRegister"],
-                $intake["status"]
+                "intakeID" => $intake["intake_id"], 
+                "courseID" => $intake["course_id"],
+                "name" => $intake["name"],
+                "startDate" => $intake["start_date"],
+                "totalRegister" => $intake["total_register"],
+                "status" => $intake["status"]
             ];
         }
         return $result;
@@ -103,7 +113,7 @@ class ManageIntake {
     }
 
     public function updateIntake($input) {
-        $error = $this->intakeEditor->updateIntake($input["intakeID"], $input["startDate"], $input["status"]);
+        $error = $this->intakeEditor->updateIntake($input["intakeID"], $input["status"]);
         if ($error["error"]) {
             return "An error has occurred.";
         } else {

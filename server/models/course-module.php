@@ -19,8 +19,8 @@
 class CourseModule {
     private $connection;
 
-    public function __construct($connection) {
-        $this->$connection = $connection;
+    public function __construct($database) {
+        $this->connection = $database;
     }
 
     public function createCourseModule($moduleID, $lecturerID, $startDate, $endDate):array {

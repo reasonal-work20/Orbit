@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . CONFIG;
 require_once ROOT . MODELS . '/module.php';
+require_once ROOT . CONTROLLERS . '/manage-course-module.php';
 
 /**
 * Manage Module Controller
@@ -13,7 +14,7 @@ require_once ROOT . MODELS . '/module.php';
 *                   -> Returns a list of all the modules in the selected major. Format Regular Array > [[moduleID, name], []]
 *
 * getModule         -> Takes in the input moduleID.
-*                   -> Returns associated array. [error, moduleID, majorID, name]
+*                   -> Returns associated array. [error, moduleID, majorID, name, row] *Row refers to the number of course modules created.
 *
 * createModule      -> :param > majorID, short, name
 *                   -> Returns error string.
@@ -28,11 +29,13 @@ require_once ROOT . MODELS . '/module.php';
 class ManageCourse {
     private $connection;
     private $moduleEditor;
+    private $courseModuleEditor;
 
     public function __construct() {
         global $connect;
         $this->connection = $connect;
         $this->moduleEditor = new Module($connect);
+        $this->courseModuleEditor = new ManageCourseModule($connect);
     }
 
     public function getMajorList() {
@@ -50,7 +53,8 @@ class ManageCourse {
         $sql = "SELECT * FROM module WHERE major_id = '$majorID';";
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
-            $result[] = ["moduleID" => $row["module_id"], "name" => $row["name"]];
+            $courseModuleList = $this->courseModuleEditor->getList($row["module_id"]);
+            $result[] = ["moduleID" => $row["module_id"], "name" => $row["name"], "row" => count($courseModuleList)];
         }
         return $result;
     }
@@ -60,10 +64,12 @@ class ManageCourse {
         if ($result["error"]) {
             return [];
         } else {
+            $courseModuleList = $this->courseModuleEditor->getList($result["moduleID"]);
             return [
                 "moduleID" => $result["moduleID"],
                 "majorID" => $result["majorID"],
-                "name" => $result["name"]
+                "name" => $result["name"],
+                "row" => count($courseModuleList)
             ];
         }
     }

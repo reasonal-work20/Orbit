@@ -23,11 +23,11 @@ class Intake {
         $this->connection = $database;
     }
 
-    public function createIntake($courseID, $name, $short, $startDate):array {
+    public function createIntake($courseID, $name, $short, $startDate, $status):array {
         $result = ["error" => True, "id" => ""];
         $intakeID = $courseID . date("ym", strtotime($startDate)) . $short;
         $sql = "INSERT INTO intake (intake_id, course_id, name, start_date, total_register, status)
-                VALUES ('$intakeID', '$courseID', '$name', '$startDate', 0, 'Active');";
+                VALUES ('$intakeID', '$courseID', '$name', '$startDate', 0, '$status');";
         try {
             mysqli_query($this->connection, $sql);
             $result = ["error" => False, "id" => $intakeID];
@@ -63,8 +63,8 @@ class Intake {
         return $result;
     }
 
-    public function updateIntake($intakeID, $startDate, $status):array {
-        $sql = "UPDATE intake SET start_date = '$startDate', status = '$status' WHERE intake_id = '$intakeID';";
+    public function updateIntake($intakeID, $status):array {
+        $sql = "UPDATE intake SET status = '$status' WHERE intake_id = '$intakeID';";
         try {
             mysqli_query($this->connection, $sql);
             $result = ["error" => False];

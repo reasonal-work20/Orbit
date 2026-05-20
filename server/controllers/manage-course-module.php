@@ -36,7 +36,7 @@ require_once ROOT . CONFIG;
 *                   -> :output > string error message
 */
 
-class ManageCourse {
+class ManageCourseModule {
     private $connection;
     private $courseModuleEditor;
     private $moduleIntakeEditor;
@@ -149,7 +149,7 @@ class ManageCourse {
             return "Not enough found.";
         }
 
-        for ($index = 1, $index <= $number, $index++) {
+        for ($index = 1; $index <= $number; $index++) {
             $this->moduleGroupEditor->createModuleGroup($input["courseModuleID"], $input["hours"], $input["type"]);
         }
         return "";
