@@ -50,7 +50,11 @@ class ManageCourse {
 
     public function getModuleList($majorID) {
         $result = [];
-        $sql = "SELECT * FROM module WHERE major_id = '$majorID';";
+        if ($majorID) {
+            $sql = "SELECT * FROM module WHERE major_id = '$majorID';";
+        } else {
+            $sql = "SELECT * FROM module;";
+        }
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
             $courseModuleList = $this->courseModuleEditor->getList($row["module_id"]);

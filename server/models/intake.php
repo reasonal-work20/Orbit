@@ -74,6 +74,17 @@ class Intake {
         return $result;
     }
 
+    public function updateRegister($intakeID) {
+        $sql = "UPDATE intake SET total_register = (total_register + 1) WHERE intake_id = '$intakeID';";
+        try {
+            mysqli_query($this->connection, $sql);
+            $result = ["error" => False];
+        } catch (mysqli_sql_exception $e) {
+            $result = ["error" => True];
+        }
+        return $result;
+    }
+
     public function deleteIntake($intakeID):array {
         $sql = "DELETE FROM intake WHERE intake_id = '$intakeID';";
         try {

@@ -23,10 +23,10 @@ class CourseModule {
         $this->connection = $database;
     }
 
-    public function createCourseModule($moduleID, $lecturerID, $startDate, $endDate):array {
+    public function createCourseModule($moduleID, $lecturerID, $intakeID, $startDate, $endDate):array {
         $result = ["error" => True, "id" => 0];
-        $sql = "INSERT INTO course_module (module_id, lecturer_id, start_date, end_date)
-                VALUES ('$moduleID', '$lecturerID', '$startDate', '$endDate');";
+        $sql = "INSERT INTO course_module (module_id, lecturer_id, intake_id, start_date, end_date)
+                VALUES ('$moduleID', '$lecturerID', '$intakeID', '$startDate', '$endDate');";
         try {
             mysqli_query($this->connection, $sql);
             $result = ["error" => False, "id" => mysqli_insert_id($this->connection)];
@@ -42,6 +42,7 @@ class CourseModule {
             "courseModuleID" => 0,
             "moduleID" => "",
             "lecturerID" => "",
+            "intakeID" => "",
             "startDate" => "",
             "endDate" => ""
         ];
@@ -53,6 +54,7 @@ class CourseModule {
             $result["courseModuleID"] = $courseModuleID;
             $result["moduleID"] = $courseModule["module_id"];
             $result["lecturerID"] = $courseModule["lecturer_id"];
+            $result["intakeID"] = $courseModule["intake_id"];
             $result["startDate"] = $courseModule["start_date"];
             $result["endDate"] = $courseModule["end_date"];
             $result["error"] = False;

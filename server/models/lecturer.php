@@ -46,7 +46,7 @@ class Lecturer {
             "status" => ""
         ];
 
-        $sql = "SELECT * FROM lecturer WHERE lecturer_id = '$id' OR user_id = $id;";
+        $sql = "SELECT * FROM lecturer WHERE lecturer_id = '$id' OR user_id = '$id';";
         $statement = mysqli_query($this->connection, $sql);
         $lecturer = mysqli_fetch_array($statement);
         if ($lecturer) {

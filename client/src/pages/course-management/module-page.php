@@ -26,23 +26,25 @@ renderContentTopBar($name, $role);
 
 if (isset($_GET['intake'])) {
     $intake = getIntake($_GET['intake']);
+    if ($intake['status'] !== 'In Progress') {
+        $path = PAGES . '/course-management/manage-intake.php';
+        echo "<script>window.location.href='$path';</script>";
+    }
 } else {
     header('Location: ' . INDEX);
     exit();
 }
+
+$addCourseModuleForm = addCourseModuleForm("addCourseModuleForm", $intake['intakeID']);
+$addCourseModuleModal = new Modal("addCourseModuleForm", "large");
+echo $addCourseModuleModal->render("Add Module", $addCourseModuleForm);
 ?>
 
 <div class="page-content">
     <div class="manage-users-container">
         <div class="title-btn-wrapper">
             <span class="manage-users-header"><?php echo $intake['intakeID']; ?></span>
-            <form action="#" method="get" style="display:flex; gap:10px;">
-                <div class='form-input'>
-                    <input type='text' id='search' name="search" class='text-input' placeholder='Search ...'>
-                </div>
-                <button type="submit" class="confirm-btn">Search</button>
-            </form>
-            <div class="add-user-btn" onclick="openModal('')">
+            <div class="add-user-btn" onclick="openModal('addCourseModuleForm')">
                 <span class="btn-text">
                     Add Module
                 </span>
@@ -57,6 +59,8 @@ if (isset($_GET['intake'])) {
         <hr class="divider">
 
         <?php
+        $courseModuleList = getCourseModuleList($intake['intakeID']);
+        renderTable($courseModuleList, $intake['intakeID']);
         ?>
     </div>
 </div>
@@ -66,4 +70,19 @@ if (isset($_GET['intake'])) {
 
 <?php
 createFooter(false);
+if (isset($_POST['edit'])) {
+    $courseModule = getCourseModule($_POST['courseModuleID']);
+    $editCourseModuleForm = editCourseModuleForm("editCourseModuleForm", $intake['intakeID'], $courseModule);
+    $editCourseModuleModal = new Modal("editCourseModuleForm", "medium");
+    echo $editCourseModuleModal->render("Edit Course module", $editCourseModuleForm);
+    echo "<script>openModal('editCourseModuleForm');</script>";
+}
+
+if (isset($_POST['delete'])) {
+    $courseModule = getCourseModule($_POST['courseModuleID']);
+    $deleteCourseModuleForm = deleteCourseModuleForm("deleteCourseModuleForm", $intake['intakeID'], $courseModule);
+    $deleteCourseModuleModal = new Modal("deleteCourseModuleForm", "medium");
+    echo $deleteCourseModuleModal->render("Delete Course module", $deleteCourseModuleForm);
+    echo "<script>openModal('deleteCourseModuleForm');</script>";
+}
 ?>

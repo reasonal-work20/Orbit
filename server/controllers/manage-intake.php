@@ -2,18 +2,21 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . MODELS . '/intake.php';
 require_once ROOT . MODELS . '/student-intake.php';
+require_once ROOT . MODELS . '/student.php';
 require_once ROOT . CONFIG;
 
 class ManageIntake {
     private $connection;
     private $intakeEditor;
     private $studentIntakeEditor;
+    private $studentEditor;
 
     public function __construct() {
         global $connect;
         $this->connection = $connect;
         $this->intakeEditor = new Intake($connect);
         $this->studentIntakeEditor = new StudentIntake($connect);
+        $this->studentEditor = new Student($connect);
     }
 
     public function createIntake($input) {
@@ -26,10 +29,16 @@ class ManageIntake {
     }
 
     public function addStudent($input) {
+        $checkStudent = $this->studentEditor->getStudent($input['studentID']);
+        $checkIntake = $this->studentIntakeEditor->check($input['studentID']);
+        if (!$checkStudent || $checkIntake) {
+            return "Error. Student may already be enrolled to an intake.";
+        }
         $error = $this->studentIntakeEditor->create($input["studentID"], $input["intakeID"]);
         if ($error["error"]) {
             return "An error has occurred while enrolling the student.";
         } else {
+            $this->intakeEditor->updateRegister($input["intakeID"]);
             return "";
         }
     }
@@ -81,33 +90,29 @@ class ManageIntake {
         }
     }
 
-    public function getStudentList($intakeID) {
+    public function getStudentList($input) {
+        $intakeID = $input['intakeID'];
+        $search = $input['search'];
         $result = [];
-        $sql = "SELECT * FROM student_intake WHERE intake_id = '$intakeID';";
-        $statement = mysqli_query($this->connection, $sql);
-        while ($row = mysqli_fetch_array($statement)) {
-            $result[] = [
-                "studentIntakeID" => $row["student_intake_id"],
-                "studentID" => $row["student_id"],
-                "intakeID" => $row["intake_id"]
-            ];
-        }
-        return $result;
-    }
-
-    public function getStudent($search) {
-        $result = [];
-        $sql = "SELECT * FROM student_intake_id i
+        if ($search) {
+            $sql = "SELECT * FROM student_intake i
                 LEFT JOIN student s ON s.student_id = i.student_id
                 LEFT JOIN user u ON s.user_id = u.user_id
-                WHERE u.name LIKE '%$search%';";
+                WHERE u.name LIKE '%$search%' AND intake_id = '$intakeID';";
+        } else {
+            $sql = "SELECT * FROM student_intake i
+                    LEFT JOIN student s ON s.student_id = i.student_id
+                    LEFT JOIN user u ON s.user_id = u.user_id 
+                    WHERE intake_id = '$intakeID';";
+        }
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
             $result[] = [
                 "studentIntakeID" => $row["student_intake_id"],
                 "studentID" => $row["student_id"],
                 "intakeID" => $row["intake_id"],
-                "name" => $row["name"]];
+                "name" => $row["name"]
+            ];
         }
         return $result;
     }

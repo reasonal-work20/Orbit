@@ -20,9 +20,9 @@ class ModuleGroup {
         $this->connection = $database;
     }
 
-    public function createModuleGroup($courseModuleID, $hours, $type) {
+    public function createModuleGroup($courseModuleID, $type) {
         $result = ["error" => True, "id" => ""];
-        $sql = "SELECT m.module_id, c.start_data FROM course_module c
+        $sql = "SELECT m.module_id, c.start_date FROM course_module c
                 LEFT JOIN module m ON m.module_id = c.module_id
                 WHERE c.course_module_id = $courseModuleID;";
         $statement = mysqli_query($this->connection, $sql);
@@ -48,14 +48,13 @@ class ModuleGroup {
         $statement = mysqli_query($this->connection, $sql);
         $number = 1;
         while ($row = mysqli_fetch_array($statement)) {
-            if (substr($row["module_group_id"], 0, strlen($tempID) - 1) === $tempID) {
+            if (substr($row["module_group_id"], 0, strlen($tempID)) === $tempID) {
                 $number += 1;
             }
         }
         $moduleGroupID = $tempID . $number;
-
-        $sql = "INSERT INTO module_group (module_group_id, course_module_id, hours, type)
-                VALUES ('$moduleGroupID', $courseModuleID, $hours, $type);";
+        $sql = "INSERT INTO module_group (module_group_id, course_module_id, type)
+                VALUES ('$moduleGroupID', $courseModuleID, '$type');";
         try {
             mysqli_query($this->connection, $sql);
             $result = ["id" => $moduleGroupID, "error" => False];
@@ -67,12 +66,11 @@ class ModuleGroup {
 
     public function getModuleGroup($courseModuleID) {
         $result = [];
-        $sql = "SELECT * FROM module_group WHERE course_module_id = ?;";
+        $sql = "SELECT * FROM module_group WHERE course_module_id = $courseModuleID;";
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
             $result[] = [
                 "moduleGroupID" => $row["module_group_id"],
-                "hours" => $row["hours"],
                 "type" => $row["type"]
             ];
         }

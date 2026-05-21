@@ -58,4 +58,49 @@ if (isset($_POST['deleteIntake'])) {
     $path = PAGES . '/course-management/manage-intake.php';
     echo "<script>window.location.href='$path';</script>";
 }
+
+if (isset($_POST['enrolStudent'])) {
+    $error = enrolStudent($_POST);
+    if ($error) {
+        $_SESSION['error'] = $error;
+    }
+    $path = PAGES . '/course-management/student-page.php?intake=' . $_POST['intakeID'];
+    echo "<script>window.location.href='$path';</script>";
+}
+
+if (isset($_POST['removeStudent'])) {
+    $error = removeStudent($_POST['studentIntakeID']);
+    if ($error) {
+        $_SESSION['error'] = $error;
+    }
+    $path = PAGES . '/course-management/student-page.php?intake=' . $_POST['intakeID'];
+    echo "<script>window.location.href='$path';</script>";
+}
+
+if (isset($_POST['addCourseModule'])) {
+    $error = addCourseModule($_POST);
+    if ($error) {
+        $_SESSION['error'] = $error;
+    }
+    $path = PAGES . '/course-management/module-page.php?intake=' . $_POST['intakeID'];
+    echo "<script>window.location.href='$path';</script>";
+}
+
+if (isset($_POST['editCourseModule'])) {
+    $error = editCourseModule($_POST);
+    if ($error) {
+        $_SESSION['error'] = $error;
+    }
+    $path = PAGES . '/course-management/module-page.php?intake=' . $_POST['intakeID'];
+    echo "<script>window.location.href='$path';</script>";
+}
+
+if (isset($_POST['deleteCourseModule'])) {
+    $error = deleteCourseModule($_POST);
+    if ($error) {
+        $_SESSION['error'] = $error;
+    }
+    $path = PAGES . '/course-management/module-page.php?intake=' . $_POST['intakeID'];
+    echo "<script>window.location.href='$path';</script>";
+}
 ?>

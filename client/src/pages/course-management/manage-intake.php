@@ -66,9 +66,6 @@ renderContentTopBar($name, $role);
     </div>
 </div>
 
-<script>
-</script>
-
 <?php
 createFooter(false);
 if (isset($_POST['edit'])) {
@@ -83,6 +80,8 @@ if (isset($_POST['delete'])) {
     $intake = getIntake($_POST['intakeID']);
     if ($intake['status'] !== "Completed") {
         $_SESSION['error'] = "This intake can't be deleted as it is not completed.";
+        $path = PAGES . '/course-management/manage-intake.php';
+        echo "<script>window.location.href='$path';</script>";
     } else {
         $intakeDeleteForm = deleteIntakeForm("deleteIntakeForm", $intake);
         $intakeDeleteModal = new Modal("deleteIntakeForm", "medium");

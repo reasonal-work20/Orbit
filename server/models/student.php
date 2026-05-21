@@ -45,7 +45,7 @@ class Student {
                 FROM student u
                 LEFT JOIN student_intake s ON s.student_id = u.student_id
                 LEFT JOIN intake i ON i.intake_id = s.intake_id
-                WHERE u.student_id = '$id' OR u.user_id = $id;";
+                WHERE u.student_id = '$id' OR u.user_id = '$id';";
         $statement = mysqli_query($this->connection, $sql);
         $student = mysqli_fetch_array($statement);
         if ($student) {

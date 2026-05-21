@@ -68,6 +68,12 @@ async function findRoute() {
     var start = document.getElementById('start').value;
     var end = document.getElementById('end').value;
     var route = document.getElementById('route').value;
+    
+    if (start == "" || end == "" || route == "") {
+        loadingOverlay.style.display = 'none';
+        return;
+    }
+    
     var parameters = `mode=route&start=${start}&end=${end}&route=${route}&getMap=#`;
     var result = await getMap(parameters);
     var path = result.path;

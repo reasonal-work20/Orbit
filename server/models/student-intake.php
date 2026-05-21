@@ -17,6 +17,27 @@ class StudentIntake {
         $this->connection = $database;
     }
 
+    public function check($studentID):bool {
+        $sql = "SELECT i.status AS status FROM student_intake s
+                LEFT JOIN intake i ON s.intake_id = i.intake_id 
+                WHERE student_id = '$studentID';";
+        try {
+            $statement = mysqli_query($this->connection, $sql);
+            $result = mysqli_fetch_array($statement);
+            if ($result) {
+                if ($result['status'] !== "Completed") {
+                    return True;
+                } else {
+                    return False;
+                }
+            } else {
+                return False;
+            }
+        } catch (mysqli_sql_exception $e) {
+            return True;
+        }
+    }
+
     public function create($studentID, $intakeID):array {
         $sql = "INSERT INTO student_intake (student_id, intake_id) VALUES ('$studentID', '$intakeID');";
         try {
