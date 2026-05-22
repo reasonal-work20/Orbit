@@ -144,7 +144,7 @@ renderNavBar();
 
             <form method="post" action="<?php echo SERVICES; ?>/carpool-service.php" class="footer-actions">
                 <button class="btn-cancel" name="cancelRide" type="submit">Cancel Ride</button>
-                <select class="btn-waiting" id="statusBtn" onclick="">
+                <select class="btn-waiting" id="statusBtn">
                     <option value="Waiting">Waiting</option>
                     <option value="Full">Full</option>
                     <option value="In Progress">In Progress</option>

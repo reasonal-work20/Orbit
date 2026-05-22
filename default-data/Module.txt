@@ -1,0 +1,20 @@
+CT,Academic Research Skill,ARS
+CT,Programming With Python,PWP
+CT,System Analysis & Design,SYAD
+CT,Operating System,OS
+CT,Database Management,DM
+CT,Networking Technologies,NWT
+CT,Object Oriented Programming,OOP
+CT,Behavioural Science & Marketing Analytics,BSMA
+CT,Digital Thinking & Innovation,DTI
+CT,Digital Games Design Re-engineering,DGDR
+CT,Digital Image Production,DIP
+CT,Audio Visual Technologies,AVT
+CT,E-Commerce,EC
+CT,People Management,PM
+CT,Quantitative Method,QM
+BAM,Digital Supply Chain,DSC
+BAM,E-Business,EB
+BAM,Marketing,M
+BAM,International Business,IB
+BAM,Business Economics,BE

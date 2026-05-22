@@ -48,10 +48,8 @@ function renderNavBar()
             break;
             
         case 'Schedule Admin':
-            $dashboardPath = PAGES . "/course-management/dashboard.php";
-            renderNavItem('Home', 'home-icon.svg', $dashboardPath, 'home');
-            renderNavItem('Manage Schedules', 'calendar-icon.svg', '#', 'manageschedules');
-            renderNavItem('More', 'more-icon-vertical.svg', '#', 'more');
+            $dashboardPath = PAGES . "/schedule-management/dashboard.php";
+            renderNavItem('Manage Schedules', 'calendar-icon.svg', $dashboardPath, 'manageschedules');
             break;
             
         default:

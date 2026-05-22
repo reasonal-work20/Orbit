@@ -95,7 +95,7 @@ echo $createModuleModal->render("Create New Module", $moduleCreateForm);
 createFooter(false);
 
 if (isset($_POST['delete'])) {
-    $deleteHtml = deleteModuleForm("deleteModuleView", $_POST['majorID'], $_POST['moduleID'], $_POST['name'], $_POST['count']);
+    $deleteHtml = deleteModuleForm("deleteModuleView", $_POST['majorID'], $_POST['moduleID'], $_POST['name']);
     $deleteModal = new Modal('deleteModuleView', 'medium');
     echo $deleteModal->render('Delete Module', $deleteHtml);
     echo "<script>openModal('deleteModuleView');</script>";

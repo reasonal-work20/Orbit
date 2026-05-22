@@ -58,7 +58,7 @@ class ManageCourse {
         $statement = mysqli_query($this->connection, $sql);
         while ($row = mysqli_fetch_array($statement)) {
             $courseModuleList = $this->courseModuleEditor->getList($row["module_id"]);
-            $result[] = ["moduleID" => $row["module_id"], "name" => $row["name"], "row" => count($courseModuleList)];
+            $result[] = ["moduleID" => $row["module_id"], "name" => $row["name"]];
         }
         return $result;
     }

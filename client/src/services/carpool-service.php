@@ -35,19 +35,13 @@ if (isset($_GET["requester"])) {
     echo json_encode($result);
 }
 
-if (isset($_GET["cancelRide"])) {
+if (isset($_POST["cancelRide"])) {
     $carpool = host($_SESSION["userID"]);
     $result = cancelRide(["carpoolID" => $carpool["carpoolID"]]);
-    if ($result) {
-        echo "<script>
-        alert('$result');
-        </script>";
-    } else {
-        $path = PAGES . '/transport/carpool-manage.php';
-        echo "<script>
-        window.location.href='$path';
-        </script>";
-    }
+    $path = PAGES . '/transport/carpool-manage.php';
+    echo "<script>
+    window.location.href='$path';
+    </script>";
 }
 
 if (isset($_GET["updateRide"])) {

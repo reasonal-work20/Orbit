@@ -1,30 +1,34 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/Orbit/shared/constants.php';
 require_once ROOT . SHARED . '/form/form-component.php';
+require_once ROOT . SERVICES . '/manage-course-service.php';
 
-function renderCourseTable($moduleList, $majorID)
+function renderScheduleTable($intakeList)
 {
 ?>
     <div class="table-container">
     <table class="users-table">
         <thead>
             <tr>
-                <th>Module Code</th>
-                <th>Module Name</th>
+                <th>Module Group</th>
+                <th>Lecturer</th>
+                <th>Location</th>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($moduleList as $module):
+            <?php foreach ($intakeList as $intake):
             ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($module['moduleID']); ?></td>
-                    <td><?php echo htmlspecialchars($module['name']); ?></td>
+                    <td><?php echo $intake['intakeID']; ?></td>
+                    <td><?php echo $intake['name']; ?></td>
+                    <td><?php echo $intake['status']; ?></td>
                     <td>
-                        <form class="actions" method="post" action="<?php echo PAGES ?>/course-management/dashboard.php">
-                            <input type="hidden" name="moduleID" value="<?php echo $module['moduleID']; ?>" >
-                            <input type="hidden" name="majorID" value="<?php echo $majorID; ?>" >
-                            <input type="hidden" name="name" value="<?php echo $module['name']; ?>" >
+                        <form class="actions" method="post" action="<?php echo PAGES ?>/course-management/manage-intake.php">
+                            <input type="hidden" name="intakeID" value="<?php echo $intake['intakeID']; ?>" >
                             <button class="action-btn" id="edit-btn" name="edit" type="submit">
                                 <?php
                                 $editIcon = ROOT . ICONS . '/pen-edit.svg';
@@ -46,6 +50,12 @@ function renderCourseTable($moduleList, $majorID)
 
                                 ?>
                             </button>
+                            <button type="button" class="action-btn" onclick="window.location.href='<?php echo PAGES; ?>/course-management/module-page.php?intake=<?php echo $intake['intakeID']; ?>'">
+                                Modules
+                            </button>
+                            <button type="button" class="action-btn" onclick="window.location.href='<?php echo PAGES; ?>/course-management/student-page.php?intake=<?php echo $intake['intakeID']; ?>'">
+                                Students
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -56,20 +66,23 @@ function renderCourseTable($moduleList, $majorID)
 <?php
 }
 
-function addModuleForm($modalName, $majorID) {
+function addIntakeForm($modalName) {
     ob_start();
 ?>
     <form class="create-form" id="user-form" method="post" action="<?php echo SERVICES ?>/manage-course-service.php" enctype="multipart/form-data">
         <div class="form-body">
             <?php
-            renderFormInput("name", "Module Name", "text", "text-input", "Module Name");
-            renderFormInput("short", "Module Short Name", "text", "text-input", "Module Short Name");
+            $courseList = getCourseList();
+            renderFormSelect("courseID", "Course Type", $courseList, "select-input");
+            renderFormInput("name", "Intake Name", "text", "text-input", "Intake Name");
+            renderFormInput("short", "Short Name", "text", "text-input", "Short Name");
+            renderFormInput("startDate", "Start Date", "date", "text-input", "Start Date");
+            renderSegmentedControl("status", "Status", ['Open', 'In Progress', 'Completed']);
             ?>
         </div>
 
         <div class="form-actions">
-            <input type="hidden" name="majorID" id="majorID" value="<?php echo $majorID ?>">
-            <button type="submit" name="addModule" class="confirm-btn">Confirm</button>
+            <button type="submit" name="addIntake" class="confirm-btn">Confirm</button>
             <button type="button" class="cancel-btn" onclick="closeModal('<?php echo $modalName; ?>')">Cancel</button>
         </div>
     </form>
@@ -77,20 +90,20 @@ function addModuleForm($modalName, $majorID) {
     return ob_get_clean();
 }
 
-function editModuleForm($modalName, $majorID, $moduleID, $moduleName) {
+function editIntakeForm($modalName, $intake) {
     ob_start();
 ?>
     <form class="create-form" id="user-form" method="post" action="<?php echo SERVICES ?>/manage-course-service.php" enctype="multipart/form-data">
         <div class="form-body">
+            <label><?php echo $intake['intakeID'] . " | " . $intake['name']; ?></label>
             <?php
-            renderFormInput("name", "Module Name", "text", "text-input", "Module Name", true, $moduleName);
+            renderSegmentedControl("status-edit", "Status", ['Open', 'In Progress', 'Completed'], true, $intake['status']);
             ?>
         </div>
 
         <div class="form-actions">
-            <input type="hidden" name="moduleID" id="moduleID" value="<?php echo $moduleID ?>" >
-            <input type="hidden" name="majorID" id="majorID" value="<?php echo $majorID ?>">
-            <button type="submit" name="editModule" class="confirm-btn">Confirm</button>
+            <input type="hidden" name="intakeID" value="<?php echo $intake['intakeID']; ?>" />
+            <button type="submit" name="editIntake" class="confirm-btn">Confirm</button>
             <button type="button" class="cancel-btn" onclick="closeModal('<?php echo $modalName; ?>')">Cancel</button>
         </div>
     </form>
@@ -98,7 +111,7 @@ function editModuleForm($modalName, $majorID, $moduleID, $moduleName) {
     return ob_get_clean();
 }
 
-function deleteModuleForm($modalName, $majorID, $moduleID, $moduleName) {
+function deleteIntakeForm($modalName, $intake) {
     ob_start(); ?>
     <form class="delete-user-modal" action="<?php echo SERVICES ?>/manage-course-service.php" method="post">
         <div class="modal-header">
@@ -112,16 +125,15 @@ function deleteModuleForm($modalName, $majorID, $moduleID, $moduleName) {
                     ?>
                 </div>
                 <div class="text-and-desc">
-                    <span class="message"><?php echo 'Delete ' . $moduleName . '? There maybe courses using this module'; ?></span>
-                    <span class="description">Are you sure you want to delete this module? This action cannot be undone.</span>
+                    <span class="message"><?php echo 'Delete ' . $intake['intakeID'] . " | " . $intake['name'] . '?'; ?></span>
+                    <span class="description">Are you sure you want to delete this intake? This action cannot be undone.</span>
                 </div>
             </div>
         </div>
         <div class="modal-actions">
-            <input type="hidden" name="majorID" value="<?php echo $majorID; ?>" >
-            <input type="hidden" name="moduleID" value="<?php echo $moduleID; ?>" >
+            <input type="hidden" name="intakeID" value="<?php echo $intake['intakeID']; ?>" >
             <button type="button" class="cancel-btn" onclick="closeModal('<?php echo $modalName; ?>')">Cancel</button>
-            <button type="submit" name="deleteModule" class="delete-btn">Delete</button>
+            <button type="submit" name="deleteIntake" class="delete-btn">Delete</button>
         </div>
     </form>
 

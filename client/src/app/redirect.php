@@ -12,6 +12,9 @@ switch ($page) {
     case "courseAdmin":
         $path = PAGES . '/course-management/dashboard.php';
         break;
+    case "scheduleAdmin":
+        $path = PAGES . '/schedule-management/dashboard.php';
+        break;
     case "directory":
         $path = PAGES . '/campus-navigation/dashboard.php';
         break;

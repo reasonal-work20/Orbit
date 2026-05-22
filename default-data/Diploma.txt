@@ -1,0 +1,6 @@
+UCDF,Diploma Information & Communication Technology,ICT,2026-06-01,Open,214
+UCDF,Diploma Information & Communication Technology With Specialism In Software Engineering,ICT(SE),2026-06-01,Open,176
+UCDF,Diploma Information & Communication Technology With Specialism In Data Informatics,ICT(DI),2026-06-01,Open,138
+UCDF,Diploma Information & Communication Technology With Specialism In Interactive Technology,ICT(ITR),2026-06-01,Open,165
+UCDF,Diploma Business Information Technology,BIT,2026-06-01,Open,129
+UCDF,Diploma Business Administration,BA,2026-06-01,Open,108
