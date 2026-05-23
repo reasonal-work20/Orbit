@@ -58,6 +58,7 @@ typeSelector.addEventListener("change", async function(event) {
 const locationSelector = document.getElementById("location");
 locationSelector.addEventListener("change", async function(event) {
     var location = document.getElementById("location").value;
+    console.log('Here' + location);
     var parameters = `mode=point&point=${location}&getMap=#`;
     var mapList = await getMap(parameters);
     document.getElementById('map').innerHTML = mapList.svg[0];

@@ -38,7 +38,7 @@ function renderQuickAccessCard($role)
             renderQuickAccessButton("Carpool", "car-icon.svg", APP . 'transport');
             renderQuickAccessButton("Campus Directory", "map-icon.svg", APP . 'directory');
             renderQuickAccessButton("Bus Shuttle", "bus-icon.svg", APP . 'bus');
-            renderQuickAccessButton("Timetable", "map-icon.svg", '#');
+            renderQuickAccessButton("Timetable", "map-icon.svg", APP . 'timetable');
             ?>
         </div>
     </div>

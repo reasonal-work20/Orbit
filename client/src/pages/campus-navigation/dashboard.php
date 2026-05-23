@@ -33,4 +33,20 @@ renderNavBar();
 <script src="<?php echo FEATURES ?>/campus-navigation/search-location.js"></script>
 <?php
 createFooter(false);
+if (isset($_GET['point'])) {
+    $point = $_GET['point'];
+    echo "<script>
+        window.onload = function() {
+            const locationInput = document.getElementById('location');
+            setTimeout (function() {
+                if (locationInput) {
+                    locationInput.value = '$point' ;
+                    document.getElementById('end').value = '$point';
+                    locationInput.dispatchEvent(new Event('change'));
+                }
+            }, 100);
+        };
+    </script>";
+}
+
 ?>

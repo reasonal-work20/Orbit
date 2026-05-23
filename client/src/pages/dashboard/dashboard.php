@@ -6,9 +6,10 @@ require_once ROOT . COMPONENTS . '/header.php';
 require_once ROOT . COMPONENTS . '/footer.php';
 require_once ROOT . NAVIGATION . '/nav-bar.php';
 require_once ROOT . COMPONENTS . '/quick-access.php';
-// require_once ROOT . COMPONENTS . '/timetable-card.php';
+require_once ROOT . FEATURES . '/timetable/timetable-card.php';
 require_once ROOT . COMPONENTS . '/user-profile-card.php';
 require_once ROOT . SERVICES . '/manage-user-service.php';
+require_once ROOT . SERVICES . '/manage-schedule-service.php';
 require_once ROOT . MODALS . '/modal.php';
 
 // START CONNECTION TO DB
@@ -21,6 +22,20 @@ if (!isset($_SESSION['userID'])) {
 
 if (!isset($user) || empty($user)) {
     $user = getUser($_SESSION['userID']); // Get user data of current logged in user
+    if ($user['role'] === 'Student') {
+        $intakeID = $user['intakeID'];
+        $scheduleList = getScheduleList(['intakeID' => $intakeID, "week" => "All"]);
+    } else {
+        $intakeID = "All";
+        $tempList = getScheduleList(['intakeID' => $intakeID, "week" => "All"]);
+        $scheduleList = [];
+        foreach ($tempList as $row) {
+            $schedule = getSchedule($row);
+            if ($schedule['lecturerID'] === $user['lecturerID']) {
+                $scheduleList[] = $row;
+            }
+        }
+    }
 }
 
 $role = $user['role'];
@@ -46,11 +61,22 @@ renderNavBar();
     ?>
     <div class="card-wrapper">
         <?php
-        // renderTimetableCardForDashboard(['Class Array -> Belonging to the student`s course and lesson'], $currentTime);
+        $currentDate = date("Y-m-d");
+        $nextDate = date('Y-m-d', strtotime('+1 day'));
+        $todaySchedule = [];
+        $nextSchedule = [];
+        foreach ($scheduleList as $schedule) {
+            if ($schedule['date'] == $currentDate) {
+                $todaySchedule[] = getSchedule($schedule);
+            } elseif ($schedule['date'] == $nextDate) {
+                $nextSchedule[] = getSchedule($schedule);
+            }
+        }
+        renderTimetableCardForDashboard($todaySchedule, $nextSchedule, $currentTime);
         ?>
     </div>
 </div>
-<script src="<?php echo FEATURES . '/timetable-script.js'; ?>"></script>
+<script src="<?php echo FEATURES . '/timetable/timetable-script.js'; ?>"></script>
 <?php
 createFooter(false);
 ?>

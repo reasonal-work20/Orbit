@@ -21,6 +21,9 @@ switch ($page) {
     case "transport":
         $path = PAGES . '/transport/dashboard.php';
         break;
+    case "timetable":
+        $path = PAGES . '/timetable/dashboard.php';
+        break;
     case "more":
         $path = PAGES . '/more/more-page.php';
         break;

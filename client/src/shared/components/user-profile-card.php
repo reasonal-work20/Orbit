@@ -19,7 +19,13 @@ function renderUserProfileCard($user)
                     <?php echo $user['name'] ?>
                 </h3>
                 <h4 class="student-id">
-                    <?php echo $user['studentID'] ?>
+                    <?php 
+                    if (isset($user['studentID'])) {
+                        echo $user['studentID'];
+                    } elseif (isset($user['lecturerID'])) {
+                        echo $user['lecturerID'];
+                    }
+                    ?>
                 </h4>
             </div>
             <a href="<?php echo SERVICES . '/logout-service'; ?>" class="logout-button">
