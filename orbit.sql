@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 22, 2026 at 03:36 AM
+-- Generation Time: May 23, 2026 at 07:08 AM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -360,18 +360,31 @@ CREATE TABLE IF NOT EXISTS `course_module` (
   KEY `module_id` (`module_id`),
   KEY `lecturer_id` (`lecturer_id`),
   KEY `intake_id` (`intake_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `course_module`
 --
 
 INSERT INTO `course_module` (`course_module_id`, `module_id`, `lecturer_id`, `intake_id`, `start_date`, `end_date`) VALUES
-(1, 'BAM-BE', 'L000014', 'UCDF2606BA', '2026-05-04', '2026-07-31'),
-(2, 'BAM-M\r\n', 'L000029', 'UCDF2606BA', '2026-05-04', '2026-07-31'),
+(1, 'BAM-BE', 'L000014', 'UCDF2606BA', '2026-06-01', '2026-07-31'),
+(2, 'BAM-M\r\n', 'L000029', 'UCDF2606BA', '2026-06-01', '2026-07-31'),
 (3, 'CT-ARS\r\n', 'L000003', 'UCDF2606ICT(SE)', '2026-05-04', '2026-07-31'),
 (4, 'CT-OOP\r\n', 'L000001', 'UCDF2606ICT(SE)', '2026-05-04', '2026-07-31'),
-(5, 'CT-OS\r\n', 'L000023', 'UCDF2606ICT', '2026-05-04', '2026-07-31');
+(5, 'CT-OS\r\n', 'L000023', 'UCDF2606ICT', '2026-05-04', '2026-07-31'),
+(6, 'CT-ARS\r\n', 'L000023', 'UCDF2606BA', '2026-06-01', '2026-07-31'),
+(7, 'CT-ARS\r\n', 'L000033', 'UCDF2606BIT', '2026-06-01', '2026-07-31'),
+(8, 'BAM-IB\r\n', 'L000009', 'UCDF2606BIT', '2026-06-01', '2026-07-31'),
+(9, 'BAM-EB\r\n', 'L000029', 'UCDF2606BIT', '2026-06-01', '2026-07-31'),
+(10, 'CT-NWT\r\n', 'L000021', 'UCDF2606ICT', '2026-06-01', '2026-07-31'),
+(11, 'CT-DM\r\n', 'L000002', 'UCDF2606ICT', '2026-06-01', '2026-07-31'),
+(12, 'CT-DM\r\n', 'L000002', 'UCDF2606ICT(DI)', '2026-06-01', '2026-07-31'),
+(13, 'CT-SYAD\r\n', 'L000028', 'UCDF2606ICT(DI)', '2026-06-01', '2026-07-31'),
+(14, 'CT-PWP\r\n', 'L000013', 'UCDF2606ICT(DI)', '2026-06-01', '2026-07-31'),
+(15, 'CT-DTI\r\n', 'L000001', 'UCDF2606ICT(ITR)', '2026-06-01', '2026-07-31'),
+(16, 'CT-PWP\r\n', 'L000013', 'UCDF2606ICT(ITR)', '2026-06-01', '2026-07-31'),
+(17, 'CT-OOP\r\n', 'L000007', 'UCDF2606ICT(ITR)', '2026-06-01', '2026-07-31'),
+(18, 'CT-NWT\r\n', 'L000006', 'UCDF2606ICT(SE)', '2026-06-01', '2026-07-31');
 
 -- --------------------------------------------------------
 
@@ -927,7 +940,82 @@ INSERT INTO `module_group` (`module_group_id`, `course_module_id`, `type`) VALUE
 ('2605-CT-OS\r\n-T4', 5, 'Tutorial'),
 ('2605-CT-OS\r\n-T5', 5, 'Tutorial'),
 ('2605-CT-OS\r\n-T6', 5, 'Tutorial'),
-('2605-CT-OS\r\n-T7', 5, 'Tutorial');
+('2605-CT-OS\r\n-T7', 5, 'Tutorial'),
+('2606-BAM-EB\r\n-L1', 9, 'Lecture'),
+('2606-BAM-EB\r\n-T1', 9, 'Tutorial'),
+('2606-BAM-EB\r\n-T2', 9, 'Tutorial'),
+('2606-BAM-EB\r\n-T3', 9, 'Tutorial'),
+('2606-BAM-EB\r\n-T4', 9, 'Tutorial'),
+('2606-BAM-IB\r\n-L1', 8, 'Lecture'),
+('2606-BAM-IB\r\n-T1', 8, 'Tutorial'),
+('2606-BAM-IB\r\n-T2', 8, 'Tutorial'),
+('2606-BAM-IB\r\n-T3', 8, 'Tutorial'),
+('2606-BAM-IB\r\n-T4', 8, 'Tutorial'),
+('2606-CT-ARS\r\n-L1', 6, 'Lecture'),
+('2606-CT-ARS\r\n-L2', 7, 'Lecture'),
+('2606-CT-ARS\r\n-T1', 6, 'Tutorial'),
+('2606-CT-ARS\r\n-T2', 6, 'Tutorial'),
+('2606-CT-ARS\r\n-T3', 6, 'Tutorial'),
+('2606-CT-ARS\r\n-T4', 6, 'Tutorial'),
+('2606-CT-ARS\r\n-T5', 7, 'Tutorial'),
+('2606-CT-ARS\r\n-T6', 7, 'Tutorial'),
+('2606-CT-ARS\r\n-T7', 7, 'Tutorial'),
+('2606-CT-ARS\r\n-T8', 7, 'Tutorial'),
+('2606-CT-DM\r\n-L1', 11, 'Lecture'),
+('2606-CT-DM\r\n-L2', 12, 'Lecture'),
+('2606-CT-DM\r\n-T1', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T10', 12, 'Tutorial'),
+('2606-CT-DM\r\n-T11', 12, 'Tutorial'),
+('2606-CT-DM\r\n-T2', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T3', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T4', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T5', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T6', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T7', 11, 'Tutorial'),
+('2606-CT-DM\r\n-T8', 12, 'Tutorial'),
+('2606-CT-DM\r\n-T9', 12, 'Tutorial'),
+('2606-CT-DTI\r\n-L1', 15, 'Lecture'),
+('2606-CT-DTI\r\n-T1', 15, 'Tutorial'),
+('2606-CT-DTI\r\n-T2', 15, 'Tutorial'),
+('2606-CT-DTI\r\n-T3', 15, 'Tutorial'),
+('2606-CT-DTI\r\n-T4', 15, 'Tutorial'),
+('2606-CT-DTI\r\n-T5', 15, 'Tutorial'),
+('2606-CT-NWT\r\n-L1', 10, 'Lecture'),
+('2606-CT-NWT\r\n-L9', 18, 'Lecture'),
+('2606-CT-NWT\r\n-Lab1', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab10', 18, 'Lab'),
+('2606-CT-NWT\r\n-Lab11', 18, 'Lab'),
+('2606-CT-NWT\r\n-Lab12', 18, 'Lab'),
+('2606-CT-NWT\r\n-Lab2', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab3', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab4', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab5', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab6', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab7', 10, 'Lab'),
+('2606-CT-NWT\r\n-Lab8', 18, 'Lab'),
+('2606-CT-NWT\r\n-Lab9', 18, 'Lab'),
+('2606-CT-OOP\r\n-L1', 17, 'Lecture'),
+('2606-CT-OOP\r\n-Lab1', 17, 'Lab'),
+('2606-CT-OOP\r\n-Lab2', 17, 'Lab'),
+('2606-CT-OOP\r\n-Lab3', 17, 'Lab'),
+('2606-CT-OOP\r\n-Lab4', 17, 'Lab'),
+('2606-CT-OOP\r\n-Lab5', 17, 'Lab'),
+('2606-CT-PWP\r\n-L1', 14, 'Lecture'),
+('2606-CT-PWP\r\n-L6', 16, 'Lecture'),
+('2606-CT-PWP\r\n-Lab1', 14, 'Lab'),
+('2606-CT-PWP\r\n-Lab2', 14, 'Lab'),
+('2606-CT-PWP\r\n-Lab3', 14, 'Lab'),
+('2606-CT-PWP\r\n-Lab4', 14, 'Lab'),
+('2606-CT-PWP\r\n-T1', 16, 'Tutorial'),
+('2606-CT-PWP\r\n-T2', 16, 'Tutorial'),
+('2606-CT-PWP\r\n-T3', 16, 'Tutorial'),
+('2606-CT-PWP\r\n-T4', 16, 'Tutorial'),
+('2606-CT-PWP\r\n-T5', 16, 'Tutorial'),
+('2606-CT-SYAD\r\n-L1', 13, 'Lecture'),
+('2606-CT-SYAD\r\n-Lab1', 13, 'Lab'),
+('2606-CT-SYAD\r\n-Lab2', 13, 'Lab'),
+('2606-CT-SYAD\r\n-Lab3', 13, 'Lab'),
+('2606-CT-SYAD\r\n-Lab4', 13, 'Lab');
 
 -- --------------------------------------------------------
 
@@ -946,7 +1034,25 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   PRIMARY KEY (`schedule_id`),
   KEY `module_group_id` (`module_group_id`),
   KEY `classroom_id` (`classroom_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `schedule`
+--
+
+INSERT INTO `schedule` (`schedule_id`, `module_group_id`, `classroom_id`, `start_time`, `end_time`, `date`) VALUES
+(1, '2605-BAM-BE-L1', 7, '2026-06-01 00:30:00', '2026-06-01 02:30:00', '2026-06-01'),
+(2, '2605-BAM-BE-T1', 35, '2026-06-01 02:45:00', '2026-06-01 04:45:00', '2026-06-01'),
+(4, '2605-BAM-BE-T3', 117, '2026-06-05 00:30:00', '2026-06-05 02:30:00', '2026-06-05'),
+(5, '2605-BAM-BE-T2', 154, '2026-06-02 07:45:00', '2026-06-02 09:45:00', '2026-06-02'),
+(6, '2605-BAM-M\r\n-L1', 6, '2026-06-02 02:45:00', '2026-06-02 04:45:00', '2026-06-02'),
+(7, '2605-BAM-BE-T4', 155, '2026-06-01 06:00:00', '2026-06-01 08:00:00', '2026-06-01'),
+(8, '2605-BAM-M\r\n-T1', 55, '2026-06-03 00:30:00', '2026-06-03 02:30:00', '2026-06-03'),
+(9, '2605-BAM-M\r\n-T2', 37, '2026-06-02 02:00:00', '2026-06-02 04:00:00', '2026-06-02'),
+(10, '2606-CT-SYAD\r\n-L1', 5, '2026-06-04 00:30:00', '2026-06-04 02:30:00', '2026-06-04'),
+(11, '2606-CT-NWT\r\n-Lab1', 54, '2026-06-01 00:30:00', '2026-06-01 02:30:00', '2026-06-01'),
+(12, '2606-CT-NWT\r\n-L9', 7, '2026-06-02 07:00:00', '2026-06-02 09:00:00', '2026-06-02'),
+(13, '2606-CT-NWT\r\n-L9', 144, '2026-06-03 07:00:00', '2026-06-03 09:00:00', '2026-06-03');
 
 -- --------------------------------------------------------
 

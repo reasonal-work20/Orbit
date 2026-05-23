@@ -55,10 +55,16 @@ renderNavBar();
 ?>
 <div class="page-content">
     <?php
+    if ($week === "All") {
+        $select = "selected";
+    } else {
+        $select = "";
+    }
     echo "
         <div class='form-input'>
             <select id='selectWeek' name='selectWeek' class='select-input'>
-            <option value='All'>All</option>";
+            <option value='' selected disabled>Select Week</option>
+            <option value='All' $select>All</option>";
         $weekList = getWeeks();
         foreach ($weekList as $monday) {
             if ($monday === $week) {
