@@ -99,14 +99,14 @@ class ManageCourseModule {
         return $result;
     }
 
-    public function getModuleGroup($courseModuleID) {
-        $result = $this->moduleGroupEditor->getModuleGroup($courseModuleID);
-        if ($result["error"]) {
-            return [];
-        } else {
-            return $result["intakeID"];
-        }
-    }
+    // public function getModuleGroup($courseModuleID) {
+    //     $result = $this->moduleGroupEditor->getModuleGroup($courseModuleID);
+    //     if ($result["error"]) {
+    //         return [];
+    //     } else {
+    //         return $result;
+    //     }
+    // }
 
     public function createCourseModule($input) {
         $courseModule = $this->courseModuleEditor->createCourseModule($input["moduleID"], $input["lecturerID"], $input['intakeID'], $input["startDate"], $input["endDate"]);

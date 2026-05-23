@@ -5,6 +5,8 @@ include_once ROOT . COMPONENTS . '/footer.php';
 require_once ROOT . SHARED . '/form/form-component.php';
 require_once ROOT . NAVIGATION . '/admin-nav-bar.php';
 require_once ROOT . SERVICES . '/manage-user-service.php';
+require_once ROOT . SERVICES . '/manage-schedule-service.php';
+require_once ROOT . FEATURES . '/schedule-management/schedule-component.php';
 require_once ROOT . MODALS . '/modal.php';
 
 if (!isset($_SESSION['userID'])) {
@@ -22,9 +24,19 @@ createHead("Orbit | Schedule Management", $cssFiles);
 renderNavBar();
 renderContentTopBar($name, $role);
 
-// $moduleCreateForm = addModuleForm("createModuleForm", $majorID);
-// $createModuleModal = new Modal('createModuleForm', 'large');
-// echo $createModuleModal->render("Create New Module", $moduleCreateForm);
+$intakeID = "All";
+$week = "All";
+if (isset($_GET['intakeID'])) {
+    $intakeID = $_GET['intakeID'];
+}
+if (isset($_GET['week'])) {
+    $week = $_GET['week'];
+}
+
+$moduleGroupList = getModuleGroup($intakeID);
+$scheduleCreateForm = addScheduleForm("createScheduleForm", $moduleGroupList, $intakeID, $week);
+$createScheduleModal = new Modal('createScheduleForm', 'large');
+echo $createScheduleModal->render("Create New Schedule", $scheduleCreateForm);
 ?>
 
 <div class="page-content">
@@ -35,7 +47,18 @@ renderContentTopBar($name, $role);
             <?php
             echo "
             <div class='form-input'>
-                <select id='selectIntake' name='selectIntake' class='select-input'>";
+                <select id='selectIntake' name='selectIntake' class='select-input'>
+                <option value='All'>All</option>";
+            $intakeList = getIntake();
+            foreach ($intakeList as $intake) {
+                if ($intakeID === $intake['intakeID']) {
+                    $select = "selected";
+                } else {
+                    $select = "";
+                }
+                $id = $intake['intakeID'];
+                echo "<option value='$id' $select>$id</option>";
+            }
 
             echo "
                 </select>
@@ -44,17 +67,27 @@ renderContentTopBar($name, $role);
 
             echo "
             <div class='form-input'>
-                <select id='selectWeek' name='selectWeek' class='select-input'>";
-
+                <select id='selectWeek' name='selectWeek' class='select-input'>
+                <option value='All'>All</option>";
+            $weekList = getWeeks();
+            foreach ($weekList as $monday) {
+                if ($monday === $week) {
+                    $select = "selected";
+                } else {
+                    $select = "";
+                }
+                $format = date("M j, Y", strtotime($monday));
+                echo "<option value='$monday' $select>$format</option>";
+            }
             echo "
                 </select>
             </div>
             ";
             ?>
 
-            <div class="add-user-btn" onclick="openModal('')">
+            <div class="add-user-btn" onclick="openModal('createScheduleForm')">
                 <span class="btn-text">
-                    Add New Week
+                    Add Schedule
                 </span>
                 <?php
                 $userPlusIcon = ROOT . ICONS . '/plus-icon.svg';
@@ -67,34 +100,27 @@ renderContentTopBar($name, $role);
         <hr class="divider">
 
         <?php
+        $scheduleList = getScheduleList(["intakeID" => $intakeID, "week" => $week]);
+        renderScheduleTable($scheduleList, $intakeID, $week);
         ?>
     </div>
 </div>
 
 <script>
-    // document.getElementById("selectMajor").addEventListener("change", function (event) {
-    //     let majorID = this.value;
-    //     window.location.href='/Orbit/client/src/pages/course-management/dashboard.php?major=' + majorID;
-    // });
+    document.getElementById("selectIntake").addEventListener("change", function (event) {
+        console.log("here")
+        let intakeID = document.getElementById("selectIntake").value;
+        let week = document.getElementById("selectWeek").value;
+        window.location.href='/Orbit/client/src/pages/schedule-management/dashboard.php?intakeID=' + intakeID + '&week=' + week;
+    });
+
+    document.getElementById("selectWeek").addEventListener("change", function (event) {
+        let intakeID = document.getElementById("selectIntake").value;
+        let week = document.getElementById("selectWeek").value;
+        window.location.href='/Orbit/client/src/pages/schedule-management/dashboard.php?intakeID=' + intakeID + '&week=' + week;
+    });
 </script>
 
 <?php
 createFooter(false);
-
-// if (isset($_POST['delete'])) {
-//     $deleteHtml = deleteModuleForm("deleteModuleView", $_POST['majorID'], $_POST['moduleID'], $_POST['name'], $_POST['count']);
-//     $deleteModal = new Modal('deleteModuleView', 'medium');
-//     echo $deleteModal->render('Delete Module', $deleteHtml);
-//     echo "<script>openModal('deleteModuleView');</script>";
-// }
-
-// if (isset($_POST['edit'])) {
-//     $editModuleForm = editModuleForm("editModuleView", $_POST['majorID'], $_POST['moduleID'], $_POST['name']);
-//     $editModuleModal = new Modal('editModuleView', 'large');
-//     echo $editModuleModal->render('Edit Module', $editModuleForm);
-//     echo "<script>
-//     openModal('editModuleView');
-//     console.log('Something went wrong here.');
-//     </script>";
-// }
 ?>

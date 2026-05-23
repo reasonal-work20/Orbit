@@ -19,8 +19,6 @@ require_once ROOT . CONTROLLERS . '/map-controller.php';
 */
 
 class NavigateController {
-    private $connection;
-
     public function navigate($start, $end, $type):array {
         /**
          * If statement used to filter conditions.
