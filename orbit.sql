@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 23, 2026 at 07:08 AM
+-- Generation Time: Jun 12, 2026 at 02:14 AM
 -- Server version: 8.4.7
 -- PHP Version: 8.3.28
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `carpool` (
   `status` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`carpool_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `carpool`
@@ -56,7 +56,8 @@ INSERT INTO `carpool` (`carpool_id`, `user_id`, `type`, `start`, `destination`, 
 (4, 128, 'VOLUNTEER', 'APU', 'Vista Komanwel A', '2026-05-17 08:16:00', 'Black', 'XYZ3004', 'Proton Exora', 4, '', 'Waiting'),
 (5, 660, 'SPLIT FARE', 'LRT Bukit Jalil', 'APU Campus', '2026-05-17 00:20:00', '', '', '', 2, 'I can get a Grab for RM 9. Split with 4 people so around RM 2.25 each', 'Waiting'),
 (6, 20, 'SPLIT FARE', 'LRT Awan Besar', 'APU Campus', '2026-05-17 05:22:00', '', '', '', 3, 'I am looking for people to share a Grab with. I haven\'t book the Grab yet so I can\'t give the number.', 'Waiting'),
-(7, 232, 'SPLIT FARE', 'APU', 'Fortune Park', '2026-05-17 08:30:00', 'White', 'XYZ4001', 'Proton Saga', 3, 'I have a Grab that is arriving at 4.30 pm. Anyone who wants to carpool to Fortune Park please contact me immediately', 'Waiting');
+(7, 232, 'SPLIT FARE', 'APU', 'Fortune Park', '2026-05-17 08:30:00', 'White', 'XYZ4001', 'Proton Saga', 3, 'I have a Grab that is arriving at 4.30 pm. Anyone who wants to carpool to Fortune Park please contact me immediately', 'Waiting'),
+(8, 102, 'VOLUNTEER', 'APU Campus', 'M Vertica', '2026-06-12 09:00:00', 'Red', 'ABC921', 'Honda City', 4, 'My class ends at 4.45 pm and I will be going home after that. Anyone want to carpool to M Vertica? Message me if interested.', 'Waiting');
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `carpool_request` (
   PRIMARY KEY (`request_id`),
   KEY `user_id` (`user_id`),
   KEY `carpool_id` (`carpool_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `carpool_request`
@@ -83,7 +84,10 @@ INSERT INTO `carpool_request` (`request_id`, `user_id`, `carpool_id`, `approval`
 (1, 978, 1, 'Approved'),
 (2, 43, 4, 'Pending'),
 (3, 309, 1, 'Pending'),
-(4, 739, 5, 'Pending');
+(4, 739, 5, 'Pending'),
+(5, 5, 8, 'Approved'),
+(6, 6, 8, 'Pending'),
+(7, 7, 8, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -409,6 +413,7 @@ CREATE TABLE IF NOT EXISTS `intake` (
 --
 
 INSERT INTO `intake` (`intake_id`, `course_id`, `name`, `start_date`, `total_register`, `status`) VALUES
+('AFCF2606FIS', 'AFCF', 'Foundation in Science', '2026-06-01', 0, 'In Progress'),
 ('UCDF2606BA', 'UCDF', 'Diploma Business Administration', '2026-06-01', 107, 'In Progress'),
 ('UCDF2606BIT', 'UCDF', 'Diploma Business Information Technology', '2026-06-01', 128, 'In Progress'),
 ('UCDF2606ICT', 'UCDF', 'Diploma Information & Communication Technology', '2026-06-01', 213, 'In Progress'),
@@ -889,6 +894,7 @@ INSERT INTO `module` (`module_id`, `major_id`, `name`) VALUES
 ('CT-PM\r\n', 'CT', 'People Management'),
 ('CT-PWP\r\n', 'CT', 'Programming With Python'),
 ('CT-QM\r\n', 'CT', 'Quantitative Method'),
+('CT-RWDD', 'CT', 'Responsive Web Design and Development'),
 ('CT-SYAD\r\n', 'CT', 'System Analysis & Design');
 
 -- --------------------------------------------------------
@@ -1034,7 +1040,7 @@ CREATE TABLE IF NOT EXISTS `schedule` (
   PRIMARY KEY (`schedule_id`),
   KEY `module_group_id` (`module_group_id`),
   KEY `classroom_id` (`classroom_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `schedule`
@@ -1052,7 +1058,13 @@ INSERT INTO `schedule` (`schedule_id`, `module_group_id`, `classroom_id`, `start
 (10, '2606-CT-SYAD\r\n-L1', 5, '2026-06-04 00:30:00', '2026-06-04 02:30:00', '2026-06-04'),
 (11, '2606-CT-NWT\r\n-Lab1', 54, '2026-06-01 00:30:00', '2026-06-01 02:30:00', '2026-06-01'),
 (12, '2606-CT-NWT\r\n-L9', 7, '2026-06-02 07:00:00', '2026-06-02 09:00:00', '2026-06-02'),
-(13, '2606-CT-NWT\r\n-L9', 144, '2026-06-03 07:00:00', '2026-06-03 09:00:00', '2026-06-03');
+(13, '2606-CT-NWT\r\n-L9', 144, '2026-06-03 07:00:00', '2026-06-03 09:00:00', '2026-06-03'),
+(14, '2605-CT-OS\r\n-L1', 146, '2026-06-08 06:30:00', '2026-06-08 08:30:00', '2026-06-08'),
+(15, '2605-CT-OS\r\n-T1', 85, '2026-06-09 00:30:00', '2026-06-09 02:30:00', '2026-06-09'),
+(16, '2606-CT-NWT\r\n-L1', 1, '2026-06-09 07:45:00', '2026-06-09 09:45:00', '2026-06-09'),
+(17, '2606-CT-NWT\r\n-Lab1', 186, '2026-06-11 02:40:00', '2026-06-11 04:40:00', '2026-06-11'),
+(18, '2606-CT-DM\r\n-L1', 6, '2026-06-12 00:30:00', '2026-06-12 02:30:00', '2026-06-12'),
+(19, '2606-CT-DM\r\n-T1', 35, '2026-06-12 08:00:00', '2026-06-12 10:00:00', '2026-06-12');
 
 -- --------------------------------------------------------
 
